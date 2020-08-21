@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('auth/login', 'Api\\AuthController@login');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -35,18 +37,38 @@ Route::get('/teste', function (Request $request) {
 });
 
 
+Route::group(['middleware'=>['apijwt']], function(){
+    Route::get('users', 'Api\\UserController@index');
+});
 
 // Rotas de transportes
-/*
-Route::get('/transporte', function () {
-    return \App\Transporte::all();
+Route::namespace('api')->group(function(){
+
+    Route::prefix('transportes')->group(function(){
+
+        Route::get('/', 'TransporteController@index');
+        Route::get('/paginate', 'TransporteController@paginate');
+        Route::get('/{id}','TransporteController@show');
+        Route::post('/', 'TransporteController@save');
+        Route::put('/', 'TransporteController@update');
+        Route::patch('/', 'TransporteController@update');
+        Route::delete('/{id}', 'TransporteController@delete');
+        Route::post('/update', 'TransporteController@update');
+        Route::post('/delete/{id}', 'TransporteController@delete');
+
+    });
+
+    // Route::resource('/users', 'UserController');
+
 });
-*/
 
-Route::namespace('Api')->prefix('transportes')->group(function(){
-  
-    Route::get('/', 'TransporteController@index');
-    Route::post('/', 'TransporteController@save');
 
-});
 
+// Rotas para Favoritos
+Route::get('/favoritos','api\FavoritoController@index');
+Route::post('/favoritos','api\FavoritoController@store');
+Route::get('/favoritos/{id}','api\FavoritoController@show');
+Route::put('/favoritos/{id}','api\FavoritoController@update');
+Route::post('/favoritos/update/{id}','api\FavoritoController@update');
+Route::delete('/favoritos/{id}','api\FavoritoController@destroy');
+Route::post('/favoritos/delete/{id}','api\FavoritoController@destroy');
