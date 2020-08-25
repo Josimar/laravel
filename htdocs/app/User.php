@@ -5,17 +5,17 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+// use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+// class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
     use Notifiable;
+    
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modified';
+    const DELETED_AT = 'deleted';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -38,6 +38,11 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function chamados(){
+        return $this->belongsToMany('App\Model\Chamado');
+    }
+
+    /*
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -47,4 +52,5 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+    */
 }

@@ -59,3 +59,45 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+### Trabalhando com laravel
+
+## Criando usuários fake
+php artisan make:seeder UsersTableSeeder
+
+colocar no Run no arquivo UsersTableSeeder: factory(\App\User::class, 1)->create();
+
+no arquivo DataBaseSeeder.php colocar o nome do seeder criado UsersTableSeeder
+
+php artisan db:seed
+
+Trabalhos no framework laravel
+
+Reoptimized class loader:
+
+php artisan optimize
+Clear Cache facade value:
+
+php artisan cache:clear
+Clear Route cache:
+
+php artisan route:cache
+Clear View cache:
+
+php artisan view:clear
+Clear Config cache:
+
+php artisan config:cache
+
+## Para o git -> Não subir vendor e nem node
+composer update -> traz o vendor
+npm install     -> traz o node
+
+### criar um modelo tabela chamado Chamado
+php artisan make:model Chamado -m
+
+### habilitar autenticação
+composer require laravel/ui
+php artisan ui vue --auth
+
+

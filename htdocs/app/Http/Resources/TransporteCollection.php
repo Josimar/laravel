@@ -14,4 +14,11 @@ class TransporteCollection extends ResourceCollection
         ];
     }
 
+    public function with($request)
+    {
+        return [
+            'extra_information' => 'Extra information',
+            'extra' => 'Dado extra'
+        ];
+    }
 }

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('auth/login', 'Api\\AuthController@login');
+Route::post('auth/login', 'api\\AuthController@login');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -36,10 +36,15 @@ Route::get('/teste', function (Request $request) {
     return $response;
 });
 
-
+/*
 Route::group(['middleware'=>['apijwt']], function(){
-    Route::get('users', 'Api\\UserController@index');
+    Route::get('users', 'api\\UserController@index');
 });
+*/
+Route::group(['middleware'=>['auth.basic']], function(){
+    Route::get('users', 'api\\UserController@index');
+});
+
 
 // Rotas de transportes
 Route::namespace('api')->group(function(){
@@ -49,7 +54,8 @@ Route::namespace('api')->group(function(){
         Route::get('/', 'TransporteController@index');
         Route::get('/paginate', 'TransporteController@paginate');
         Route::get('/{id}','TransporteController@show');
-        Route::post('/', 'TransporteController@save');
+        Route::post('/', 'TransporteController@save')->middleware('auth.basic');
+        // Route::post('/', 'TransporteController@save')->middleware('auth.basic');
         Route::put('/', 'TransporteController@update');
         Route::patch('/', 'TransporteController@update');
         Route::delete('/{id}', 'TransporteController@delete');
