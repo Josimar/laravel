@@ -100,4 +100,7 @@ php artisan make:model Chamado -m
 composer require laravel/ui
 php artisan ui vue --auth
 
+### Compilar CSS e JS
+npm run dev
+
 
