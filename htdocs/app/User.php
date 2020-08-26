@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 // use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Model\Papel;
 
 // class User extends Authenticatable implements JWTSubject
 class User extends Authenticatable
@@ -38,8 +39,46 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function ehAdmin(){
+        return $this->existePapel('Admin');
+    }
+
     public function chamados(){
         return $this->belongsToMany('App\Model\Chamado');
+    }
+
+    public function papeis(){
+        return $this->belongsToMany('App\Model\Papel', 'papel_user', 'userid', 'papelid');
+        // return $this->belongsToMany('App\Model\Papel::class');
+    }
+
+    public function adicionarPapel($papel){
+        if (is_string($papel)){
+            $papel = Papel::where('nome','=',$papel)->firstOrFail();
+        }
+        if ($this->existePapel($papel)){
+            return;
+        }
+        return $this->papeis()->attach($papel);
+    }
+
+    public function existePapel($papel){
+        if (is_string($papel)){
+            $papel = Papel::where('nome', '=', $papel)->firstOrFail();
+        }
+        return (boolean) $this->papeis()->find($papel->id);
+    }
+
+    public function removePapel($papel){
+        if (is_string($papel)){
+            $papel = papel::where('nome', '=', $papel)->firstOrFail();
+        }
+        return $this->papeis()->detach($papel);
+    }
+
+    public function temPermissao($papeis){
+        $userPapeis = $this->papeis;
+        return $papeis->intersect($userPapeis)->count();
     }
 
     /*

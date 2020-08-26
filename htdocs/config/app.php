@@ -14,6 +14,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Controle'),
+    'logoSite' => 'Controle',
+    'corSite' => 'blue',
+    'descricaoSite' => 'Controle de utilitários',
+    'autorSite' => 'Josimar Silva',
 
     /*
     |--------------------------------------------------------------------------
