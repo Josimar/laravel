@@ -12,7 +12,8 @@ class AdminController extends Controller
     }
 
     public function index(){
+        $search = "";
         $caminho = ['url'=>'', 'titulo'=>'Admin'];
-        return view('admin.index', compact('caminho'));
+        return view('admin.index', compact('caminho', 'search'));
     }
 }

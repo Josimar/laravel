@@ -14,8 +14,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $search = "";
+        $texto = trans("Texto"); // texto traduzido
         $chamados = Chamado::all();
-        return view('home', compact('chamados'));
+        return view('home', compact('texto', 'chamados', 'search'));
     }
 }
 

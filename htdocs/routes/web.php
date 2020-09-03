@@ -2,21 +2,20 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Auth::routes();
 
-Route::get('/', ['uses'=>'Controller@homepage']);
+Route::get('lang/{locale?}', function($locale = 'pt_br'){
+    $lang = session('lang', 'pt_br');
+    session(['lang'=>$locale]);
+    
+    return back()->withInput();
+})->name('lang');
 
-Route::get('/welcome', function () {
+Route::get('/', function(){
+    return view('home');
+});
+
+Route::get('/welcome/{locale?}', function ($locale = 'pt_br') {
     return view('welcome');
 });
 
@@ -24,21 +23,20 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::group(['middleware'=>'auth', 'prefix'=>'admin'], function(){
+Route::prefix('admin')->namespace('Admin')->group(function(){
     Route::get('/', 'Admin\AdminController@index')->name('admin');
 
-    Route::resource('usuarios', 'Admin\UsuarioController');
-    Route::resource('papeis', 'Admin\PapelController');
+    Route::resource('usuarios', 'UsuarioController');
+    Route::resource('papeis', 'PapelController');
 
-    Route::get('usuarios/papel/{id}', ['as'=>'usuarios.papel', 'uses'=>'Admin\UsuarioController@papel']);
-    Route::post('usuarios/papel/{papel}', ['as'=>'usuarios.papel.store', 'uses'=>'Admin\UsuarioController@papelStore']);
-    Route::delete('usuarios/papel/{usuario}/{papel}', ['as'=>'usuarios.papel.destroy', 'uses'=>'Admin\UsuarioController@papelDestroy']);
+    Route::get('usuarios/papel/{id}', ['as'=>'usuarios.papel', 'uses'=>'UsuarioController@papel']);
+    Route::post('usuarios/papel/{papel}', ['as'=>'usuarios.papel.store', 'uses'=>'UsuarioController@papelStore']);
+    Route::delete('usuarios/papel/{usuario}/{papel}', ['as'=>'usuarios.papel.destroy', 'uses'=>'UsuarioController@papelDestroy']);
 
-    Route::get('papeis/permissao/{id}', ['as'=>'papeis.permissao','uses'=>'Admin\PapelController@permissao']);
-    Route::post('papeis/permissao/{permissao}', ['as'=>'papeis.permissao.store','uses'=>'Admin\PapelController@permissaoStore']);
-    Route::delete('papeis/permissao/{papel}/{permissao}', ['as'=>'papeis.permissao.destroy','uses'=>'Admin\PapelController@permissaoDestroy']);
+    Route::get('papeis/permissao/{id}', ['as'=>'papeis.permissao','uses'=>'PapelController@permissao']);
+    Route::post('papeis/permissao/{permissao}', ['as'=>'papeis.permissao.store','uses'=>'PapelController@permissaoStore']);
+    Route::delete('papeis/permissao/{papel}/{permissao}', ['as'=>'papeis.permissao.destroy','uses'=>'PapelController@permissaoDestroy']);
 });
 
 Route::get('/chamado', 'ChamadoController@index')->name('chamados');
 Route::get('/chamado/{id}', 'ChamadoController@detalhe');
-

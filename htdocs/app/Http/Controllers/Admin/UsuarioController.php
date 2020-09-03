@@ -5,17 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use App\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Model\Papel;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private $rota = 'usuarios';
+    private $page;
+    private $paginate = 2;
+    private $filtro = ['name', 'email'];
+    private $model;
+
+    public function __construct(UserRepositoryInterface $model){
+        $this->page = trans('controle.nomePage');
+        $this->model = $model;
+    }
+
+    public function index(Request $request)
     {
         // return response()->json(['message'=>__METHOD__]);
 
@@ -23,12 +29,22 @@ class UsuarioController extends Controller
             abort(403, 'Não Autorizado');
         }
 
-        $usuarios = user::all();
+        $page = $this->page;
+        $routeName = $this->rota;
+        $search = "";
+
+        if (isset($request->search)){
+            $search = $request->search;
+            $usuarios = $this->model->findWhereLike($this->$filtro, $search, 'id', 'DESC');
+        }else{
+            $usuarios = $this->model->paginate($this->paginate);
+        }
+
         $caminhos = [
-            ['url'=>'/admin', 'titulo'=>'Admin'],
-            // ['url'=>'', 'titulo'=>'Usuários'],
+            ['url'=>'../admin', 'titulo'=>'Admin'],
+            ['url'=>'', 'titulo'=>'Usuários'],
         ];
-        return view('admin.usuarios.index', compact('usuarios', 'caminhos'));
+        return view('admin.usuarios.index', compact('usuarios', 'caminhos', 'search', 'routeName'));
     }
 
     public function papel($id){
@@ -40,8 +56,8 @@ class UsuarioController extends Controller
         $papel = Papel::all();
         $caminhos = [
             ['url'=>'/admin', 'titulo'=>'Admin'],
-            // ['url'=>route('usuarios.index'), 'titulo'=>'Usuários'],
-            // ['url'=>'', 'titulo'=>'Papel'],
+            ['url'=>route('usuarios.index'), 'titulo'=>'Usuários'],
+            ['url'=>'', 'titulo'=>'Papel'],
         ];
         return view('admin.usuarios.papel', compact('usuario', 'papel', 'caminhos'));
     }

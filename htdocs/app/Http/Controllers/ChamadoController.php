@@ -16,11 +16,12 @@ class ChamadoController extends Controller
 
     public function index()
     {
+        $search = "";
         $user = Auth::user();
         // dd($user);
         // $chamados = Chamado::where('userid', '=', $user->id)->get();
         $chamados = Chamado::all();
-        return view('chamados', compact('chamados'));
+        return view('chamados', compact('chamados', 'search'));
     }
 
     public function detalhe($id){
