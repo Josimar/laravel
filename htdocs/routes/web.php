@@ -24,7 +24,7 @@ Route::get('/home', function () {
 });
 
 Route::prefix('admin')->namespace('Admin')->group(function(){
-    Route::get('/', 'Admin\AdminController@index')->name('admin');
+    Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('usuarios', 'UsuarioController');
     Route::resource('papeis', 'PapelController');
@@ -37,6 +37,8 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
     Route::post('papeis/permissao/{permissao}', ['as'=>'papeis.permissao.store','uses'=>'PapelController@permissaoStore']);
     Route::delete('papeis/permissao/{papel}/{permissao}', ['as'=>'papeis.permissao.destroy','uses'=>'PapelController@permissaoDestroy']);
 });
+
+Route::resource('tarefas', 'TarefaController');
 
 Route::get('/chamado', 'ChamadoController@index')->name('chamados');
 Route::get('/chamado/{id}', 'ChamadoController@detalhe');

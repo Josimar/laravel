@@ -13,6 +13,8 @@ class Controller extends BaseController
 
     public function homepage(){
         $search = "";
-        return view('welcome', compact('search'));
+        $routeName = "";
+        
+        return view('welcome', compact('search', 'routeName'));
     }
 }

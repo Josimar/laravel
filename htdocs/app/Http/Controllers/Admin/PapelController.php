@@ -10,23 +10,22 @@ use App\Model\Permissao;
 
 class PapelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $rota = 'admin.papel';
+
     public function index()
     {
         if (Gate::denies('papel-view')){
             abort(403, 'Não Autorizado');
         }
 
-        $registros = Papel::all();
+        $routeName = $this->rota;
         $caminhos = [
         ['url'=>'/admin','titulo'=>'Admin'],
         ['url'=>'','titulo'=>'Papéis']
         ];
-        return view('admin.papel.index',compact('registros','caminhos'));
+
+        $registros = Papel::all();
+        return view('admin.papel.index',compact('registros','caminhos', 'routeName'));
     }
 
     public function permissao($id)

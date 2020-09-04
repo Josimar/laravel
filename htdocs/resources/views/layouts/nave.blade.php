@@ -13,14 +13,14 @@
   </ul>
 
   <!-- SEARCH FORM -->
-  <form class="form-inline ml-3" method="GET" action="{{route($routeName.'.index')}}">
+  <form class="form-inline ml-3" method="GET" action="{{route((($routeName ?? 'usuarios').'.index'))}}">
     <div class="input-group input-group-sm">
       <input class="form-control form-control-navbar" type="search" placeholder="@lang('controle.search')" aria-label="Search" name="search" value="{{$search ?? ''}}">
       <div class="input-group-append">
         <button class="btn btn-navbar" type="submit">
           <i class="fas fa-search"></i>
         </button>
-        <a class="btn btn-navbar" href="{{route($routeName.'.index')}}">
+        <a class="btn btn-navbar" href="{{route((($routeName ?? 'usuarios').'.index'))}}">
           <i class="fa fa-times"></i>
         </a>
       </div>

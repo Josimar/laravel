@@ -7,6 +7,8 @@ use App\Model\Chamado;
 
 class HomeController extends Controller
 {
+    private $rota = 'home';
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -15,9 +17,11 @@ class HomeController extends Controller
     public function index()
     {
         $search = "";
+        $routeName = $this->rota;
         $texto = trans("Texto"); // texto traduzido
+
         $chamados = Chamado::all();
-        return view('home', compact('texto', 'chamados', 'search'));
+        return view('home', compact('texto', 'chamados', 'search', 'routeName'));
     }
 }
 

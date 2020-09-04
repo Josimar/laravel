@@ -4,7 +4,7 @@
 	<div class="container">
 		<h2 class="center">Lista de Papéis para {{$usuario->name}}</h2>
 
-		@include('admin._breadcrumb')
+		@include('admin.breadcrumb')
 
 		<div class="row">
 			<form action="{{route('usuarios.papel.store',$usuario->id)}}" method="post">

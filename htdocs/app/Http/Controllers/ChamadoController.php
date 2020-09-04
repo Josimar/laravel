@@ -9,6 +9,8 @@ use Auth;
 
 class ChamadoController extends Controller
 {
+    private $rota = 'chamado';
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -17,11 +19,13 @@ class ChamadoController extends Controller
     public function index()
     {
         $search = "";
+        $routeName = $this->rota;
+
         $user = Auth::user();
         // dd($user);
         // $chamados = Chamado::where('userid', '=', $user->id)->get();
         $chamados = Chamado::all();
-        return view('chamados', compact('chamados', 'search'));
+        return view('chamados', compact('chamados', 'search', 'routeName'));
     }
 
     public function detalhe($id){

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Repositories\Contracts\UserRepositoryInterface', 'App\Repositories\Eloquent\UserRepository');
+        $this->app->bind('App\Repositories\Contracts\RepositoryInterface', 'App\Repositories\Eloquent\UsuarioRepository');
+        $this->app->bind('App\Repositories\Contracts\RepositoryInterface', 'App\Repositories\Eloquent\TarefaRepository');
     }
 
     /**
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::component('components.alert', 'alert');
+
         // JsonResource::withoutWrapping();
         // JsonResource::wrap('dados');
     }

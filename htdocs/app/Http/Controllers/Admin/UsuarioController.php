@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\RepositoryInterface;
 use App\Model\Papel;
 
 class UsuarioController extends Controller
@@ -16,9 +16,9 @@ class UsuarioController extends Controller
     private $filtro = ['name', 'email'];
     private $model;
 
-    public function __construct(UserRepositoryInterface $model){
+    public function __construct(RepositoryInterface $modelUser){
         $this->page = trans('controle.nomePage');
-        $this->model = $model;
+        $this->model = $modelUser;
     }
 
     public function index(Request $request)
@@ -35,7 +35,7 @@ class UsuarioController extends Controller
 
         if (isset($request->search)){
             $search = $request->search;
-            $usuarios = $this->model->findWhereLike($this->$filtro, $search, 'id', 'DESC');
+            $usuarios = $this->model->findWhereLike($this->filtro, $search, 'id', 'DESC');
         }else{
             $usuarios = $this->model->paginate($this->paginate);
         }
@@ -52,7 +52,7 @@ class UsuarioController extends Controller
             abort(403, 'Não Autorizado');
         }
         
-        $usuario = User::find($id);
+        $usuario = $this->model->find($id);
         $papel = Papel::all();
         $caminhos = [
             ['url'=>'/admin', 'titulo'=>'Admin'],
@@ -67,7 +67,7 @@ class UsuarioController extends Controller
             abort(403, 'Não Autorizado');
         }
 
-        $usuario = User::find($id);
+        $usuario = $this->model->find($id);
         $dados = $request->all();
         $papel = Papel::find($dados['papelid']);
         $usuario->adicionarPapel($papel);

@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Model\User;
+use App\User;
 
 class Papel extends Model
 {
@@ -11,7 +11,7 @@ class Papel extends Model
     protected $fillable = ['nome', 'descricao'];
 
     public function users(){
-        return $this->belongsToMany('App\Model\User', 'userid', 'id');
+        return $this->belongsToMany('App\User', 'userid', 'id');
         // return $this->belongsToMany('App\Model\Papel::class');
     }
 

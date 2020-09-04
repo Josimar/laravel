@@ -22,6 +22,11 @@ abstract class AbstractRepository{
       return $this->model->orderBy($column, $order)->get();
     }
 
+    public function find(string $id = '0')
+    {
+      return $this->model->find($id);
+    }
+
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator
     {
       return $this->model->orderBy($column, $order)->paginate($paginate);
