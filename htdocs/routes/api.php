@@ -3,17 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::post('auth/login', 'api\\AuthController@login');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -45,30 +34,21 @@ Route::group(['middleware'=>['auth.basic']], function(){
     Route::get('users', 'api\\UserController@index');
 });
 
-
 // Rotas de transportes
 Route::namespace('api')->group(function(){
-
     Route::prefix('transportes')->group(function(){
-
         Route::get('/', 'TransporteController@index');
         Route::get('/paginate', 'TransporteController@paginate');
         Route::get('/{id}','TransporteController@show');
         Route::post('/', 'TransporteController@save')->middleware('auth.basic');
-        // Route::post('/', 'TransporteController@save')->middleware('auth.basic');
         Route::put('/', 'TransporteController@update');
         Route::patch('/', 'TransporteController@update');
         Route::delete('/{id}', 'TransporteController@delete');
         Route::post('/update', 'TransporteController@update');
         Route::post('/delete/{id}', 'TransporteController@delete');
-
     });
-
     // Route::resource('/users', 'UserController');
-
 });
-
-
 
 // Rotas para Favoritos
 Route::get('/favoritos','api\FavoritoController@index');

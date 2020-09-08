@@ -13,7 +13,7 @@ Route::get('lang/{locale?}', function($locale = 'pt_br'){
 
 Route::get('/', function(){
     return view('home');
-});
+})->name('home');;
 
 Route::get('/welcome/{locale?}', function ($locale = 'pt_br') {
     return view('welcome');
@@ -23,7 +23,7 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::prefix('admin')->namespace('Admin')->group(function(){
+Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('usuarios', 'UsuarioController');

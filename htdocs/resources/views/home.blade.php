@@ -8,8 +8,7 @@
                 <div class="card-header">{{ __('controle.dashboard') }}</div>
 
                 <div class="card-body">
-                    @alert()
-                    @endalert
+                    <x-alert message="Olá mensagem" status="notification" />
                 </div>
             </div>
         </div>

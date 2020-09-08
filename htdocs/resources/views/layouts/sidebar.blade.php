@@ -57,8 +57,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="{{route('tarefas.index')}}" class="nav-link {{($link == 'tarefas-view' ? 'active' : '')}}">
+          <li class="nav-item">                                 
+            <a href="{{route('tarefas.index')}}" class="nav-link {{($link ?? '' == 'tarefas-view' ? 'active' : '')}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Tarefas</p>
             </a>

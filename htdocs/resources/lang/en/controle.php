@@ -7,10 +7,13 @@ return [
     'search' => 'search',
     'nomePage' => 'User',
     'list' => 'List',
-    'tarefa'=>'Tarefa',
-    'descricao'=>'Descrição',
-    'progresso'=>'Progresso',
+    'tarefa'=>'Task',
+    'tarefas'=>'Tasks',
+    'titulo'=>'Title',
+    'descricao'=>'Description',
+    'progresso'=>'Progress',
     'percentual'=>'Percentual',
     'listUser' => 'List User',
 
+    'create_crud' => 'Create :page',
 ];
