@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\RepositoryInterface;
 use App\Model\Papel;
+use Validator;
+use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
 {
@@ -51,7 +53,7 @@ class UsuarioController extends Controller
         if (Gate::denies('usuario-edit')){
             abort(403, 'Não Autorizado');
         }
-        
+
         $usuario = $this->model->find($id);
         $papel = Papel::all();
         $caminhos = [
@@ -108,6 +110,14 @@ class UsuarioController extends Controller
         if (Gate::denies('usuario-create')){
             abort(403, 'Não Autorizado');
         }
+
+        $data = $request->all();
+
+        Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'sometimes|required|string|email|min:3|confirmed'
+        ]);
     }
 
     /**
@@ -146,6 +156,20 @@ class UsuarioController extends Controller
         if (Gate::denies('usuario-edit')){
             abort(403, 'Não Autorizado');
         }
+
+        $data = $request->all();
+
+        if (!$data['password']){
+            unset($data['password']);
+        }
+
+        Validator::make($data, [
+           'name' => 'required|string|max:255',
+           'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore('id')],
+           'password' => 'sometimes|required|string|email|min:3|confirmed'
+        ]);
+
+
     }
 
     /**

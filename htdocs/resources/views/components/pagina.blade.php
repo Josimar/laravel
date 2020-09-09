@@ -6,7 +6,7 @@
                     <h1>{{ __('controle.list') }} {{ __($page) }}</h1>
                 </div>
                 <div class="col-sm-6">
-                    <x-breadcrumb :caminhos="$caminhos" />
+                    <x-breadcrumb :caminhos="$caminhos"></x-breadcrumb>
                 </div>
             </div>
         </div>
@@ -19,11 +19,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <x-alert message="" status="" />
+                    <x-alert :message="$msgMessage ?? ''" :status="$msgStatus ?? ''" />
                     <div class="card">
                         <x-paginacao titulo="{{__($page)}}" :search="$search" :recordsetList="$recordsetList" />
                         <div class="card-body p-0">
-                            <x-tabela :columnList="$columnList" :recordsetList="$recordsetList" />
+                            <x-tabela :routeName="$routeName ?? 'tarefas'" :columnList="$columnList" :recordsetList="$recordsetList" />
                         </div>
                     </div>
                 </div>

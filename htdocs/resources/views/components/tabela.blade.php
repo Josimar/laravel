@@ -12,6 +12,7 @@
                 //-->
                 <th>{{$value}}</th>
                 @endforeach
+                <th scope="col" nowrap>{{__('controle.action')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,11 @@
                     <td>@php echo $dado->{$key2} @endphp</td>
                 @endif
             @endforeach
+            <td nowrap>
+                <a href="{{route(($routeName ?? 'tarefas').'.show', $dado->id)}}"><i style="color:black" class="nav-icon fas fa-info-circle" aria-hidden="true"></i></a>
+                <a href="{{route(($routeName ?? 'tarefas').'.edit', $dado->id)}}"><i style="color:orange" class="nav-icon fas fa-pen" aria-hidden="true"></i></a>
+                <a href="{{route(($routeName ?? 'tarefas').'.show', [$dado->id, 'delete=1'])}}"><i style="color:red" class="nav-icon fas fa-trash" aria-hidden="true"></i></a>
+            </td>
         </tr>
         @endforeach
         </tbody>

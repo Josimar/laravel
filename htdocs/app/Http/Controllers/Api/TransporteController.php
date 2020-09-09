@@ -11,7 +11,7 @@ use App\Http\Resources\TransporteCollection;
 
 class TransporteController extends Controller
 {
-    
+
     private $transporte;
 
     public function __construct(Transporte $transporte){
@@ -26,7 +26,7 @@ class TransporteController extends Controller
 
     // http://localhost/laravel/api/transportes/paginate?page=2
     public function paginate(){
-        $transporte = $this->transporte->paginate(1);
+        $transporte = $this->transporte->paginate(10);
 
         // return response()->json($transporte);
         return new TransporteCollection($transporte);

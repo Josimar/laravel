@@ -30,7 +30,12 @@ abstract class AbstractRepository{
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator
     {
       return $this->model->orderBy($column, $order)->paginate($paginate);
-    }    
+    }
+
+    public function findPaginate(int $paginate = 10, string $id = '0', string $column = 'id', string $order = 'ASC'):LengthAwarePaginator
+    {
+        return $this->model->where('id', '=', $id)->orderBy($column, $order)->paginate($paginate);
+    }
 
     public function findWhereLike(array $columns, string $search, string $column = 'id', string $order = 'ASC'):Collection{
         $query = $this->model;
@@ -42,6 +47,27 @@ abstract class AbstractRepository{
         return $query->orderBy($column, $order)->get();
     }
 
+    public function create(array $data): Bool{
+        return (bool) $this->model->create($data);
+    }
+
+    public function update(array $data, int $id): Bool{
+        $registro = $this->find($id);
+        if ($registro){
+            return (bool) $registro->update($data);
+        }else{
+            return false;
+        }
+    }
+
+    public function delete(int $id): Bool{
+        $registro = $this->find($id);
+        if ($registro){
+            return (bool) $registro->delete();
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>

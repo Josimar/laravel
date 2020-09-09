@@ -33,8 +33,8 @@ class TarefaController extends Controller
         }
         */
 
-        $columnList = ['id'=>'#', 
-            'titulo'=>trans('controle.titulo'), 
+        $columnList = ['id'=>'#',
+            'titulo'=>trans('controle.titulo'),
             'descricao'=>trans('controle.descricao'),
             'progresso'=>trans('controle.progresso'),
             'percentcomplete'=>trans('controle.percentual')];
@@ -55,9 +55,9 @@ class TarefaController extends Controller
             ['url'=>'', 'titulo'=>$page],
         ];
 
-        $request->session()->flash('status', 'Task was successful');
+        $tarefa  = ''; $msgMessage = ''; $msgStatus = ''; $delete = '';
 
-        return view($routeName.'.index', compact('tarefas', 'caminhos', 'search', 'routeName', 'page', 'link', 'columnList'));
+        return view($routeName.'.index', compact('page','search', 'caminhos', 'routeName', 'delete', 'columnList', 'tarefas', 'tarefa', 'msgMessage', 'msgStatus'));
     }
 
     public function create()
@@ -75,33 +75,137 @@ class TarefaController extends Controller
         ];
         $columnList = [];
         $tarefas = new LengthAwarePaginator(null, 0, 1);
+        $tarefa  = ''; $msgMessage = ''; $msgStatus = ''; $delete = '';
 
-        return view($routeName.'.create', compact('tarefas', 'caminhos', 'search', 'routeName', 'page', 'link', 'columnList'));
+        return view($routeName.'.create', compact('page','search', 'caminhos', 'routeName', 'delete', 'columnList', 'tarefas', 'tarefa', 'msgMessage', 'msgStatus'));
     }
 
     public function store(Request $request)
     {
         // return response()->json(['message'=>__METHOD__]);
-        dd($request->all());
+        // dd($request->all());
+
+        $data = $request->all();
+        Validator::make($data, [
+            'titulo' => 'required|string|max:64',
+            'descricao' => 'required|string|max:255',
+        ])->validate();
+
+        if ($this->model->create($data)){
+            session()->flash('msgMessage', trans('controle.add_success'));
+            session()->flash('msgStatus', 'success');
+            $msgMessage = trans('controle.add_success');
+            $msgStatus = 'success';
+            return redirect()->back()->with(compact('msgMessage', 'msgStatus'));
+        }else{
+            session()->flash('msgMessage', trans('controle.add_error'));
+            session()->flash('msgStatus', 'error');
+            $msgMessage = trans('controle.add_error');
+            $msgStatus = 'error';
+            return redirect()->back()->with(compact('msgMessage', 'msgStatus'));
+        }
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
-        return response()->json(['message'=>__METHOD__]);
+        // return response()->json(['message'=>__METHOD__]);
+        $routeName = $this->rota;
+        $page = $this->page;
+        $search = "";
+        $link = $routeName.'-show';
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route('tarefas.index'), 'titulo'=>$page],
+            ['url'=>'', 'titulo'=>trans('controle.show_crud', ['page'=>$page])],
+        ];
+        $columnList = [];
+
+        // $tarefa = $this->model->findPaginate($this->paginate, $id);
+        $tarefa = $this->model->find($id);
+        $tarefas = new LengthAwarePaginator(null, 0, 1);
+
+        if (!$tarefa){
+            return redirect()->route($routeName.'index');
+        }
+
+        $delete = $request->delete ?? '0';
+        $msgMessage = ''; $msgStatus = '';
+        if ($delete){
+            $msgMessage = 'Deseja apagar o registro?'; $msgStatus = 'notification';
+        }
+
+        return view($routeName.'.show', compact('page','search', 'caminhos', 'routeName', 'delete', 'columnList', 'tarefas', 'tarefa', 'msgMessage', 'msgStatus'));
     }
 
     public function edit($id)
     {
-        return response()->json(['message'=>__METHOD__]);
+        // return response()->json(['message'=>__METHOD__]);
+
+        $routeName = $this->rota;
+        $page = $this->page;
+        $search = "";
+        $link = $routeName.'-edit';
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route('tarefas.index'), 'titulo'=>$page],
+            ['url'=>'', 'titulo'=>trans('controle.edit_crud', ['page'=>$page])],
+        ];
+        $columnList = [];
+
+        // $tarefa = $this->model->findPaginate($this->paginate, $id);
+        $tarefa = $this->model->find($id);
+        $tarefas = new LengthAwarePaginator(null, 0, 1);
+
+        if (!$tarefa){
+            return redirect()->route($routeName.'index');
+        }
+
+        $msgMessage = ''; $msgStatus = ''; $delete = '';
+        return view($routeName.'.edit', compact('page','search', 'caminhos', 'routeName', 'delete', 'columnList', 'tarefas', 'tarefa', 'msgMessage', 'msgStatus'));
     }
 
     public function update(Request $request, $id)
     {
-        return response()->json(['message'=>__METHOD__]);
+        // return response()->json(['message'=>__METHOD__]);
+        $data = $request->all();
+        Validator::make($data, [
+            'titulo' => 'required|string|max:64',
+            'descricao' => 'required|string|max:255',
+        ])->validate();
+        $ret = $this->model->update($data, $id);
+        if ($ret){
+            session()->flash('msgMessage', trans('controle.edit_success'));
+            session()->flash('msgStatus', 'success');
+            $msgMessage = trans('controle.edit_success');
+            $msgStatus = 'success';
+            return redirect()->back()->with(compact('msgMessage', 'msgStatus'));
+        }else{
+            session()->flash('msgMessage', trans('controle.edit_error'));
+            session()->flash('msgStatus', 'error');
+            $msgMessage = trans('controle.edit_error');
+            $msgStatus = 'error';
+            return redirect()->back()->with(compact('msgMessage', 'msgStatus'));
+        }
     }
 
     public function destroy($id)
     {
-        return response()->json(['message'=>__METHOD__]);
+        // return response()->json(['message'=>__METHOD__]);
+        $routeName = $this->rota;
+        $ret = $this->model->delete($id);
+        if ($ret){
+            session()->flash('msgMessage', trans('controle.delete_success'));
+            session()->flash('msgStatus', 'success');
+            $msgMessage = trans('controle.delete_success');
+            $msgStatus = 'success';
+            return redirect()->back()->with(compact('msgMessage', 'msgStatus'));
+        }else{
+            session()->flash('msgMessage', trans('controle.delete_error'));
+            session()->flash('msgStatus', 'error');
+            $msgMessage = trans('controle.delete_error');
+            $msgStatus = 'error';
+            return redirect()->route($routeName.'.index')->with(compact('msgMessage', 'msgStatus'));
+        }
+
     }
 }
