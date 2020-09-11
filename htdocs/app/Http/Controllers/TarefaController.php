@@ -17,7 +17,7 @@ class TarefaController extends Controller
     private $filtro = ['titulo', 'descricao'];
 
     public function __construct(RepositoryInterface $model){
-        $this->page = trans('controle.tarefas'); // ToDo: tradução error
+        $this->page = trans('controle.tarefas');
         $this->model = $model;
     }
 

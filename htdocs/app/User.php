@@ -12,10 +12,12 @@ use App\Model\Papel;
 class User extends Authenticatable
 {
     use Notifiable;
-    
+
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modified';
     const DELETED_AT = 'deleted';
+
+    protected $table = 'users';
 
     protected $fillable = [
         'name', 'email', 'password',
@@ -49,7 +51,6 @@ class User extends Authenticatable
 
     public function papeis(){
         return $this->belongsToMany('App\Model\Papel', 'papel_user', 'userid', 'papelid');
-        // return $this->belongsToMany('App\Model\Papel::class');
     }
 
     public function adicionarPapel($papel){

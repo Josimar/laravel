@@ -7,7 +7,7 @@ Auth::routes();
 Route::get('lang/{locale?}', function($locale = 'pt_br'){
     $lang = session('lang', 'pt_br');
     session(['lang'=>$locale]);
-    
+
     return back()->withInput();
 })->name('lang');
 
@@ -39,6 +39,9 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
 });
 
 Route::resource('tarefas', 'TarefaController');
+Route::resource('listas', 'ListaController');
+Route::resource('produtos', 'ProdutoController');
+Route::resource('categorias', 'CategoriaController');
 
 Route::get('/chamado', 'ChamadoController@index')->name('chamados');
 Route::get('/chamado/{id}', 'ChamadoController@detalhe');

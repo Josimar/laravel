@@ -3,51 +3,183 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use App\Repositories\Contracts\RepositoryInterface;
+use App\Repositories\Contracts\UsuarioInterface;
 use App\Model\Papel;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
 {
     private $rota = 'usuarios';
-    private $page;
-    private $paginate = 2;
-    private $filtro = ['name', 'email'];
     private $model;
+    private $colunas;
 
-    public function __construct(RepositoryInterface $modelUser){
-        $this->page = trans('controle.nomePage');
-        $this->model = $modelUser;
+    private $paginate = 10;
+    private $filtro = ['name', 'email'];
+
+    public function __construct(UsuarioInterface $model){
+        $this->model = $model;
+        $this->colunas = ['id'=>'#', 'name'=>trans('controle.name'), 'email'=>trans('controle.email')];
     }
 
     public function index(Request $request)
     {
         // return response()->json(['message'=>__METHOD__]);
-
         if (Gate::denies('usuario-view')){
             abort(403, 'Não Autorizado');
         }
 
-        $page = $this->page;
+        $titulo = trans('controle.users');
+        $colunas = $this->colunas;
         $routeName = $this->rota;
-        $search = "";
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route('admin.index'), 'titulo'=>'Dashboard'],
+            ['url'=>'', 'titulo'=>$titulo]
+        ];
 
+        $search = "";
+        $usuario = '';
         if (isset($request->search)){
             $search = $request->search;
             $usuarios = $this->model->findWhereLike($this->filtro, $search, 'id', 'DESC');
         }else{
-            $usuarios = $this->model->paginate($this->paginate);
+            $usuarios = $this->model->all();
         }
 
-        $caminhos = [
-            ['url'=>'../admin', 'titulo'=>'Admin'],
-            ['url'=>'', 'titulo'=>'Usuários'],
-        ];
-        return view('admin.usuarios.index', compact('usuarios', 'caminhos', 'search', 'routeName'));
+        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'usuarios', 'usuario'));
     }
+
+    public function create()
+    {
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        if (Gate::denies('usuario-create')){
+            abort(403, 'Não Autorizado');
+        }
+
+        $colunas = $this->colunas;
+        $routeName = $this->rota;
+        $titulo = trans('controle.users');
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route('admin.index'), 'titulo'=>'Dashboard'],
+            ['url'=>route($routeName.'.index'), 'titulo'=>$titulo],
+            ['url'=>'', 'titulo'=>trans('controle.create').' '.$titulo],
+        ];
+
+        $search = "";
+        $usuarios = new Collection;
+        $usuario = '';
+
+        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'usuarios', 'usuario'));
+    }
+
+    public function show($id, Request $request)
+    {
+        // return response()->json(['message'=>__METHOD__]);
+
+        /*
+        if (Gate::denies('usuario-show')){
+            abort(403, 'Não Autorizado');
+        }
+        */
+
+        $colunas = $this->colunas;
+        $routeName = $this->rota;
+        $titulo = trans('controle.users');
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route('admin.index'), 'titulo'=>'Dashboard'],
+            ['url'=>route($routeName.'.index'), 'titulo'=>$titulo],
+            ['url'=>'', 'titulo'=>trans('controle.detail').' '.$titulo],
+        ];
+        $search = "";
+        $delete = $request->delete ?? '0';
+        $usuarios = new Collection;
+        $usuario = $this->model->find($id);
+
+        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'usuarios', 'usuario'));
+    }
+
+    public function edit($id)
+    {
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        if (Gate::denies('usuario-edit')){
+            abort(403, 'Não Autorizado');
+        }
+
+        $titulo = trans('controle.users');
+        $colunas = $this->colunas;
+        $routeName = $this->rota;
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route('admin.index'), 'titulo'=>'Dashboard'],
+            ['url'=>route($routeName.'.index'), 'titulo'=>$titulo],
+            ['url'=>'', 'titulo'=>trans('controle.edit').' '.$titulo],
+        ];
+
+        $search = "";
+        $usuarios = new Collection;
+        $usuario = $this->model->find($id);
+
+        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'usuarios', 'usuario'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        if (Gate::denies('usuario-edit')){
+            abort(403, 'Não Autorizado');
+        }
+
+        $routeName = $this->rota;
+        $data = $request->all();
+        if (!$data['password']){
+            unset($data['password']);
+        }
+
+        Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore('id')],
+            'password' => 'sometimes|required|string|email|min:3|confirmed'
+        ]);
+
+        if ($this->model->update($data, $id)){
+            session()->flash('msgMessage', trans('controle.edit_success'));
+            session()->flash('msgStatus', 'success');
+            return redirect(route($routeName.'.index'));
+        }else{
+            session()->flash('msgMessage', trans('controle.edit_error'));
+            session()->flash('msgStatus', 'error');
+            return redirect(route($routeName.'.edit'));
+        }
+    }
+
+    public function destroy($id)
+    {
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        if (Gate::denies('usuario-delete')){
+            abort(403, 'Não Autorizado');
+        }
+
+        session()->flash('msgMessage', trans('controle.delete_error'));
+        session()->flash('msgStatus', 'success');
+        return redirect()->back();
+    }
+
 
     public function papel($id){
         if (Gate::denies('usuario-edit')){
@@ -87,17 +219,6 @@ class UsuarioController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        if (Gate::denies('usuario-create')){
-            abort(403, 'Não Autorizado');
-        }
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -107,6 +228,9 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
         if (Gate::denies('usuario-create')){
             abort(403, 'Não Autorizado');
         }
@@ -116,72 +240,29 @@ class UsuarioController extends Controller
         Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'sometimes|required|string|email|min:3|confirmed'
-        ]);
-    }
+            'password' => 'required|string|min:3|confirmed'
+        ])->validate();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        if (Gate::denies('usuario-edit')){
-            abort(403, 'Não Autorizado');
-        }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        if (Gate::denies('usuario-edit')){
-            abort(403, 'Não Autorizado');
-        }
-
-        $data = $request->all();
-
-        if (!$data['password']){
-            unset($data['password']);
-        }
-
-        Validator::make($data, [
-           'name' => 'required|string|max:255',
-           'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore('id')],
-           'password' => 'sometimes|required|string|email|min:3|confirmed'
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
 
+        $user->adicionarPapel('Usuario');
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        if (Gate::denies('usuario-delete')){
-            abort(403, 'Não Autorizado');
+        if ($user){
+            session()->flash('msgMessage', trans('controle.add_success'));
+            session()->flash('msgStatus', 'success');
+            $msgMessage = trans('controle.add_success');
+            $msgStatus = 'success';
+            return redirect()->back()->with(compact('msgMessage', 'msgStatus'));
+        }else{
+            session()->flash('msgMessage', trans('controle.add_error'));
+            session()->flash('msgStatus', 'error');
+            $msgMessage = trans('controle.add_error');
+            $msgStatus = 'error';
+            return redirect()->back()->with(compact('msgMessage', 'msgStatus'));
         }
     }
 }

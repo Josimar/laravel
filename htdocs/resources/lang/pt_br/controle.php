@@ -16,12 +16,27 @@ return [
     'listUser' => 'Lista de Usuários',
 
     'name' => 'Nome',
+    'email' => 'Email',
+    'lastname' => 'Sobrenome',
+    'phone' => 'Telefone',
     'title' => 'Título',
     'description' => 'Descrição',
+    'quantity' => 'Quantidade',
+    'unit' => 'Unidade',
+    'value' => 'Valor',
+    'precision' => 'Precisão',
+	'purchased' => 'Comprado',
+    'list' => 'Lista',
+	'category' => 'Categoria',
     'save' => 'Salvar',
     'delete' => 'Excluir',
     'action' => 'Ação',
     'detail' => 'Detalhe',
+    'edit' => 'Editar',
+	'create' => 'Novo',
+	'product' => 'Produto',
+	'users' => 'Usuários',
+	'categoriaid' => 'pai',
 
     'show_crud' => 'Detalhe :page',
     'create_crud' => 'Adicionar :page',
@@ -33,4 +48,5 @@ return [
     'edit_error' => 'Erro na edição do registro',
     'delete_success' => 'Registro removido com sucesso',
     'delete_error' => 'Erro na exclusão do registro',
+	'enter_value' => 'Entre com um valor'
 ];

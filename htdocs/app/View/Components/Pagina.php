@@ -19,7 +19,7 @@ class Pagina extends Component
     public $msgStatus;
 
     public function __construct(string $page, string $search, array $caminhos, string $routeName, string $delete,
-                                array $columnList, LengthAwarePaginator $recordsetList, string $recordsetItem,
+                                array $columnList, string $recordsetList, string $recordsetItem,
                                 string $msgMessage, string $msgStatus)
     {
         $this->page = $page;

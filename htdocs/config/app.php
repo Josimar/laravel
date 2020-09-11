@@ -170,7 +170,7 @@ return [
          * Package Service Providers...
          */
         // Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-        
+
         /*
          * Application Service Providers...
          */
@@ -203,6 +203,7 @@ return [
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
+        'Collection' => Illuminate\Database\Eloquent\Collection::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,

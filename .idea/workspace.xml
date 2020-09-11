@@ -20,29 +20,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d16656c6-22ad-4d65-a11f-9f1a73dec9c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/CategoriaController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ListaController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ProdutoController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Categoria.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Lista.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Produto.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/CategoriaInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/ProdutoInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/TarefaInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/UsuarioInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/CategoriaRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ListaRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ProdutoRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/View/Components/Layout.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/formulario.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/categorias/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/components/layout.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/otherbar.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/formulario.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/produtos/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/produtos/formulario.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/produtos/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/UsuarioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/TransporteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/TransporteController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/TarefaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/TarefaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/RepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/RepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/AbstractRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/RepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/ListaInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/UsuarioRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/UsuarioRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/View/Components/Alert.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/View/Components/Alert.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/View/Components/Breadcrumb.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/View/Components/Breadcrumb.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/app/View/Components/Pagina.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/View/Components/Pagina.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/config/app.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/components/alert.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/components/alert.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/components/breadcrumb.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/components/breadcrumb.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/views/components/pagina.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/components/pagina.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/components/tabela.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/components/tabela.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/head.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/nave.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/nave.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/formulario.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/formulario.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/htdocs/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -171,18 +211,23 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/resources/views/tarefas" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/resources/views/categorias" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\tarefas" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\categorias" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Contracts" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Model" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Eloquent" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -194,6 +239,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599654150259</updated>
       <workItem from="1599654151382" duration="22231000" />
+      <workItem from="1599743775163" duration="47371000" />
     </task>
     <servers />
   </component>
@@ -210,11 +256,28 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="578" y="292" key="#Composer" timestamp="1599654295860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="292" key="#Composer/0.0.1536.824@0.0.1536.824" timestamp="1599654295860" />
+    <state x="502" y="214" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599770151520">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="502" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1599770151520" />
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1599848539130">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1599848539130" />
+    <state x="456" y="135" key="NewPhpClassDialog" timestamp="1599770170771">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="456" y="135" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1599770170771" />
+    <state x="604" y="336" key="NewPhpFileDialog" timestamp="1599832291791">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="604" y="336" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1599832291791" />
   </component>
 </project>

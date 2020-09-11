@@ -19,7 +19,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <x-alert :message="$msgMessage ?? ''" :status="$msgStatus ?? ''" />
                     <div class="card">
                         <x-paginacao titulo="{{__($page)}}" :search="$search" :recordsetList="$recordsetList" />
                         <div class="card-body p-0">

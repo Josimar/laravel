@@ -1,15 +1,18 @@
-@if (isset($message) && $message != "" && isset($status) && $status != "")
+@if (session('msgMessage') && session('msgStatus'))
     @php
-     if ($status == "error"){
-        $status = "danger";
-     }elseif ($status == "notification"){
-        $status = "info";
-     }else{
-        $status == "success";
-     }
+        $status = session('msgStatus');
+        $message = session('msgMessage');
+
+         if ($status == "error"){
+            $status = "danger";
+         }elseif ($status == "notification"){
+            $status = "info";
+         }else{
+            $status == "success";
+         }
     @endphp
 
-    <div class="alert alert-{{$status}}" role="alert">
+    <div id="alert" class="alert alert-{{$status}}" role="alert">
         {{ $message }}
     </div>
 @endif

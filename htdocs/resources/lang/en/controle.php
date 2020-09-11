@@ -16,12 +16,27 @@ return [
     'listUser' => 'List User',
 
     'name' => 'Name',
+    'lastname' => 'Lastname',
+    'phone' => 'Phone',
+    'email' => 'Email',
     'title' => 'Title',
     'description' => 'Description',
+    'quantity' => 'Quantity',
+    'unit' => 'Unit',
+    'value' => 'Value',
+    'precision' => 'Precision',
+    'purchased' => 'Purchased',
     'save' => 'Save',
+	'list' => 'List',
+	'category' => 'Category',
     'delete' => 'Delete',
     'action' => 'Action',
     'detail' => 'Detail',
+	'edit' => 'Edit',
+	'create' => 'Create',
+	'product' => 'Product',
+	'users' => 'Users',
+	'categoriaid' => 'sub',
 
     'show_crud' => 'Show :page',
     'create_crud' => 'Create :page',
@@ -33,4 +48,5 @@ return [
     'edit_error' => 'Error editing Registry',
     'delete_success' => 'Registry removed with success',
     'delete_error' => 'Error removed Registry',
+	'enter_value' => 'Enter value'
 ];
