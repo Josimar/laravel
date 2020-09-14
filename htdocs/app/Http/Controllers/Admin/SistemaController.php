@@ -3,38 +3,38 @@
 namespace App\Http\Controllers\Admin;
 
 use Validator;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
-use App\Repositories\Contracts\PapelInterface;
-use App\Repositories\Contracts\PermissaoInterface;
+use App\Repositories\Contracts\SistemaInterface;
 
-class PapelController extends Controller
+class SistemaController extends Controller
 {
-    private $rota = 'papeis';
+    private $rota = 'sistemas';
     private $model;
-    private $modelPermissao;
     private $colunas;
 
     private $paginate = 10;
-    private $filtro = ['nome', 'descricao'];
+    private $filtro = ['titulo', 'descricao'];
 
-    public function __construct(PapelInterface $model, PermissaoInterface $modelPermissao){
+    public function __construct(SistemaInterface $model){
         $this->model = $model;
-        $this->modelPermissao = $modelPermissao;
-        $this->colunas = ['id'=>'#', 'nome'=>trans('controle.name'), 'descricao'=>trans('controle.description')];
+        $this->colunas = ['id'=>'#',
+            'titulo'=>trans('controle.title'), 'descricao'=>trans('controle.description'), 'publico'=>trans('controle.public')];
     }
 
     public function index()
     {
-        /*
-        if (Gate::denies('papel-view')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-view')){
             abort(403, 'Não Autorizado');
         }
         */
+        $routeName = $this->rota;
 
-        $titulo = trans('controle.paper');
+        $titulo = trans('controle.systems');
         $colunas = $this->colunas;
         $routeName = $this->rota;
         $caminhos = [
@@ -57,56 +57,61 @@ class PapelController extends Controller
 
     public function permissao($id)
     {
-        if (Gate::denies('papel-edit')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-edit')){
             abort(403, 'Não Autorizado');
         }
+        */
 
-      $papel = Papel::find($id);
-      $permissao = Permissao::all();
+      $sistema = Sistema::find($id);
       $caminhos = [
           ['url'=>'/admin','titulo'=>'Admin'],
-          ['url'=>route('papeis.index'),'titulo'=>'Papéis'],
-          ['url'=>'','titulo'=>'Permissões'],
+          ['url'=>route('sistemas.index'),'titulo'=>'Sistemas'],
+          ['url'=>'','titulo'=>'Categorias'],
       ];
-      return view('admin.papel.permissao',compact('papel','permissao','caminhos'));
+      return view('admin.sistema.categoria',compact('sistema','categoria','caminhos'));
     }
 
-    public function permissaoStore(Request $request,$id)
+    public function categoriaStore(Request $request,$id)
     {
-        if (Gate::denies('papel-edit')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-edit')){
             abort(403, 'Não Autorizado');
         }
+        */
 
-        $papel = Papel::find($id);
+        $papel = Sistema::find($id);
         $dados = $request->all();
-        $permissao = Permissao::find($dados['permissao_id']);
-        $papel->adicionaPermissao($permissao);
+        $permissao = Categoria::find($dados['sistema_id']);
+        $papel->adicionaCategoria($categoria);
         return redirect()->back();
     }
 
-    public function permissaoDestroy($id,$permissao_id)
+    public function categoriaDestroy($id,$categoria_id)
     {
-        if (Gate::denies('papel-edit')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-edit')){
             abort(403, 'Não Autorizado');
         }
+        */
 
-      $papel = Papel::find($id);
-      $permissao = Permissao::find($permissao_id);
-      $papel->removePermissao($permissao);
+      $sistema = Sistema::find($id);
+      $categoria = Categoria::find($categoria_id);
+      $sistema->removePermissao($categoria);
       return redirect()->back();
     }
 
     public function create()
     {
-        /*
-        if (Gate::denies('papel-create')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-create')){
             abort(403, 'Não Autorizado');
         }
         */
 
         $colunas = $this->colunas;
         $routeName = $this->rota;
-        $titulo = trans('controle.paper');
+        $titulo = trans('controle.systems');
         $caminhos = [
             ['url'=>route('home'), 'titulo'=>'Home'],
             ['url'=>route('admin.index'), 'titulo'=>'Dashboard'],
@@ -114,19 +119,20 @@ class PapelController extends Controller
             ['url'=>'', 'titulo'=>trans('controle.create').' '.$titulo],
         ];
 
-        $permissoes = $this->modelPermissao->all('nome', 'ASC');
-
         $search = "";
         $registros = new Collection;
         $registro = '';
 
-        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'permissoes'));
+        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
     }
 
     public function store(Request $request)
     {
-        /*
-        if (Gate::denies('papel-edit')){
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        /* ToDo: Permissão
+        if (Gate::denies('sistemas-create')){
             abort(403, 'Não Autorizado');
         }
         */
@@ -135,39 +141,33 @@ class PapelController extends Controller
         $data = $request->all();
 
         Validator::make($data, [
-            'nome' => 'required|string|max:255'
+            'titulo' => 'required|string|max:255'
         ])->validate();
 
-        if($request['nome'] && $request['nome'] != "Admin"){
-            if ($this->model->create($data)){
-                session()->flash('msgMessage', trans('controle.add_success'));
-                session()->flash('msgStatus', 'success');
-                return redirect(route($routeName.'.create'));
-            }else{
-                session()->flash('msgMessage', trans('controle.add_error'));
-                session()->flash('msgStatus', 'error');
-                return redirect(route($routeName.'.create'));
-            }
+        if ($this->model->create($data)){
+            session()->flash('msgMessage', trans('controle.add_success'));
+            session()->flash('msgStatus', 'success');
+            return redirect(route($routeName.'.create'));
+        }else{
+            session()->flash('msgMessage', trans('controle.add_error'));
+            session()->flash('msgStatus', 'error');
+            return redirect(route($routeName.'.create'));
         }
-
-        session()->flash('msgMessage', trans('controle.add_error'));
-        session()->flash('msgStatus', 'error');
-        return redirect()->back();
     }
 
     public function show($id)
     {
         // return response()->json(['message'=>__METHOD__]);
 
-        /*
-        if (Gate::denies('papel-view')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-view')){
             abort(403, 'Não Autorizado');
         }
         */
 
         $colunas = $this->colunas;
         $routeName = $this->rota;
-        $titulo = trans('controle.paper');
+        $titulo = trans('controle.systems');
         $caminhos = [
             ['url'=>route('home'), 'titulo'=>'Home'],
             ['url'=>route('admin.index'), 'titulo'=>'Dashboard'],
@@ -184,8 +184,11 @@ class PapelController extends Controller
 
     public function edit($id)
     {
-        /*
-        if (Gate::denies('papel-edit')){
+         // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-edit')){
             abort(403, 'Não Autorizado');
         }
         */
@@ -204,50 +207,50 @@ class PapelController extends Controller
         $registros = new Collection;
         $registro = $this->model->find($id);
 
-        $permissoes = $this->modelPermissao->all('nome', 'ASC');
-
-        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'permissoes'));
+        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
     }
 
     public function update(Request $request, $id)
     {
-        /*
-        if (Gate::denies('papel-edit')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-edit')){
             abort(403, 'Não Autorizado');
         }
         */
-        if($this->model->find($id)->nome == "Admin"){
-            return redirect()->route('papeis.index');
+
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        $routeName = $this->rota;
+        $data = $request->all();
+
+        Validator::make($data, [
+            'titulo' => 'required|string|max:255'
+        ]);
+
+        if ($this->model->update($data, $id)){
+            session()->flash('msgMessage', trans('controle.edit_success'));
+            session()->flash('msgStatus', 'success');
+            return redirect(route($routeName.'.index'));
+        }else{
+            session()->flash('msgMessage', trans('controle.edit_error'));
+            session()->flash('msgStatus', 'error');
+            return redirect(route($routeName.'.edit'));
         }
-        if($request['nome'] && $request['nome'] != "Admin"){
-            $routeName = $this->rota;
-            $data = $request->all();
-
-            Validator::make($data, [
-                'nome' => 'required|string|max:255'
-            ]);
-
-            if ($this->model->update($data, $id)){
-                session()->flash('msgMessage', trans('controle.edit_success'));
-                session()->flash('msgStatus', 'success');
-                return redirect(route($routeName.'.index'));
-            }
-        }
-
-        session()->flash('msgMessage', trans('controle.edit_error'));
-        session()->flash('msgStatus', 'error');
-        return redirect(route($routeName.'.edit'));
     }
 
     public function destroy($id)
     {
-        if (Gate::denies('papel-delete')){
+        /* ToDo: Permissão
+        if (Gate::denies('sistema-delete')){
             abort(403, 'Não Autorizado');
         }
-        if(Papel::find($id)->nome == "Admin"){
-            return redirect()->route('papeis.index');
+        */
+
+        if(Sistema::find($id)->nome == "Admin"){
+            return redirect()->route('sistemas.index');
         }
-        Papel::find($id)->delete();
-        return redirect()->route('papeis.index');
+        Sistema::find($id)->delete();
+        return redirect()->route('sistemas.index');
     }
 }

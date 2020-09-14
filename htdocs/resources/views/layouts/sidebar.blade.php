@@ -208,7 +208,23 @@
                         <a href="{{route('usuarios.index')}}">Usuários</a>
                     </li>
                     <li>
-                        <a href="#">Papeis</a>
+                        <a href="{{route('papeis.index')}}">Papeis</a>
+                    </li>
+                    <li>
+                        <a href="{{route('permissoes.index')}}">Permissão</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="uil-box"></i>
+                    <span> Sistemas </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('sistemas.index')}}">Sistemas</a>
                     </li>
                 </ul>
             </li>

@@ -15,27 +15,11 @@
                     <div class="card-body">
                         <dl>
                             <dt>{{__('controle.name')}}</dt>
-                            <dd>{{$registro->name}}</dd>
+                            <dd>{{$registro->nome}}</dd>
                         </dl>
                         <dl>
-                            <dt>{{__('controle.lastname')}}</dt>
-                            <dd>{{$registro->lastname}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>{{__('controle.email')}}</dt>
-                            <dd>{{$registro->email}}</dd>
-                        </dl>
-                        <dl>
-                            <dt>{{__('controle.phone')}}</dt>
-                            <dd>{{$registro->phone}}</dd>
-                        </dl>
-                    </div>
-                    <div class="card-body">
-                        <dl>
-                            <dt>{{__('controle.paper')}}</dt>
-                                @foreach ($registro->papeis as $papel)
-                                    <dd>{{$papel->nome}} - {{$papel->descricao}}</dd>
-                                @endforeach
+                            <dt>{{__('controle.description')}}</dt>
+                            <dd>{{$registro->descricao}}</dd>
                         </dl>
                     </div>
                 </div>

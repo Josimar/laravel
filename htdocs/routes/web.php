@@ -27,7 +27,9 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('/', 'AdminController@index')->name('admin.index');
 
     Route::resource('usuarios', 'UsuarioController');
+    Route::resource('sistemas', 'SistemaController');
     Route::resource('papeis', 'PapelController');
+    Route::resource('permissoes', 'PermissaoController');
 
     Route::get('usuarios/papel/{id}', ['as'=>'usuarios.papel', 'uses'=>'UsuarioController@papel']);
     Route::post('usuarios/papel/{papel}', ['as'=>'usuarios.papel.store', 'uses'=>'UsuarioController@papelStore']);

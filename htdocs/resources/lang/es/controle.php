@@ -37,6 +37,10 @@ return [
 	'product' => 'Produto',
 	'users' => 'Users',
 	'categoriaid' => 'pai',
+	'systems' => 'Systems',
+	'public' => 'Público',
+	'permission' => 'Permission',
+	'paper' => 'Paper',
 
     'show_crud' => 'Show :page',
     'create_crud' => 'Create :page',

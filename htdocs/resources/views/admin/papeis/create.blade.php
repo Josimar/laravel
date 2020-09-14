@@ -3,7 +3,7 @@
 @section('content')
 
     <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$registros" :recordsetItem="$registro">
-        <x-formulario action="{{route($routeName.'.update', $registro->id)}}" method="put">
+        <x-formulario action="{{route($routeName.'.store')}}" method="post">
             @include('admin.'.$routeName.'.formulario')
         </x-formulario>
     </x-layout>

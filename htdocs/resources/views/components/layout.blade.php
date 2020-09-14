@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="products-datatable">
+                        <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="{{$routeName}}-datatable">
                             <thead class="thead-light">
                                 <tr>
                                     <th style="width: 20px;">
@@ -67,6 +67,8 @@
                                             </td>
                                         @elseif ($key2 == 'percentcomplete')
                                             <td><span class="badge bg-danger">@php echo $dado->{$key2} @endphp%</span></td>
+                                        @elseif ($key2 == 'publico')
+                                            <td><span>@php echo $dado->{$key2} == "1" ? "true" : "false"  @endphp</span></td>
                                         @else
                                             <td>@php echo $dado->{$key2} @endphp</td>
                                         @endif
