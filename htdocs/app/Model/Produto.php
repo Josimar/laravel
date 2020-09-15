@@ -19,4 +19,8 @@ class Produto extends Model
         'nome', 'quantidade',
         'valor', 'unidade', 'precisao', 'purchased',
     ];
+
+    public function categorias(){
+        return $this->belongsToMany('App\Model\Categoria', 'sistema_categoria', 'sistemaid', 'categoriaid');
+    }
 }

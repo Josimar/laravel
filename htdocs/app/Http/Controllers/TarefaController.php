@@ -6,7 +6,7 @@ use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Repositories\Contracts\RepositoryInterface;
+use App\Repositories\Contracts\TarefaInterface;
 
 class TarefaController extends Controller
 {
@@ -16,7 +16,7 @@ class TarefaController extends Controller
     private $paginate = 10;
     private $filtro = ['titulo', 'descricao'];
 
-    public function __construct(RepositoryInterface $model){
+    public function __construct(TarefaInterface $model){
         $this->page = trans('controle.tarefas');
         $this->model = $model;
     }

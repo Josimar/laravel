@@ -8,15 +8,22 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
 use App\Repositories\Contracts\ProdutoInterface;
+use App\Repositories\Contracts\CategoriaInterface;
+use App\Repositories\Contracts\ListaInterface;
 
 class ProdutoController
 {
     private $rota = 'produtos';
     private $model;
+    private $modelLista;
+    private $modelCategoria;
     private $colunas;
 
-    public function __construct(ProdutoInterface $model){
+    public function __construct(ProdutoInterface $model, CategoriaInterface $modelCategoria, ListaInterface $modelLista){
         $this->model = $model;
+        $this->modelLista = $modelLista;
+        $this->modelCategoria = $modelCategoria;
+
         $this->colunas = ['id'=>'#',
             'nome'=>trans('controle.name'),
             'quantidade'=>trans('controle.quantity'),
@@ -46,7 +53,8 @@ class ProdutoController
         $produtos = $this->model->all();
         $produto = '';
 
-        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+        return view($routeName.'.index',
+            compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
     }
 
     public function create()
@@ -68,10 +76,15 @@ class ProdutoController
             ['url'=>'', 'titulo'=>trans('controle.create').' '.$titulo],
         ];
         $search = "";
-        $produtos = new Collection;
-        $produto = '';
+        $registros = new Collection;
+        $registro = '';
 
-        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+        $listas = $this->modelLista->all('nome', 'ASC');
+        $categorias = $this->modelCategoria->all('descricao', 'ASC');
+
+
+        return view($routeName.'.create',
+            compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'listas', 'categorias'));
     }
 
     public function store(Request $request){

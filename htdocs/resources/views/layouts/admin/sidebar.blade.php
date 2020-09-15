@@ -181,6 +181,25 @@
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="uil-building"></i>
+                    <span> Sistema de Bolão </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('admin.boloes.index')}}">Bolão</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.rodadas.index')}}">Rodadas</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.partidas.index')}}">Partidas</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="uil-building"></i>
                     <span> Lista dos Desejos </span>
                     <span class="menu-arrow"></span>
                 </a>

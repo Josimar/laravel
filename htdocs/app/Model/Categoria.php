@@ -19,4 +19,8 @@ class Categoria extends Model
         'usuarioid',
         'nome'
     ];
+
+    public function sistemas(){
+        return $this->belongsToMany('App\Model\Sistema', 'sistema_categoria', 'sistemaid', 'categoriaid');
+    }
 }

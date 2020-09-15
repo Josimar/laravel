@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
     <x-pagina :page="$page" :search="$search" :caminhos="$caminhos" :columnList="$columnList" :recordsetList="$tarefas">

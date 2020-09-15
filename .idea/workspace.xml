@@ -20,50 +20,82 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d16656c6-22ad-4d65-a11f-9f1a73dec9c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/PermissaoController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/SistemaController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Sistema.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/PapelInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/PermissaoInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/SistemaInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/PapelRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/PermissaoRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/SistemaRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/public/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/js/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/formulario.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/formulario.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/BolaoController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Bolao.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/BolaoInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/BolaoRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/boloes/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/app.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/footer.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/head.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/nave.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/clientes.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/contato.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/masterhead.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/modal.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/portfolio.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/services.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/sobre.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/time.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/PapelController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/PapelController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/UsuarioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Papel.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Papel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ProdutoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ProdutoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/TarefaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/TarefaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Categoria.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Categoria.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Produto.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Produto.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/UsuarioRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/UsuarioRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/public/js/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/public/js/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/TarefaRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/TarefaRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papel/_form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/formulario.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papel/adicionar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/adicionar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papel/editar.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papel/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papel/permissao.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/permissao.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/adicionar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/adicionar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/permissao.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/permissao.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/papeis/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/permissoes/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/formulario.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/formulario.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/papel.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/papel.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/components/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/components/layout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/auth/passwords/confirm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/auth/passwords/confirm.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/auth/passwords/email.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/auth/verify.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/auth/verify.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/categorias/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/categorias/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/chamados.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/chamados.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/detalhe.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/detalhe.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/head.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/nave.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/nave.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/otherbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/otherbar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/listas/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/listas/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/listas/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/listas/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/produtos/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/produtos/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/produtos/formulario.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/produtos/formulario.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/produtos/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/produtos/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -201,7 +233,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/resources/views/admin/papeis" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/resources/views/admin/partidas" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -212,16 +244,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\partidas" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\rodadas" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\boloes\rodada" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\Admin" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Contracts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\layouts\admin" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\papeis" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\sistemas" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\papeis" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\permissoes" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Contracts" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Eloquent" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\Admin" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -236,6 +269,7 @@
       <workItem from="1599743775163" duration="47371000" />
       <workItem from="1600089431971" duration="1363000" />
       <workItem from="1600099911276" duration="17001000" />
+      <workItem from="1600177041842" duration="25006000" />
     </task>
     <servers />
   </component>
@@ -275,10 +309,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="456" y="135" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1599770170771" />
-    <state x="604" y="336" key="NewPhpFileDialog" timestamp="1600111736129">
+    <state x="604" y="336" key="NewPhpFileDialog" timestamp="1600202010088">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="604" y="336" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1600111736129" />
+    <state x="604" y="336" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1600202010088" />
     <state x="611" y="185" key="refactoring.ChangeSignatureDialog" timestamp="1600121170264">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

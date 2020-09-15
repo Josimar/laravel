@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Model\Papel', 'papel_user', 'userid', 'papelid');
     }
 
+    public function boloes(){
+        return $this->hasMany('App\Model\Bolao', 'usuarioid');
+    }
+
     public function adicionarPapel($papel){
         if (is_string($papel)){
             $papel = Papel::where('nome','=',$papel)->firstOrFail();

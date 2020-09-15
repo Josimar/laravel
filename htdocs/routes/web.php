@@ -12,16 +12,8 @@ Route::get('lang/{locale?}', function($locale = 'pt_br'){
 })->name('lang');
 
 Route::get('/', function(){
-    return view('home');
-})->name('home');;
-
-Route::get('/welcome/{locale?}', function ($locale = 'pt_br') {
     return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('home');
-});
+})->name('home');
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.index');
@@ -30,6 +22,10 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::resource('sistemas', 'SistemaController');
     Route::resource('papeis', 'PapelController');
     Route::resource('permissoes', 'PermissaoController');
+
+    Route::resource('boloes', 'BolaoController', ['as' => 'admin']);
+    Route::resource('rodadas', 'RodadaController', ['as' => 'admin']);
+    Route::resource('partidas', 'PartidaController', ['as' => 'admin']);
 
     Route::get('usuarios/papel/{id}', ['as'=>'usuarios.papel', 'uses'=>'UsuarioController@papel']);
     Route::post('usuarios/papel/{papel}', ['as'=>'usuarios.papel.store', 'uses'=>'UsuarioController@papelStore']);
@@ -40,10 +36,15 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::delete('papeis/permissao/{papel}/{permissao}', ['as'=>'papeis.permissao.destroy','uses'=>'PapelController@permissaoDestroy']);
 });
 
-Route::resource('tarefas', 'TarefaController');
-Route::resource('listas', 'ListaController');
-Route::resource('produtos', 'ProdutoController');
-Route::resource('categorias', 'CategoriaController');
+Route::middleware('auth')->group(function(){
+    Route::resource('tarefas', 'TarefaController');
+    Route::resource('listas', 'ListaController');
+    Route::resource('categorias', 'CategoriaController');
+    Route::resource('produtos', 'ProdutoController');
+    Route::resource('boloes', 'BolaoController');
 
-Route::get('/chamado', 'ChamadoController@index')->name('chamados');
-Route::get('/chamado/{id}', 'ChamadoController@detalhe');
+    Route::get('/chamado', 'ChamadoController@index')->name('chamados');
+    Route::get('/chamado/{id}', 'ChamadoController@detalhe');
+});
+
+

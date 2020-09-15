@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 
 @section('content')
 <div class="container">
@@ -20,9 +20,9 @@
 
                     @forelse($chamados as $key => $value)
                         @can('view', $value)
-                            <p>{{$value->titulo}} 
+                            <p>{{$value->titulo}}
                                 @can('update', $value)
-                                    <a href="chamado/{{$value->id}}">{{ __('editar') }}</a> 
+                                    <a href="chamado/{{$value->id}}">{{ __('editar') }}</a>
                                 @endcan
                                 @can('delete', $value)
                                     <a href="chamado/{{$value->id}}">{{ __('excluir') }}</a>
