@@ -43,8 +43,8 @@ class BolaoController
         ];
 
         $search = "";
-        $registros = $this->model->all();
         $registro = '';
+        $registros = $this->model->list();
 
         return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
     }

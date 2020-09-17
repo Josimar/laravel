@@ -10,6 +10,7 @@ class Lista extends Model
     use SoftDeletes;
 
     protected $table = 'listas';
+
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
     const DELETED_AT = 'deleted';
@@ -18,4 +19,8 @@ class Lista extends Model
         'usuarioid',
         'nome'
     ];
+
+    public function usuario(){
+        return $this->belongsTo('App\User', 'usuarioid');
+    }
 }

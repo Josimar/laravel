@@ -15,6 +15,16 @@ Route::get('/', function(){
     return view('welcome');
 })->name('home');
 
+Route::middleware('auth')->group(function(){
+  Route::post('/sign/{id}', 'HomeController@sign')->name('sign');
+  Route::get('/sign/{id}', 'HomeController@signNoLogin')->name('sign');
+  Route::get('/rodadas/{bolaoid}', 'HomeController@rodadas')->name('rodadas');
+  Route::get('/rodadas/partidas/{rodadaid}', 'HomeController@partidas')->name('partidas');
+  Route::get('/rodadas/partidas/resultado/{partidaid}', 'HomeController@resultado')->name('resultado');
+  Route::put('/rodadas/partidas/resultado/{partidaid}', 'HomeController@update')->name('boloes.resultado.update');
+  Route::put('/classificacao/{bolaoid}', 'HomeController@classificacao')->name('classificacao');
+});
+
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.index');
 

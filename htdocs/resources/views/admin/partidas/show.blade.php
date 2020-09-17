@@ -14,20 +14,24 @@
                     </div>
                     <div class="card-body">
                         <dl>
-                            <dt>{{__('controle.name')}}</dt>
+                            <dt>{{__('controle.title')}}</dt>
                             <dd>{{$registro->titulo}}</dd>
                         </dl>
                         <dl>
-                            <dt>{{__('controle.description')}}</dt>
-                            <dd>{{$registro->descricao}}</dd>
+                            <dt>{{__('controle.estadio')}}</dt>
+                            <dd>{{$registro->estadio}}</dd>
                         </dl>
                         <dl>
-                            <dt>{{__('controle.pontos_extra')}}</dt>
-                            <dd>{{$registro->pontosextra}}</dd>
+                            <dt>{{__('controle.placara')}}</dt>
+                            <dd>{{$registro->placara}}</dd>
                         </dl>
                         <dl>
-                            <dt>{{__('controle.pontos_taxa')}}</dt>
-                            <dd>{{$registro->pontostaxa}}</dd>
+                            <dt>{{__('controle.placarb')}}</dt>
+                            <dd>{{$registro->placarb}}</dd>
+                        </dl>
+                        <dl>
+                            <dt>{{__('controle.data')}}</dt>
+                            <dd>{{$registro->data_format}}</dd>
                         </dl>
                     </div>
                 </div>

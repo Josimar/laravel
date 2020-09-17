@@ -17,10 +17,14 @@ class Categoria extends Model
 
     protected $fillable = [
         'usuarioid',
-        'nome'
+        'descricao'
     ];
 
     public function sistemas(){
-        return $this->belongsToMany('App\Model\Sistema', 'sistema_categoria', 'sistemaid', 'categoriaid');
+        return $this->belongsToMany('App\Model\Sistema', 'sistema_categoria', 'categoriaid', 'sistemaid');
+    }
+
+    public function imoveis(){
+        return $this->belongsToMany('App\Model\Imovel', 'categoria_imovel', 'categoriaid', 'imovelid');
     }
 }

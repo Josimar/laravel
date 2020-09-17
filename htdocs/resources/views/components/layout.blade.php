@@ -51,9 +51,14 @@
                                             <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                         </div>
                                     </td>
+                                    @php
+                                    $count = 1;
+                                    @endphp
                                     @foreach ($columnList as $key2 => $value2)
                                         @if ($key2 == 'id')
-                                            <th scope="row">@php echo $dado->{$key2} @endphp</th>
+                                            <td scope="row">@php echo $dado->{$key2} @endphp</td>
+                                        @elseif ($key2 == 'OrderAsc')
+                                            <td scope="row">@php echo $count++ @endphp</td>
                                         @elseif ($key2 == 'progresso')
                                             <td class="table-user">
                                                 <img src="{{ URL::asset('img/avatar-1.jpg') }}" alt="table-user" class="mr-2 rounded-circle">

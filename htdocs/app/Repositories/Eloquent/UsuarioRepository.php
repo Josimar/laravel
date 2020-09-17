@@ -9,6 +9,11 @@ class UsuarioRepository extends AbstractRepository implements UsuarioInterface {
 
     protected $model = User::class;
 
+    public function find(string $id = '0')
+    {
+        return $this->model->with('profile')->findOrFail($id);
+    }
+
     public function create(array $data):Bool{
         $register = $this->model->create($data);
         if (isset($data['papeis']) && count($data['papeis'])){

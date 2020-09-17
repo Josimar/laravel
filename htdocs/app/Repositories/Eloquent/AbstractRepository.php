@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class AbstractRepository{
@@ -17,6 +18,28 @@ abstract class AbstractRepository{
         return app($this->model);
     }
 
+    public function selectFilter(Request $request){
+        if ($request->has('fields')){
+            $fields = $request->get('fields');
+            $this->model = $this->model->selectRaw($fields);
+        }
+    }
+
+    public function selectCondition(Request $request){
+        if ($request->has('conditions')){
+            $conditions = explode(';', $request->get('conditions'));
+
+            foreach ($conditions as $condition){
+                $where = explode(':', $condition);
+                $this->model = $this->model->where($where[0], $where[1], $where[2]);
+            }
+        }
+    }
+
+    public function getResult(){
+        return $this->model;
+    }
+
     public function all(string $column = 'id', string $order = 'ASC'):Collection
     {
       return $this->model->orderBy($column, $order)->get();
@@ -24,7 +47,7 @@ abstract class AbstractRepository{
 
     public function find(string $id = '0')
     {
-      return $this->model->find($id);
+      return $this->model->findOrFail($id);
     }
 
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator
@@ -45,6 +68,10 @@ abstract class AbstractRepository{
         }
 
         return $query->orderBy($column, $order)->get();
+    }
+
+    public function save(array $data){
+        return $this->model->create($data);
     }
 
     public function create(array $data): Bool{

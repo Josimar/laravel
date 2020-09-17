@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Transporte;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\TransporteResource;
 use App\Http\Resources\TransporteCollection;
+use App\Repositories\Contracts\TransporteInterface;
 
 
-class TransporteController extends Controller
-{
+class TransporteController extends Controller{
 
     private $transporte;
+    private $model;
 
-    public function __construct(Transporte $transporte){
-        $this->transporte = $transporte;
+    public function __construct(TransporteInterface $model){
+        $this->transporte = $model;
+        $this->model = $model;
     }
 
-    public function index(){
-        $transporte = $this->transporte->all();
+    public function index(Request $request){
+        $this->model->selectCondition($request);
+        $this->model->selectFilter($request);
+        $transporte = $this->model->getResult();
 
+        return new TransporteCollection($transporte->paginate(10));
         return response()->json($transporte);
     }
 

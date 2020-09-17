@@ -7,7 +7,7 @@
         @enderror
     </div>
     <div class="form-group col-md-6">
-        <label for="titulo" class="col-form-label">{{__('controle.bolao')}}</label>
+        <label for="bolaoid" class="col-form-label">{{__('controle.bolao')}}</label>
         <select name="bolaoid" class="custom-select custom-select-sm mb-3">
             @foreach($boloes as $key => $value)
                 @php

@@ -11,7 +11,6 @@
         $showTime = ($showTime ?? 'false');
         $showClientes = ($showClientes ?? 'false');
         $showContato = ($showContato ?? 'false');
-        $showModal = ($showModal ?? 'false');
     @endphp
 
     @if(($showNave ?? 'true') == 'true')

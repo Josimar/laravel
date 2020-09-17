@@ -26,6 +26,10 @@ class Rodada extends Model
         return $this->belongsTo('App\Model\Bolao', 'bolaoid');
     }
 
+    public function partidas(){
+        return $this->hasMany('App\Model\Partida', 'rodadaid');
+    }
+
     public function getBolaoTitleAttribute(){
         return $this->bolao->titulo;
     }

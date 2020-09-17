@@ -11,20 +11,22 @@ use App\Repositories\Contracts\PartidaInterface;
 
 class PartidaController
 {
-    private $rota = 'admin.boloespartida';
+    private $rota = 'admin.partidas';
     private $model;
     private $colunas;
 
     public function __construct(PartidaInterface $model){
         $this->model = $model;
-        $this->colunas = ['id'=>'#', 'titulo'=>trans('controle.title'),
+        $this->colunas = ['id'=>'#',
+            'titulo'=>trans('controle.title'),
+            'campeonato_rodada'=>trans('controle.round'),
             'estadio'=>trans('controle.estadio'),
             'timea'=>trans('controle.timea'),
             'timeb'=>trans('controle.timeb'),
             'placara'=>trans('controle.placara'),
             'placarb'=>trans('controle.placarb'),
             'resultado'=>trans('controle.resultado'),
-            'data'=>trans('controle.data')];
+            'data_format'=>trans('controle.data')];
     }
 
     public function index(Request $request){
@@ -36,7 +38,7 @@ class PartidaController
         }
         */
 
-        $titulo = trans('controle.jackpot');
+        $titulo = trans('controle.match');
         $colunas = $this->colunas;
         $routeName = $this->rota;
         $caminhos = [
@@ -63,7 +65,7 @@ class PartidaController
 
         $colunas = $this->colunas;
         $routeName = $this->rota;
-        $titulo = trans('controle.jackpot');
+        $titulo = trans('controle.match');
         $caminhos = [
             ['url'=>route('home'), 'titulo'=>'Home'],
             ['url'=>route($routeName.'.index'), 'titulo'=>$titulo],
@@ -74,7 +76,10 @@ class PartidaController
         $registros = new Collection;
         $registro = '';
 
-        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        $user = auth()->user();
+        $rodadas = $user->rodadas;
+
+        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'rodadas'));
     }
 
     public function store(Request $request){
@@ -92,6 +97,10 @@ class PartidaController
 
         Validator::make($data, [
             'titulo' => 'required|string|max:255',
+            'rodadaid' => 'required',
+            'timea' => 'required',
+            'timeb' => 'required',
+            'data' => 'required',
         ])->validate();
 
         if ($this->model->create($data)){
@@ -127,7 +136,10 @@ class PartidaController
         $registros = new Collection;
         $registro = $this->model->find($id);
 
-        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        $user = auth()->user();
+        $rodadas = $user->rodadas;
+
+        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'rodadas'));
     }
 
     public function update(Request $request, $id)

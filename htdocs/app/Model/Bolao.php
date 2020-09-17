@@ -29,11 +29,19 @@ class Bolao extends Model
         return $this->belongsTo('App\User', 'usuarioid');
     }
 
+    public function Apostadores(){
+        return $this->belongsToMany('App\User', 'usuario_bolao', 'bolaoid', 'usuarioid')->withPivot('pontos');
+    }
+
+    public function getTituloAttribute($value){
+        return ucwords(mb_strtolower($value));
+    }
+
     public function getNomeUsuarioAttribute($value){
         return $this->usuario->name;
     }
 
-    public function rodada(){
-        return $this->hasMany('App\Model\Bolao', 'bolaoid');
+    public function rodadas(){
+        return $this->hasMany('App\Model\Rodada', 'bolaoid');
     }
 }
