@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Api\ApiMessages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TransporteRequest;
 use App\Http\Resources\TransporteResource;
 use App\Http\Resources\TransporteCollection;
 use App\Repositories\Contracts\TransporteInterface;
@@ -24,8 +26,8 @@ class TransporteController extends Controller{
         $this->model->selectFilter($request);
         $transporte = $this->model->getResult();
 
-        return new TransporteCollection($transporte->paginate(10));
-        return response()->json($transporte);
+        return new TransporteCollection($transporte->all());
+        // return response()->json($transporte);
     }
 
     // http://localhost/laravel/api/transportes/paginate?page=2
@@ -37,33 +39,95 @@ class TransporteController extends Controller{
     }
 
     public function show($id){
-        $transporte = $this->transporte->find($id);
+        try{
+            $imovel = $this->model->find($id);
 
-        // return response()->json($transporte);
-        return new TransporteResource($transporte);
+            return response()->json([
+                'data' => $imovel
+            ], 200);
+        }catch (\Exception $ex){
+            $message = new ApiMessages($ex->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 
-    public function save(Request $request){
+    public function save(TransporteRequest $request){
         $data = $request->all();
 
-        $transporte = $this->transporte->create($data);
+        $images = $request->file['images'];
 
-        return response()->json($transporte);
+        try{
+            $transporte = $this->transporte->save($data);
+
+            if ($images){
+                $imageUpload = [];
+                foreach ($images as $image){
+                    $path = $image->store('upload', 'public');
+                    $imageUpload[] = ['foto' => $path, 'thumb' => false];
+                }
+
+                $transporte->fotos()->createmany($imageUpload);
+            }
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Registry add with success'
+                ]
+            ], 200);
+        }catch (\Exception $ex){
+            $message = new ApiMessages($ex->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 
-    public function update(Request $request){
+    public function update($id, TransporteRequest $request){
         $data = $request->all();
-        $transporte = $this->transporte->find($data['id']);
-        $transporte->update($data);
 
-        return response()->json($transporte);
+        $images = $request->file['images'];
+
+        dd($request->file);
+
+        try{
+            $transporte = $this->model->find($id);
+            $transporte->update($data);
+
+            if ($images){
+                $imageUpload = [];
+                foreach ($images as $image){
+                    $path = $image->store('upload', 'public');
+                    $imageUpload[] = ['foto' => $path, 'thumb' => false];
+                }
+
+                $transporte->fotos()->createmany($imageUpload);
+            }
+
+            // return response()->json($imovel);
+            return response()->json([
+                'data' => [
+                    'msg' => 'Registry updated with success'
+                ]
+            ], 200);
+        }catch (\Exception $ex){
+            $message = new ApiMessages($ex->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 
     public function delete($id){
-        $transporte = $this->transporte->find($id);
-        $transporte->delete();
+        try{
+            $transporte = $this->transporte->find($id);
+            $transporte->delete();
 
-        return response()->json(['data'=>['msg'=>'Registry deleted']]);
+            // return response()->json($imovel);
+            return response()->json([
+                'data' => [
+                    'msg' => 'Registry deleted with success'
+                ]
+            ], 200);
+        }catch (\Exception $ex){
+            $message = new ApiMessages($ex->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 
 }

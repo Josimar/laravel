@@ -108,7 +108,6 @@ class User extends Authenticatable
         return $papeis->intersect($userPapeis)->count();
     }
 
-    /*
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -118,5 +117,6 @@ class User extends Authenticatable
     {
         return [];
     }
-    */
+
+
 }

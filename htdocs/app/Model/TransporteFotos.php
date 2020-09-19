@@ -5,24 +5,24 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ImovelFotos extends Model
+class TransporteFotos extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'imovelfotos';
+    protected $table = 'transportefotos';
 
     const CREATED_AT = 'created';
     const UPDATED_AT = 'updated';
     const DELETED_AT = 'deleted';
 
     protected $fillable = [
-        'imovelid',
+        'transporteid',
         'foto',
         'thumb'
     ];
 
-    public function Imovel(){
-        return $this->belongsTo('App\Model\Imovel', 'imovelid');
+    public function Transporte(){
+        return $this->belongsTo('App\Model\Transporte', 'transporteid');
     }
 
 }

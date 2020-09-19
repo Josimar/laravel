@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function(){
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
     Route::get('/', 'AdminController@index')->name('admin.index');
+    Route::get('/token', 'AdminController@token')->name('admin.token');
 
     Route::resource('usuarios', 'UsuarioController');
     Route::resource('sistemas', 'SistemaController');

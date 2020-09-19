@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class Lang
 {
@@ -13,11 +15,12 @@ class Lang
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $lang = session('lang', 'pt_br');
-        \App::setLocale("lang");
-        
+        $locale = session('lang', 'pt_br');
+        App::setLocale($locale);
+        setlocale(LC_TIME, $locale);
+
         return $next($request);
     }
 }

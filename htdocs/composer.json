@@ -15,7 +15,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.1"
+        "laravel/ui": "^2.1",
+        "ext-json": "*",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

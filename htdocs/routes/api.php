@@ -15,19 +15,21 @@ use Illuminate\Support\Facades\Route;
 //    Route::get('users', 'api\\UserController@index');
 //});
 
-// Rotas de usuários
+// $response->header('Content-Type', 'application/json');
+
 Route::namespace('api')->prefix('v1')->group(function(){
+    // Rotas de usuários
     Route::prefix('usuarios')->group(function(){
+        Route::post('/login', 'LoginJwtController@login')->name('api.login');
+
         Route::get('/', 'UserController@index')->name('api.usuarios.index');
         Route::get('/{id}','UserController@show')->name('api.usuarios.show');
         Route::post('/', 'UserController@save')->name('api.usuarios.create');
         Route::post('/update/{id}', 'UserController@update')->name('api.usuarios.update');
         Route::post('/delete/{id}', 'UserController@delete')->name('api.usuarios.delete');
     });
-});
 
-// Rotas de categorias
-Route::namespace('api')->prefix('v1')->group(function(){
+    // Rotas de categorias
     Route::prefix('categorias')->group(function(){
         Route::get('/', 'CategoriaController@index')->name('api.categorias.index');
         Route::get('/{id}','CategoriaController@show')->name('api.categorias.show');
@@ -37,10 +39,8 @@ Route::namespace('api')->prefix('v1')->group(function(){
 
         Route::get('/{id}/imoveis', 'CategoriaController@imoveis')->name('api.categorias.imoveis');
     });
-});
 
-// Rotas de listas
-Route::namespace('api')->prefix('v1')->group(function(){
+    // Rotas de listas
     Route::prefix('listas')->group(function(){
         Route::get('/', 'ListaController@index')->name('api.listas.index');
         Route::get('/{id}','ListaController@show')->name('api.listas.show');
@@ -48,69 +48,60 @@ Route::namespace('api')->prefix('v1')->group(function(){
         Route::post('/update/{id}', 'ListaController@update')->name('api.listas.update');
         Route::post('/delete/{id}', 'ListaController@delete')->name('api.listas.delete');
     });
-});
 
-// Rotas de imoveis
-Route::namespace('api')->prefix('v1')->group(function(){
+    // Rotas de imoveis
     Route::prefix('imoveis')->group(function(){
-        Route::get('/', 'ImovelController@index')->name('api.imoveis.index');
-        Route::get('/{id}','ImovelController@show')->name('api.imoveis.show');
-        Route::post('/', 'ImovelController@save')->name('api.imoveis.create');
-        Route::post('/update/{id}', 'ImovelController@update')->name('api.imoveis.update');
-        Route::post('/delete/{id}', 'ImovelController@delete')->name('api.imoveis.delete');
+        Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
+            Route::get('/search', 'ImovelController@search')->name('api.imoveis.search');
 
-        Route::get('/{id}/categorias', 'ImovelController@categorias')->name('api.imoveis.categorias');
+            Route::get('/', 'ImovelController@index')->name('api.imoveis.index');
+            Route::get('/{id}','ImovelController@show')->name('api.imoveis.show');
+            Route::post('/', 'ImovelController@save')->name('api.imoveis.create');
+            Route::post('/update/{id}', 'ImovelController@update')->name('api.imoveis.update');
+            Route::post('/delete/{id}', 'ImovelController@delete')->name('api.imoveis.delete');
+
+            Route::get('/{id}/categorias', 'ImovelController@categorias')->name('api.imoveis.categorias');
+            Route::post('/foto/delete/{id}', 'ImovelFotoController@delete')->name('api.imoveis.foto.delete');
+            Route::post('/foto/setthumb/{fotoid}/{imovelid}', 'ImovelFotoController@setThumb')->name('api.imoveis.foto.setthumb');
+        });
+    });
+
+    // Rotas de produtos
+    Route::prefix('produtos')->group(function(){
+        Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
+            Route::get('/', 'ProdutoController@index');
+            Route::get('/paginate', 'ProdutoController@paginate');
+            Route::get('/{id}','ProdutoController@show');
+            Route::post('/', 'ProdutoController@save');
+            Route::put('/', 'ProdutoController@update');
+            Route::patch('/', 'ProdutoController@update');
+            Route::delete('/{id}', 'ProdutoController@delete');
+            Route::post('/update', 'ProdutoController@update');
+            Route::post('/delete/{id}', 'ProdutoController@delete');
+        });
+    });
+
+    // Rotas de transportes
+    Route::prefix('transportes')->group(function(){
+        Route::get('/', 'TransporteController@index')->name('api.transporte.index');
+        Route::get('/paginate', 'TransporteController@paginate')->name('api.transporte.paginate');
+        Route::get('/{id}','TransporteController@show')->name('api.transporte.show');
+        Route::post('/', 'TransporteController@save')->name('api.transporte.create');
+        Route::post('/update/{id}', 'TransporteController@update')->name('api.transporte.update');
+        Route::post('/delete/{id}', 'TransporteController@delete')->name('api.transporte.delete');
+    });
+
+    // Rotas para Favoritos
+    Route::prefix('favoritos')->group(function(){
+        Route::get('/','api\FavoritoController@index');
+        Route::post('/','api\FavoritoController@store');
+        Route::get('/{id}','api\FavoritoController@show');
+        Route::put('/{id}','api\FavoritoController@update');
+        Route::post('/update/{id}','api\FavoritoController@update');
+        Route::delete('/{id}','api\FavoritoController@destroy');
+        Route::post('/delete/{id}','api\FavoritoController@destroy');
     });
 });
 
-// Rotas de produtos
-Route::namespace('api')->prefix('produtos')->group(function(){
-    Route::get('/', 'ProdutoController@index');
-    Route::get('/paginate', 'ProdutoController@paginate');
-    Route::get('/{id}','ProdutoController@show');
-    Route::post('/', 'ProdutoController@save');
-    Route::put('/', 'ProdutoController@update');
-    Route::patch('/', 'ProdutoController@update');
-    Route::delete('/{id}', 'ProdutoController@delete');
-    Route::post('/update', 'ProdutoController@update');
-    Route::post('/delete/{id}', 'ProdutoController@delete');
-});
 
-// Rotas de transportes
-//Route::namespace('api')->prefix('transportes')->group(function(){
-//    Route::get('/', 'TransporteController@index');
-//    Route::get('/paginate', 'TransporteController@paginate');
-//    Route::get('/{id}','TransporteController@show');
-//    Route::post('/', 'TransporteController@save')->middleware('auth.basic');
-//    Route::put('/', 'TransporteController@update');
-//    Route::patch('/', 'TransporteController@update');
-//    Route::delete('/{id}', 'TransporteController@delete');
-//    Route::post('/update', 'TransporteController@update');
-//    Route::post('/delete/{id}', 'TransporteController@delete');
-//});
-
-// Rotas para Favoritos
-//Route::get('/favoritos','api\FavoritoController@index');
-//Route::post('/favoritos','api\FavoritoController@store');
-//Route::get('/favoritos/{id}','api\FavoritoController@show');
-//Route::put('/favoritos/{id}','api\FavoritoController@update');
-//Route::post('/favoritos/update/{id}','api\FavoritoController@update');
-//Route::delete('/favoritos/{id}','api\FavoritoController@destroy');
-//Route::post('/favoritos/delete/{id}','api\FavoritoController@destroy');
-
-Route::get('/teste', function (Request $request) {
-    // Retorna uma mensagem simples
-    // return ['msg', 'Teste de retorno de API'];
-
-    // Retorna todos os requests
-    // dd($request->headers->all());
-
-    // Pega um header
-    dd($request->headers->get('Authorization'));
-
-    $response = new \Illuminate\Http\Response(json_encode(['msg', 'Teste de retorno de API']));
-    $response->header('Content-Type', 'application/json');
-
-    return $response;
-});
 

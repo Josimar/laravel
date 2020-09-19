@@ -17,11 +17,30 @@ class ImovelController extends Controller{
         $this->model = $model;
     }
 
-    // http://localhost/laravel/api/imoveis?fields=nome,quantidade&conditions=nome:LIKE:%a%
-    public function index(Request $request){
+    public function search(Request $request){
+        // $usuario = auth()->user();
+        // $imovel = $usuario->imoveis();
+
         $this->model->selectCondition($request);
         $this->model->selectFilter($request);
+
+        $this->model->setLocation($request->all(['estadoid', 'cidadeid']));
+
         $imovel = $this->model->getResult();
+
+        // return response()->json($imovel);
+        return new ImovelCollection($imovel->paginate(10));
+    }
+
+    // http://localhost/laravel/api/imoveis?fields=nome,quantidade&conditions=nome:LIKE:%a%
+    public function index(Request $request){
+        $usuario = auth()->user();
+        $imovel = $usuario->imoveis();
+
+        // ToDo: Busca
+        // $this->model->selectCondition($request);
+        // $this->model->selectFilter($request);
+        // $imovel = $this->model->getResult();
 
         // return response()->json($imovel);
         return new ImovelCollection($imovel->paginate(10));
@@ -35,7 +54,7 @@ class ImovelController extends Controller{
         return new ImovelCollection($imovel);
     }
 
-    public function show($id){
+    public function show($id, Request $request){
         try{
             $imovel = $this->model->find($id);
 
@@ -53,12 +72,23 @@ class ImovelController extends Controller{
     // No Header precisa -> Accept => application/json
     public function save(ImovelRequest $request){
         $data = $request->all();
+        $images = $request->file['images'];
 
         try{
             $imovel = $this->model->save($data);
 
             if (isset($data['categorias']) && count($data['categorias'])){
                 $imovel->categorias()->sync($data['categorias']);
+            }
+
+            if ($images){
+                $imageUpload = [];
+                foreach ($images as $image){
+                    $path = $image->store('upload', 'public');
+                    $imageUpload[] = ['foto' => $path, 'thumb' => false];
+                }
+
+                $imovel->fotos()->createmany($imageUpload);
             }
 
             return response()->json([
@@ -74,6 +104,7 @@ class ImovelController extends Controller{
 
     public function update($id, ImovelRequest $request){
         $data = $request->all();
+        $images = $request->file['images'];
 
         try{
             $imovel = $this->model->find($id);
@@ -81,6 +112,16 @@ class ImovelController extends Controller{
 
             if (isset($data['categorias']) && count($data['categorias'])){
                 $imovel->categorias()->sync($data['categorias']);
+            }
+
+            if ($images){
+                $imageUpload = [];
+                foreach ($images as $image){
+                    $path = $image->store('upload', 'public');
+                    $imageUpload[] = ['foto' => $path, 'thumb' => false];
+                }
+
+                $imovel->fotos()->createmany($imageUpload);
             }
 
             // return response()->json($imovel);

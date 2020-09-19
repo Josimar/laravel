@@ -10,6 +10,11 @@ class TransporteRepository extends AbstractRepository implements TransporteInter
 
     protected $model = Transporte::class;
 
+    public function find(string $id = '0')
+    {
+        return $this->model->with('fotos')->findOrFail($id);
+    }
+
 }
 
 ?>
