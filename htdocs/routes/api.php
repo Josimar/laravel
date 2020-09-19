@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 // $response->header('Content-Type', 'application/json');
 
 Route::namespace('api')->prefix('v1')->group(function(){
+    Route::prefix('tarefas')->group(function(){
+        Route::get('/', 'TarefaController@index')->name('api.tarefas.index');
+    });
+});
+
+Route::namespace('api')->prefix('v1')->group(function(){
     // Rotas de usuários
     Route::prefix('usuarios')->group(function(){
         Route::post('/login', 'LoginJwtController@login')->name('api.login');
@@ -93,13 +99,13 @@ Route::namespace('api')->prefix('v1')->group(function(){
 
     // Rotas para Favoritos
     Route::prefix('favoritos')->group(function(){
-        Route::get('/','api\FavoritoController@index');
-        Route::post('/','api\FavoritoController@store');
-        Route::get('/{id}','api\FavoritoController@show');
-        Route::put('/{id}','api\FavoritoController@update');
-        Route::post('/update/{id}','api\FavoritoController@update');
-        Route::delete('/{id}','api\FavoritoController@destroy');
-        Route::post('/delete/{id}','api\FavoritoController@destroy');
+        Route::get('/','FavoritoController@index');
+        Route::post('/','FavoritoController@store');
+        Route::get('/{id}','FavoritoController@show');
+        Route::put('/{id}','FavoritoController@update');
+        Route::post('/update/{id}','FavoritoController@update');
+        Route::delete('/{id}','FavoritoController@destroy');
+        Route::post('/delete/{id}','FavoritoController@destroy');
     });
 });
 

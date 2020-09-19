@@ -85,8 +85,6 @@ class TransporteController extends Controller{
 
         $images = $request->file['images'];
 
-        dd($request->file);
-
         try{
             $transporte = $this->model->find($id);
             $transporte->update($data);

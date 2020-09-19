@@ -36,6 +36,9 @@ class LoginJwtController extends Controller{
         $user->save();
 
         return response()->json([
+            'email' => $user->email,
+            'nome' => $user->name,
+            'admin' => '1',
             'token' => $token
         ]);
     }
