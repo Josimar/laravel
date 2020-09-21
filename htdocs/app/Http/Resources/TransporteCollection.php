@@ -18,7 +18,7 @@ class TransporteCollection extends ResourceCollection
     {
         return [
             'extra_information' => 'Extra information',
-            'extra' => 'Dado extra'
+            'extra' => 'Dado extra 2'
         ];
     }
 }

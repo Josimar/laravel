@@ -20,37 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d16656c6-22ad-4d65-a11f-9f1a73dec9c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/ImovelFotoController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/LoginJwtController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Requests/TransporteRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Resources/ImovelFotoCollection.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Cidade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Endereco.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Estado.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/Pais.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/ProdutoFotos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/TransporteFotos.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/ImovelFotoInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ImovelFotoRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/UtilitariosController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/ImovelController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/ImovelController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/TransporteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/TransporteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Middleware/Lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Middleware/Lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Middleware/apiProtectedRoute.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Middleware/apiProtectedRoute.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Imovel.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Imovel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/ImovelFotos.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/ImovelFotos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Produto.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Produto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Transporte.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Transporte.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/AbstractRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ImovelRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ImovelRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/TransporteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/TransporteRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/config/auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Resources/TransporteCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Resources/TransporteCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +161,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/app/Model" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -199,15 +173,17 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\_Api" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\apis" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\layouts\admin" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\papeis" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\sistemas" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\Api" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Model" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Contracts" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Eloquent" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\Api" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Requests" />
     </key>
   </component>
@@ -227,7 +203,9 @@
       <workItem from="1600209937527" duration="922000" />
       <workItem from="1600260097954" duration="58510000" />
       <workItem from="1600430072006" duration="25790000" />
-      <workItem from="1600516527332" duration="12055000" />
+      <workItem from="1600516527332" duration="18084000" />
+      <workItem from="1600689804500" duration="707000" />
+      <workItem from="1600693454921" duration="3296000" />
     </task>
     <servers />
   </component>
@@ -259,18 +237,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1600273060484" />
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600528036602">
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600689924170">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1600528036602" />
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1600689924170" />
     <state x="456" y="135" key="NewPhpClassDialog" timestamp="1599770170771">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="456" y="135" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1599770170771" />
-    <state x="604" y="336" key="NewPhpFileDialog" timestamp="1600539329490">
+    <state x="604" y="336" key="NewPhpFileDialog" timestamp="1600689901922">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="604" y="336" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1600539329490" />
+    <state x="604" y="336" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1600689901922" />
     <state x="611" y="185" key="refactoring.ChangeSignatureDialog" timestamp="1600121170264">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -26,7 +26,8 @@ class TransporteController extends Controller{
         $this->model->selectFilter($request);
         $transporte = $this->model->getResult();
 
-        return new TransporteCollection($transporte->all());
+        return $transporte->all();
+        // return new TransporteCollection($transporte->all());
         // return response()->json($transporte);
     }
 

@@ -107,6 +107,10 @@ Route::namespace('api')->prefix('v1')->group(function(){
         Route::delete('/{id}','FavoritoController@destroy');
         Route::post('/delete/{id}','FavoritoController@destroy');
     });
+
+    Route::prefix('loremipsum')->group(function(){
+       route::get('/', 'UtilitariosController@loremipsum')->name('loremipsum');
+    });
 });
 
 
