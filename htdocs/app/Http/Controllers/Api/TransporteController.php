@@ -26,8 +26,8 @@ class TransporteController extends Controller{
         $this->model->selectFilter($request);
         $transporte = $this->model->getResult();
 
-        return $transporte->all();
-        // return new TransporteCollection($transporte->all());
+        // return $transporte->all();
+        return new TransporteCollection($transporte->paginate(2));
         // return response()->json($transporte);
     }
 
@@ -70,11 +70,13 @@ class TransporteController extends Controller{
                 $transporte->fotos()->createmany($imageUpload);
             }
 
-            return response()->json([
+            return response()->json(
+                $transporte
+                /*[
                 'data' => [
                     'msg' => 'Registry add with success'
                 ]
-            ], 200);
+            ]*/, 200);
         }catch (\Exception $ex){
             $message = new ApiMessages($ex->getMessage());
             return response()->json(['error' => $message->getMessage()], 401);

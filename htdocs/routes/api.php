@@ -109,7 +109,11 @@ Route::namespace('api')->prefix('v1')->group(function(){
     });
 
     Route::prefix('loremipsum')->group(function(){
-       route::get('/', 'UtilitariosController@loremipsum')->name('loremipsum');
+        route::get('/', 'UtilitariosController@loremipsum')->name('loremipsum');
+    });
+
+    Route::prefix('upload')->group(function(){
+        route::post('/', 'UtilitariosController@upload')->name('upload');
     });
 });
 

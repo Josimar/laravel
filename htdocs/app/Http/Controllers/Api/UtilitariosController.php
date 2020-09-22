@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Api\ApiMessages;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class UtilitariosController extends Controller{
 
@@ -41,6 +42,60 @@ class UtilitariosController extends Controller{
         }catch (\Exception $ex){
             $message = new ApiMessages($ex->getMessage());
             return response()->json(['error' => $message->getMessage()], 401);
+        }
+    }
+
+    public function upload(Request $request){
+        /*
+        $imgName = "imagem.png";
+        $path = 'storage/upload/'.$imgName;
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        */
+        $imagem = "";
+        if ($request->imagem){
+            $base64 = $request->imagem;
+            $imagem = $this->convertBase64ToImage($base64, 'transporte');
+        }
+        try{
+            return response()->json(
+                $imagem
+                , 200);
+        }catch (\Exception $ex){
+            $message = new ApiMessages($ex->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
+    }
+
+    public function convertBase64ToImage($photo = null, $path = null) {
+        if (!empty($photo)) {
+            $photo = str_replace('data:image/png;base64,', '', $photo);
+            $photo = str_replace(' ', '+', $photo);
+            $photo = str_replace('data:image/jpeg;base64,', '', $photo);
+            $photo = str_replace('data:image/gif;base64,', '', $photo);
+            $entry = base64_decode($photo);
+            $image = imagecreatefromstring($entry);
+
+            $fileName = time() . ".jpeg";
+            $directory = "storage/upload/" . $path . '/' . $fileName;
+
+            header('Content-type:image/jpeg');
+
+            if (file_exists($directory)) {
+                unlink($directory);
+            }
+
+
+            $saveImage = imagejpeg($image, $directory);
+
+            imagedestroy($image);
+
+            if ($saveImage) {
+                return $fileName;
+            } else {
+                return false; // image not saved
+            }
         }
     }
 

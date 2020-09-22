@@ -9,16 +9,15 @@ class TransporteCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
-            'extra' => 'Dado extra'
+            'data' => $this->collection
         ];
     }
 
     public function with($request)
     {
         return [
-            'extra_information' => 'Extra information',
-            'extra' => 'Dado extra 2'
+            'titulo' => 'Transportes',
+            'descricao' => 'Listagem de transporte'
         ];
     }
 }
