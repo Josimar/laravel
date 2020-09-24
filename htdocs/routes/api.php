@@ -23,10 +23,11 @@ Route::namespace('api')->prefix('v1')->group(function(){
     });
 });
 
-Route::namespace('api')->prefix('v1')->group(function(){
+Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function(){
     // Rotas de usuários
     Route::prefix('usuarios')->group(function(){
         Route::post('/login', 'LoginJwtController@login')->name('api.login');
+        Route::post('/cadastro', 'LoginJwtController@cadastro')->name('api.usuarios.cadastro');
 
         Route::get('/', 'UserController@index')->name('api.usuarios.index');
         Route::get('/{id}','UserController@show')->name('api.usuarios.show');

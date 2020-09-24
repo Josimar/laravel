@@ -36,8 +36,65 @@ class LoginJwtController extends Controller{
         $user->save();
 
         return response()->json([
+            'id' => $user->id,
             'email' => $user->email,
             'nome' => $user->name,
+            'urlfoto' => $user->urlfoto,
+            'admin' => '1',
+            'token' => $token
+        ]);
+    }
+
+    public function cadastro(Request $request){
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        $email = $request->email;
+        $name = $request->name;
+        $password = $request->password;
+
+        if ($request->name == null || $request->name == ""){
+            $name = $email;
+        }
+        if ($request->password == null || $request->password == ""){
+            $password = '123456';
+        }
+
+        if ($user == null){
+            $user = User::create([
+                'name' => $name,
+                'email' => $email,
+                'password' => Hash::make($password),
+            ]);
+        }
+
+        $token = $this->createToken($user);
+        $token = base64_encode($token);
+
+        $user->api_token = hash('sha256', $token);
+        $user->uid = $request->uid;
+        if ($request->foto != null && $request->foto != ""){
+            $user->urlfoto = $request->foto;
+        }
+        $user->save();
+
+        $user->profile()->create(
+            [
+                'fone' => $request->fone,
+                'foto' => $request->foto,
+                'uid' => $request->uid,
+                'app' => $request->app
+            ]
+        );
+
+        return response()->json([
+            'id' => $user->id,
+            'email' => $user->email,
+            'nome' => $user->name,
+            'urlfoto' => $request->foto,
             'admin' => '1',
             'token' => $token
         ]);
@@ -49,9 +106,9 @@ class LoginJwtController extends Controller{
         $payload = [
             'locale' => $locale,
             'exp' => now(),
-            'uid' => 1,
-            'name' => 'Josimar Silva',
-            'email' => 'josimar@gmail.com'
+            'uid' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email
         ];
 
         // JSON

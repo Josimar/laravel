@@ -27,7 +27,7 @@ class TransporteController extends Controller{
         $transporte = $this->model->getResult();
 
         // return $transporte->all();
-        return new TransporteCollection($transporte->paginate(2));
+        return new TransporteCollection($transporte->paginate(10));
         // return response()->json($transporte);
     }
 

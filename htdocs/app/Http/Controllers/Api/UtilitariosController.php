@@ -54,9 +54,13 @@ class UtilitariosController extends Controller{
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         */
         $imagem = "";
+        $tipo = "";
+        if ($request->tipo){
+            $tipo = $request->tipo;
+        }
         if ($request->imagem){
             $base64 = $request->imagem;
-            $imagem = $this->convertBase64ToImage($base64, 'transporte');
+            $imagem = $this->convertBase64ToImage($base64, $tipo);
         }
         try{
             return response()->json(
