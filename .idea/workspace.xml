@@ -20,11 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d16656c6-22ad-4d65-a11f-9f1a73dec9c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/UtilitariosController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/TransporteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/TransporteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Resources/TransporteCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Resources/TransporteCollection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ListaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ListaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ProdutoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ProdutoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/TarefaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/TarefaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Lista.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Lista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Model/Produto.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Model/Produto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/ProdutoInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/ProdutoInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/AbstractRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/AbstractRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ListaRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ListaRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ProdutoRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ProdutoRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/public/js/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/public/js/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/js/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/js/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/components/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/components/layout.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/listas/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/listas/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/tarefas/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/tarefas/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,6 +170,9 @@
       <path value="$PROJECT_DIR$/htdocs/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/htdocs/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/htdocs/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/htdocs/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/htdocs/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/htdocs/vendor/barryvdh/laravel-debugbar" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hH3NOGLuyUncBZrM3T99wfRvGe" />
@@ -161,7 +183,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/public/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -172,19 +194,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\public\js" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\Api" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Model" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Contracts" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Eloquent" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\_Api" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\apis" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\layouts\admin" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\papeis" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\sistemas" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\Api" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Model" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Contracts" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Eloquent" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Requests" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -205,7 +227,12 @@
       <workItem from="1600430072006" duration="25790000" />
       <workItem from="1600516527332" duration="18084000" />
       <workItem from="1600689804500" duration="707000" />
-      <workItem from="1600693454921" duration="3296000" />
+      <workItem from="1600693454921" duration="6515000" />
+      <workItem from="1600787438048" duration="5258000" />
+      <workItem from="1600883122662" duration="2617000" />
+      <workItem from="1600953675895" duration="8323000" />
+      <workItem from="1601305458510" duration="93000" />
+      <workItem from="1601305828359" duration="12435000" />
     </task>
     <servers />
   </component>
@@ -237,10 +264,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1600273060484" />
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1600689924170">
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1601320299766">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1600689924170" />
+    <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1601320299766" />
     <state x="456" y="135" key="NewPhpClassDialog" timestamp="1599770170771">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -253,5 +280,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="611" y="185" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1600121170264" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1600718595835">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1600718595835" />
   </component>
 </project>

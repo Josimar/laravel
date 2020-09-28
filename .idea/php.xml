@@ -105,6 +105,9 @@
       <path value="$PROJECT_DIR$/htdocs/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/htdocs/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/htdocs/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/htdocs/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/htdocs/vendor/symfony/debug" />
+      <path value="$PROJECT_DIR$/htdocs/vendor/barryvdh/laravel-debugbar" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
