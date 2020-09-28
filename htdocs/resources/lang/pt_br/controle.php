@@ -6,7 +6,6 @@ return [
     'dashboard' => 'Principal',
     'search' => 'busca',
     'nomePage' => 'Usuários',
-    'list' => 'Lista',
     'tarefa'=>'Tarefa',
     'tarefas'=>'Tarefas',
     'titulo'=>'Título',
@@ -45,7 +44,7 @@ return [
 	'public' => 'Público',
 	'permission' => 'Permissão',
 	'paper' => 'Papel',
-	
+
 	'jackpot' => 'Bolão',
 	'welcome_site' => 'Bem vindo ao nosso site!',
 	'prazer_site' => 'Prazer em conhecê-lo',

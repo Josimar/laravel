@@ -62,7 +62,7 @@
                                         @elseif ($key2 == 'progresso')
                                             <td class="table-user">
                                                 <img src="{{ URL::asset('img/avatar-1.jpg') }}" alt="table-user" class="mr-2 rounded-circle">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">{{ $usuario->name }}</a>
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold"> (colocar nome do User)</a>
                                             </td>
                                         @elseif ($key2 == 'progresso')
                                             <td>
@@ -74,6 +74,14 @@
                                             <td><span class="badge bg-danger">@php echo $dado->{$key2} @endphp%</span></td>
                                         @elseif ($key2 == 'publico')
                                             <td><span>@php echo $dado->{$key2} == "1" ? "true" : "false"  @endphp</span></td>
+                                        @elseif (strpos($key2, '->') > 0)
+                                            <td>
+                                                @php
+                                                    if ($key2 == 'categoria->descricao'){
+                                                        echo $dado->categoria['descricao'];
+                                                    }
+                                                @endphp
+                                            </td>
                                         @else
                                             <td>@php echo $dado->{$key2} @endphp</td>
                                         @endif

@@ -29,6 +29,12 @@ class ListaController
         }
         */
 
+        // usuário logado
+        $usuario = auth()->user();
+
+        // pego a lista atual
+        $lista = $usuario->listas();
+
         $titulo = trans('controle.list');
         $colunas = $this->colunas;
         $routeName = $this->rota;

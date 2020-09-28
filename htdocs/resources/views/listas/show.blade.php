@@ -14,7 +14,7 @@
                     </div>
                     <div class="card-body">
                         <dl>
-                            <dd>{{$lista->nome}}</dd>
+                            <dd><a href="{{route('produtos.lista', $lista->id)}}">{{$lista->nome}}</a></dd>
                         </dl>
                     </div>
                 </div>

@@ -200,7 +200,7 @@
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="uil-building"></i>
-                    <span> Lista dos Desejos </span>
+                    <span> Lista de compras</span>
                     <span class="menu-arrow"></span>
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">

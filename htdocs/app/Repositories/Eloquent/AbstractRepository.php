@@ -18,6 +18,13 @@ abstract class AbstractRepository{
         return app($this->model);
     }
 
+    public function selectFilterField(Request $request){
+        if ($request->has('fields')){
+            $fields = $request->get('fields');
+            $this->model = $this->model->selectRaw($fields);
+        }
+    }
+
     public function selectFilter(Request $request){
         if ($request->has('fields')){
             $fields = $request->get('fields');
@@ -48,6 +55,11 @@ abstract class AbstractRepository{
     public function find(string $id = '0')
     {
       return $this->model->findOrFail($id);
+    }
+
+    public function findField(string $field, string $sign, string $value)
+    {
+        return $this->model->where($field, $sign, $value)->get();
     }
 
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator

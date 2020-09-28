@@ -6,7 +6,6 @@ return [
     'dashboard' => 'Painel de Controle',
     'search' => 'buscar',
     'nomePage' => 'Usuários',
-    'list' => 'Lista',
     'tarefa'=>'Tarefa',
     'tarefas'=>'Tasks',
     'titulo'=>'Título',
@@ -68,7 +67,7 @@ return [
 	'match' => 'Match',
 	'resultado' => 'Result',
 	'data' => 'Date',
-	
+
     'show_crud' => 'Show :page',
     'create_crud' => 'Create :page',
     'edit_crud' => 'Edit :page',

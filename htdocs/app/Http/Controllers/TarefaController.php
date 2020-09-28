@@ -13,19 +13,23 @@ class TarefaController extends Controller
     private $rota = 'tarefas';
     private $model;
     private $page;
+    private $colunas;
     private $paginate = 10;
     private $filtro = ['titulo', 'descricao'];
 
     public function __construct(TarefaInterface $model){
-        $this->page = trans('controle.tarefas');
         $this->model = $model;
+        $this->colunas = ['id'=>'#',
+            'titulo'=>trans('controle.titulo'),
+            'descricao'=>trans('controle.descricao'),
+            'progresso'=>trans('controle.progresso'),
+            'percentcomplete'=>trans('controle.percentual')
+        ];
     }
 
     public function index(Request $request)
     {
         // return response()->json(['message'=>__METHOD__]);
-
-        $routeName = $this->rota;
 
         /* ToDo: Permissão
         if (Gate::denies($routeName.'-view')){
@@ -33,31 +37,26 @@ class TarefaController extends Controller
         }
         */
 
-        $columnList = ['id'=>'#',
-            'titulo'=>trans('controle.titulo'),
-            'descricao'=>trans('controle.descricao'),
-            'progresso'=>trans('controle.progresso'),
-            'percentcomplete'=>trans('controle.percentual')];
+        $titulo = trans('controle.tarefa');
+        $colunas = $this->colunas;
+        $routeName = $this->rota;
+        $caminhos = [
+            ['url'=>'../admin', 'titulo'=>'Admin'],
+            ['url'=>'', 'titulo'=>$titulo],
+        ];
 
-        $page = $this->page;
         $search = "";
-        $link = $routeName.'-view';
+        $tarefa = '';
 
         if (isset($request->search)){
             $search = $request->search;
             $tarefas = $this->model->findWhereLike($this->filtro, $search, 'id', 'DESC');
         }else{
-            $tarefas = $this->model->paginate($this->paginate);
+            $tarefas = $this->model->all();
+            // $tarefas = $this->model->paginate($this->paginate); // ToDo: pensar em paginar
         }
 
-        $caminhos = [
-            ['url'=>'../admin', 'titulo'=>'Admin'],
-            ['url'=>'', 'titulo'=>$page],
-        ];
-
-        $tarefa  = ''; $msgMessage = ''; $msgStatus = ''; $delete = '';
-
-        return view($routeName.'.index', compact('page','search', 'caminhos', 'routeName', 'delete', 'columnList', 'tarefas', 'tarefa', 'msgMessage', 'msgStatus'));
+        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'tarefas', 'tarefa'));
     }
 
     public function create()

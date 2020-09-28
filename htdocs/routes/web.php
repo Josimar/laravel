@@ -49,9 +49,14 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
 
 Route::middleware('auth')->group(function(){
     Route::resource('tarefas', 'TarefaController');
+
     Route::resource('listas', 'ListaController');
+
     Route::resource('categorias', 'CategoriaController');
+
     Route::resource('produtos', 'ProdutoController');
+    Route::get('/produtos/lista/{listaid}', 'ProdutoController@lista')->name('produtos.lista');
+
     Route::resource('boloes', 'BolaoController');
 
     Route::get('/chamado', 'ChamadoController@index')->name('chamados');

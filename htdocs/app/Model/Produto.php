@@ -35,7 +35,8 @@ class Produto extends Model
         return $this->hasMany('App\Model\ProdutoFotos', 'produtoid');
     }
 
-    public function categorias(){
-        return $this->belongsToMany('App\Model\Categoria', 'sistema_categoria', 'sistemaid', 'categoriaid');
+    public function categoria(){
+        // return $this->hasOne('App\Model\Categoria', 'categoriaid');
+        return $this->belongsTo('App\Model\Categoria', 'categoriaid');
     }
 }

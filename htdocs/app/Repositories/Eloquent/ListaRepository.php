@@ -9,6 +9,7 @@ class ListaRepository extends AbstractRepository implements ListaInterface {
 
     protected $model = Lista::class;
 
+
 }
 
 ?>

@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
@@ -26,6 +26,7 @@ class ProdutoController
 
         $this->colunas = ['id'=>'#',
             'nome'=>trans('controle.name'),
+            'categoria->descricao'=>trans('controle.category'),
             'quantidade'=>trans('controle.quantity'),
             'unidade'=>trans('controle.unit'),
             'valor'=>trans('controle.value'),
@@ -50,9 +51,8 @@ class ProdutoController
         ];
 
         $search = "";
-        $produtos = $this->model->all();
+        $produtos = $this->model->all(); // dd($produtos[2]->categoria->descricao);
         $produto = '';
-
         return view($routeName.'.index',
             compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
     }
@@ -127,6 +127,55 @@ class ProdutoController
             'nome' => 'required|string|max:255',
         ])->validate();
 
-        dd($data);
+        $routeName = $this->rota;
+
+        // dd($data);
+        if ($this->model->create($data)){
+            session()->flash('msgMessage', trans('controle.add_success'));
+            session()->flash('msgStatus', 'success');
+            return redirect(route($routeName.'.create'));
+        }else{
+            session()->flash('msgMessage', trans('controle.add_error'));
+            session()->flash('msgStatus', 'error');
+            return redirect(route($routeName.'.create'));
+        }
+    }
+
+    public function lista(Request $request, $id){
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+        // dd($id);
+
+        /* ToDo: permissão
+        if (Gate::denies('usuario-create')){
+            abort(403, 'Não Autorizado');
+        }
+        */
+
+        // usuário logado
+        $usuario = auth()->user();
+        // dd($usuario);
+
+        // pego a lista atual
+        $lista = $usuario->listas()->find($id);
+        // dd($lista);
+
+        // produtos da lista
+        $produtos = $this->model->findField('listaid', '=', $lista->id);
+
+        $titulo = trans('controle.product');
+        $colunas = $this->colunas;
+        $routeName = $this->rota;
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>'', 'titulo'=>$titulo]
+        ];
+
+        $search = "";
+//        $produtos = $this->model->all();
+        $produto = '';
+
+        return view($routeName.'.index',
+            compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
     }
 }

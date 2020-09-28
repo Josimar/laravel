@@ -6,7 +6,7 @@ return [
     'dashboard' => 'Tablero',
     'search' => 'search',
     'nomePage' => 'User',
-    'list' => 'List',
+    'lista' => 'List',
     'tarefa'=>'Task',
     'tarefas'=>'Tasks',
     'titulo'=>'Title',
