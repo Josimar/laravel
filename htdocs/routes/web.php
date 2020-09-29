@@ -30,7 +30,10 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
     Route::get('/token', 'AdminController@token')->name('admin.token');
 
     Route::resource('usuarios', 'UsuarioController');
+
     Route::resource('sistemas', 'SistemaController');
+
+
     Route::resource('papeis', 'PapelController');
     Route::resource('permissoes', 'PermissaoController');
 
@@ -53,6 +56,9 @@ Route::middleware('auth')->group(function(){
     Route::resource('listas', 'ListaController');
 
     Route::resource('categorias', 'CategoriaController');
+    Route::get('/categorias/treeview',['as'=>'categorias.treeview', 'uses'=>'CategoriaController@treeview']);
+    Route::get('/categorias/filho',['as'=>'child.categoria', 'uses'=>'CategoriaController@findchild']);
+    Route::post('/categorias/atualizar/{categoriaid}',['as'=>'categorias.atualizar', 'uses'=>'CategoriaController@atualizar']);
 
     Route::resource('produtos', 'ProdutoController');
     Route::get('/produtos/lista/{listaid}', 'ProdutoController@lista')->name('produtos.lista');

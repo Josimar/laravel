@@ -28,6 +28,8 @@
                 <button class="btn btn-danger btn-md float-right">@lang('controle.delete')</button>
             @endif
         </x-formulario>
-
+        <x-formulario action="{{route($routeName.'.destroy', $registro->id)}}" method="delete">
+            <button class="btn btn-secondary btn-md float-right">@lang('controle.associar_categoria')</button>
+        </x-formulario>
     </x-layout>
 @endsection

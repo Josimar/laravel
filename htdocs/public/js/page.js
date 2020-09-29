@@ -327,4 +327,164 @@ $(document).ready(function () {
                 })
         }
     })
+
+    $.fn.extend({
+        treed: function (o) {
+
+            var openedClass = 'glyphicon-minus-sign';
+            var closedClass = 'glyphicon-plus-sign';
+
+            if (typeof o != 'undefined'){
+                if (typeof o.openedClass != 'undefined'){
+                    openedClass = o.openedClass;
+                }
+                if (typeof o.closedClass != 'undefined'){
+                    closedClass = o.closedClass;
+                }
+            };
+
+            /* initialize each of the top levels */
+            var tree = $(this);
+            tree.addClass("tree");
+            tree.find('li').has("ul").each(function () {
+                var branch = $(this);
+                branch.prepend("");
+                branch.addClass('branch');
+                branch.on('click', function (e) {
+                    if (this == e.target) {
+                        var icon = $(this).children('i:first');
+                        icon.toggleClass(openedClass + " " + closedClass);
+                        $(this).children().children().toggle();
+                    }
+                })
+                branch.children().children().toggle();
+            });
+            /* fire event from the dynamically added icon */
+            tree.find('.branch .indicator').each(function(){
+                $(this).on('click', function () {
+                    $(this).closest('li').click();
+                });
+            });
+            /* fire event to open branch if the li contains an anchor instead of text */
+            tree.find('.branch>a').each(function () {
+                $(this).on('click', function (e) {
+                    $(this).closest('li').click();
+                    e.preventDefault();
+                });
+            });
+            /* fire event to open branch if the li contains a button instead of text */
+            tree.find('.branch>button').each(function () {
+                $(this).on('click', function (e) {
+                    $(this).closest('li').click();
+                    e.preventDefault();
+                });
+            });
+        }
+    });
+    /* Initialization of treeviews */
+    $('#treeCategoria').treed();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $(document).ready(function () {
+        $('.categoriaid1').on('change',function(e) {
+            var categoriaid = e.target.value;
+            $.ajax({
+                url: $('.categoriaid1').attr('style').split('#')[0],
+                type:"GET",
+                data: {
+                    'conditions': 'categoriaid:=:' + categoriaid
+                },
+                success:function (data) {
+                    $('.categoriaid2').empty();
+                    $('.categoriaid3').empty();
+                    $.each(data.data,function(index,subcategory){
+                        $('.categoriaid2').append('<option value="'+subcategory.id+'">'+subcategory.descricao+'</option>');
+                    })
+                }
+            })
+        });
+        $('.categoriaid2').on('change',function(e) {
+            var categoriaid = e.target.value;
+            $.ajax({
+                url: $('.categoriaid2').attr('style').split('#')[0],
+                type:"GET",
+                data: {
+                    'conditions': 'categoriaid:=:' + categoriaid
+                },
+                success:function (data) {
+                    $('.categoriaid3').empty();
+                    $.each(data.data,function(index,subcategory){
+                        $('.categoriaid3').append('<option value="'+subcategory.id+'">'+subcategory.descricao+'</option>');
+                    })
+                }
+            })
+        });
+        $('.categoriaid4').on('change',function(e) {
+            const select = e.target;
+            const value = select.value;
+            const desc = select.options[select.selectedIndex].text;
+
+            $('input#descricao.editid').val(value);
+            $('input#descricao.editdescricao').val(desc);
+
+            var categoriaid = e.target.value;
+            $.ajax({
+                url: $('.categoriaid4').attr('style').split('#')[0],
+                type:"GET",
+                data: {
+                    'conditions': 'categoriaid:=:' + categoriaid
+                },
+                success:function (data) {
+                    $('.categoriaid5').empty();
+                    $('.categoriaid6').empty();
+                    $.each(data.data,function(index,subcategory){
+                        $('.categoriaid5').append('<option value="'+subcategory.id+'">'+subcategory.descricao+'</option>');
+                    })
+                }
+            })
+        });
+        $('.categoriaid5').on('change',function(e) {
+            const select = e.target;
+            const value = select.value;
+            const desc = select.options[select.selectedIndex].text;
+
+            $('input#descricao.editid').val(value);
+            $('input#descricao.editdescricao').val(desc);
+
+            var categoriaid = e.target.value;
+            $.ajax({
+                url: $('.categoriaid5').attr('style').split('#')[0],
+                type:"GET",
+                data: {
+                    'conditions': 'categoriaid:=:' + categoriaid
+                },
+                success:function (data) {
+                    $('.categoriaid6').empty();
+                    $.each(data.data,function(index,subcategory){
+                        $('.categoriaid6').append('<option value="'+subcategory.id+'">'+subcategory.descricao+'</option>');
+                    })
+                }
+            })
+        });
+        $('.categoriaid6').on('change',function(e) {
+            const select = e.target;
+            const value = select.value;
+            const desc = select.options[select.selectedIndex].text;
+
+            $('input#descricao.editid').val(value);
+            $('input#descricao.editdescricao').val(desc);
+        });
+    });
+
+
+    function editarCategoria(id, nivel){
+        alert(id);
+        alert(nivel);
+    }
+
+
 });

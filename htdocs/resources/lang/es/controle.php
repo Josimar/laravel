@@ -45,6 +45,8 @@ return [
 	'permission' => 'Permission',
 	'paper' => 'Paper',
 
+    'associar_categoria' => 'Associar Categoria',
+
 	'jackpot' => 'Jackpot',
 	'welcome_site' => 'Welcome To Our Site!',
 	'prazer_site' => 'It\'s Nice To Meet You',

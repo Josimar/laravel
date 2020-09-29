@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\Contracts\SistemaInterface;
+use App\Repositories\Contracts\CategoriaInterface;
 
 class SistemaController extends Controller
 {
     private $rota = 'sistemas';
     private $model;
+    private $modelCategoria;
     private $colunas;
 
     private $paginate = 10;
     private $filtro = ['titulo', 'descricao'];
 
-    public function __construct(SistemaInterface $model){
+    public function __construct(SistemaInterface $model, CategoriaInterface $modelCategoria){
         $this->model = $model;
+        $this->modelCategoria = $modelCategoria;
         $this->colunas = ['id'=>'#',
             'titulo'=>trans('controle.title'), 'descricao'=>trans('controle.description'), 'publico'=>trans('controle.public')];
     }
@@ -144,6 +148,8 @@ class SistemaController extends Controller
             'titulo' => 'required|string|max:255'
         ])->validate();
 
+        $data['slug'] = Str::slug($request->titulo);
+
         if ($this->model->create($data)){
             session()->flash('msgMessage', trans('controle.add_success'));
             session()->flash('msgStatus', 'success');
@@ -176,6 +182,7 @@ class SistemaController extends Controller
         ];
         $search = "";
         $delete = $request->delete ?? '0';
+
         $registros = new Collection;
         $registro = $this->model->find($id);
 
@@ -207,7 +214,9 @@ class SistemaController extends Controller
         $registros = new Collection;
         $registro = $this->model->find($id);
 
-        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        $categorias = $this->modelCategoria->all('descricao', 'ASC');
+
+        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'categorias'));
     }
 
     public function update(Request $request, $id)
@@ -227,6 +236,8 @@ class SistemaController extends Controller
         Validator::make($data, [
             'titulo' => 'required|string|max:255'
         ]);
+
+        $data['slug'] = Str::slug($request->titulo);
 
         if ($this->model->update($data, $id)){
             session()->flash('msgMessage', trans('controle.edit_success'));

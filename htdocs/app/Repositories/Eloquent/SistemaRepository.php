@@ -9,6 +9,11 @@ class SistemaRepository extends AbstractRepository implements SistemaInterface {
 
     protected $model = Sistema::class;
 
+    public function find(string $id = '0')
+    {
+        return $this->model->with('categorias')->findOrFail($id);
+    }
+
 }
 
 ?>

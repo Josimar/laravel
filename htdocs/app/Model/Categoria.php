@@ -16,9 +16,15 @@ class Categoria extends Model
     const DELETED_AT = 'deletedAt';
 
     protected $fillable = [
-        'usuarioid',
-        'descricao'
+        'descricao',
+        'categoriaid',
+        'slug',
+        'nivel'
     ];
+
+    public function childs() {
+        return $this->hasMany('App\Model\Categoria','categoriaid','id') ;
+    }
 
     public function sistemas(){
         return $this->belongsToMany('App\Model\Sistema', 'sistema_categoria', 'categoriaid', 'sistemaid');

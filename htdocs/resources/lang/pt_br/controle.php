@@ -68,6 +68,8 @@ return [
 	'resultado' => 'Resultado',
 	'data' => 'Data',
 
+    'associar_categoria' => 'Associar Categoria',
+
     'show_crud' => 'Detalhe :page',
     'create_crud' => 'Adicionar :page',
     'edit_crud' => 'Editar :page',

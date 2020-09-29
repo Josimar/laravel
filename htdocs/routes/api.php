@@ -44,6 +44,8 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
         Route::post('/update/{id}', 'CategoriaController@update')->name('api.categorias.update');
         Route::post('/delete/{id}', 'CategoriaController@delete')->name('api.categorias.delete');
 
+        Route::get('/filho/{nivel}', 'CategoriaController@child')->name('api.categorias.child');
+
         Route::get('/{id}/imoveis', 'CategoriaController@imoveis')->name('api.categorias.imoveis');
     });
 

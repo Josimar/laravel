@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Api\ApiMessages;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -55,6 +56,56 @@ class ProdutoController
         $produto = '';
         return view($routeName.'.index',
             compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+    }
+
+    public function show($id){
+        // return response()->json(['message'=>__METHOD__]);
+
+        /* ToDo: Permissão
+        if (Gate::denies($routeName.'-index')){
+            abort(403, 'Não Autorizado');
+        }
+        */
+
+        $colunas = $this->colunas;
+        $routeName = $this->rota;
+        $titulo = trans('controle.product');
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route($routeName.'.index'), 'titulo'=>$titulo],
+            ['url'=>'', 'titulo'=>trans('controle.detail').' '.$titulo],
+        ];
+        $search = "";
+        $delete = $request->delete ?? '0';
+        $produtos = new Collection;
+        $produto = $this->model->find($id);
+
+        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+    }
+
+    public function edit($id){
+        // return response()->json(['message'=>__METHOD__]);
+
+        /* ToDo: Permissão
+        if (Gate::denies($routeName.'-index')){
+            abort(403, 'Não Autorizado');
+        }
+        */
+
+        $titulo = trans('controle.product');
+        $colunas = $this->colunas;
+        $routeName = $this->rota;
+        $caminhos = [
+            ['url'=>route('home'), 'titulo'=>'Home'],
+            ['url'=>route($routeName.'.index'), 'titulo'=>$titulo],
+            ['url'=>'', 'titulo'=>trans('controle.edit').' '.$titulo],
+        ];
+
+        $search = "";
+        $produtos = new Collection;
+        $produto = $this->model->find($id);
+
+        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
     }
 
     public function create()

@@ -27,6 +27,15 @@ class CategoriaController extends Controller{
         return new CategoriaCollection($categoria->paginate(10));
     }
 
+    public function child($nivel, Request $request){
+        $this->model->selectCondition($request);
+        $this->model->selectFilter($request);
+        $categoria = $this->model->getResult();
+
+        // return response()->json($lista);
+        return new CategoriaCollection($categoria->paginate(100));
+    }
+
     // http://localhost/laravel/api/categorias/paginate?page=1
     public function paginate(){
         $categoria = $this->model->paginate(10);
@@ -35,7 +44,7 @@ class CategoriaController extends Controller{
         return new CategoriaCollection($categoria);
     }
 
-    public function show($id){
+    public function show($id, Request $request){
         try{
             $categoria = $this->model->find($id);
 

@@ -57,9 +57,9 @@ abstract class AbstractRepository{
       return $this->model->findOrFail($id);
     }
 
-    public function findField(string $field, string $sign, string $value)
+    public function findField(string $field, string $sign, string $value, $column = 'id', string $order = 'ASC')
     {
-        return $this->model->where($field, $sign, $value)->get();
+        return $this->model->where($field, $sign, $value)->orderBy($column, $order)->get();
     }
 
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator
