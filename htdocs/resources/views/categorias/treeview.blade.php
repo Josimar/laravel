@@ -84,6 +84,8 @@
             </x-formulario>
 
             <br />
+            <br />
+            <br />
 
             <h3>Edit Category</h3>
             <x-formulario action="{{route('categorias.atualizar', 0)}}" method="post">
@@ -95,7 +97,9 @@
                     </div>
                 @endif
                 <div class="form-group {{ $errors->has('descricao') ? 'has-error' : '' }}">
-                    <label for="descricao">{{__('controle.description')}}</label>
+                    <label for="descricao">{{__('controle.description')}}</label> |
+                    <a href="javascript:void(0)" id="moverCategoria" class="btn-allot-modal" data-id="0" data-toggle="modal" data-target="#categoriaModal"><span  class="text-warning">{{__('controle.mover')}}</span></a>  |
+                    <a href="javascript:void(0)" id="apagarCategoria"><span class="text-danger">{{__('controle.apagar')}}</span></a>
                     <input type="text" required name="descricao" id="descricao" class="editdescricao form-control @error('descricao') is-invalid @enderror" value="{{ old('descricao') ?? ($categoria->descricao ?? '') }}" placeholder="descricao">
                     <input type="hidden" name="id" id="id" class="editid">
                     <span class="text-danger">{{ $errors->first('descricao') }}</span>
@@ -147,77 +151,60 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-success">Edit</button>
-                </div>
-
             </x-formulario>
         </div>
     </div>
 
+    <div class="modal fade" id="categoriaModal" tabindex="-1" role="dialog" aria-labelledby="categoriaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoriaModalLabel" class="nomeCategoria">Categorias</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <x-formulario name="frmCategoria" id="frmCategoria" action="{{route('categorias.atualizar', 0)}}" method="post">
+                        <input type="hidden" id="categoriaid" name="categoriaid" value="" />
+                        <input type="hidden" id="categoriaidpai" name="categoriaidpai" value="" />
+                        <div class="form-group row">
+                            <label for="dd_college" class="col-sm-4 col-form-label">Escolha uma categoria pai</label>
+                            <div class="col-sm-8">
+                                <ul id="tree">
+                                    @foreach($categorias as $category)
+                                        <li>
+                                            <a href="javascript:void(0)" class="atualizarCategoria" data-id="{{ $category->id }}">{{ $category->descricao }}</a>
+                                            @if(count($category->childs))
+                                                @include('categorias.treeviewitem',['childs' => $category->childs])
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </x-formulario>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <style>
-    .tree, .tree ul {
-        margin:0;
-        padding:0;
-        list-style:none
-    }
-    .tree ul {
-        margin-left:1em;
-        position:relative
-    }
-    .tree ul ul {
-        margin-left:.5em
-    }
-    .tree ul:before {
-        content:"";
-        display:block;
-        width:0;
-        position:absolute;
-        top:0;
-        bottom:0;
-        left:0;
-        border-left:1px solid
-    }
-    .tree li {
-        margin:0;
-        padding:0 1em;
-        line-height:2em;
-        color:#369;
-        font-weight:700;
-        position:relative
-    }
-    .tree ul li:before {
-        content:"";
-        display:block;
-        width:10px;
-        height:0;
-        border-top:1px solid;
-        margin-top:-1px;
-        position:absolute;
-        top:1em;
-        left:0
-    }
-    .tree ul li:last-child:before {
-        height:auto;
-        top:1em;
-        bottom:0
-    }
-    .indicator {
-        margin-right:5px;
-    }
-    .tree li a {
-        text-decoration: none;
-        color:#369;
-    }
-    .tree li button, .tree li button:active, .tree li button:focus {
-        text-decoration: none;
-        color:#369;
-        border:none;
-        background:transparent;
-        margin:0px 0px 0px 0px;
-        padding:0px 0px 0px 0px;
-        outline: 0;
-    }
+    .tree, .tree ul {margin:0;padding:0;list-style:none}
+    .tree ul {margin-left:1em;position:relative}
+    .tree ul ul {margin-left:.5em}
+    .tree ul:before {content:""; display:block; width:0; position:absolute; top:0; bottom:0; left:0;border-left:1px solid}
+    .tree li {margin:0; padding:0 1em; line-height:2em; color:#369; font-weight:700; position:relative}
+    .tree ul li:before {content:""; display:block; width:10px; height:0; border-top:1px solid; margin-top:-1px;position:absolute; top:1em; left:0}
+    .tree ul li:last-child:before {height:auto; top:1em; bottom:0}
+    .indicator {margin-right:5px;}
+    .tree li a {text-decoration: none; color:#369;}
+    .tree li button, .tree li button:active, .tree li button:focus {text-decoration: none; color:#369; border:none; background:transparent; margin:0px 0px 0px 0px; padding:0px 0px 0px 0px; outline: 0;}
 </style>
 
 @endsection

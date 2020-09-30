@@ -70,6 +70,9 @@ return [
 
     'associar_categoria' => 'Associar Categoria',
 
+    'mover' => 'Mover',
+    'apagar' => 'Apagar',
+
     'show_crud' => 'Detalhe :page',
     'create_crud' => 'Adicionar :page',
     'edit_crud' => 'Editar :page',

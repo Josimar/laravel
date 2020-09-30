@@ -63,19 +63,16 @@ class UserController extends Controller
             return response()->json(['error' => $message->getMessage()], 401);
         }
 
-        Validator::make($data, [
-            'fone' => 'required',
-            'sobre' => 'required'
-        ])->validate();
-
         try{
             $data['password'] = Hash::make($data['password']);
             $usuario = $this->model->save($data);
 
             $usuario->profile()->create(
               [
-                  'fone' => $data['fone'],
-                  'sobre' => $data['sobre']
+                  'app' => $data['app'] ?? '',
+                  'fone' => $data['fone'] ?? '',
+                  'urlfoto' => $data['foto'] ?? '',
+                  'sobre' => $data['sobre'] ?? ''
               ]
             );
 
@@ -101,11 +98,6 @@ class UserController extends Controller
         }
 
         unset($data['email']);
-
-        Validator::make($data, [
-            'profile.fone' => 'required',
-            'profile.sobre' => 'required'
-        ])->validate();
 
         try{
             $profile = $data['profile'];

@@ -429,7 +429,7 @@ $(document).ready(function () {
             const value = select.value;
             const desc = select.options[select.selectedIndex].text;
 
-            $('input#descricao.editid').val(value);
+            $('input#id.editid').val(value);
             $('input#descricao.editdescricao').val(desc);
 
             var categoriaid = e.target.value;
@@ -453,7 +453,7 @@ $(document).ready(function () {
             const value = select.value;
             const desc = select.options[select.selectedIndex].text;
 
-            $('input#descricao.editid').val(value);
+            $('input#id.editid').val(value);
             $('input#descricao.editdescricao').val(desc);
 
             var categoriaid = e.target.value;
@@ -476,15 +476,34 @@ $(document).ready(function () {
             const value = select.value;
             const desc = select.options[select.selectedIndex].text;
 
-            $('input#descricao.editid').val(value);
+            $('input#id.editid').val(value);
             $('input#descricao.editdescricao').val(desc);
         });
     });
 
-
-    function editarCategoria(id, nivel){
-        alert(id);
-        alert(nivel);
+    function apagarCategoria(id){
+        if(confirm('Are you sure want to remove?')) {
+            alert(id);
+        }
     }
+
+    $(document).ready(function() {
+        $('#moverCategoria').click(function(){
+            console.log($(this).attr("data-id"));
+        });
+        $('#apagarCategoria').click(function(){ apagarCategoria(1); return false; });
+        $('.atualizarCategoria').click(function(e){
+            e.preventDefault();
+            let idn = $(this).attr("data-id");
+            let id = $('input#id.editid').val();
+
+            console.log(id);
+            console.log(idn);
+
+            $('#categoriaid').val(id);
+            $('#categoriaidpai').val(idn);
+            $('#frmCategoria').submit();
+        });
+    });
 
 });

@@ -13,7 +13,7 @@ class Profile extends Model
     const UPDATED_AT = 'updated';
     const DELETED_AT = 'deleted';
 
-    protected $fillable = ['usuarioid', 'sobre', 'redes', 'fone'];
+    protected $fillable = ['usuarioid', 'app', 'sobre', 'redes', 'fone'];
 
     public function users(){
         return $this->belongsToMany('App\User', 'usuarioid', 'id');

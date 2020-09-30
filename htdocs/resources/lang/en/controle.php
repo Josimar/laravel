@@ -48,6 +48,9 @@ return [
 
     'associar_categoria' => 'Associar Categoria',
 
+    'mover' => 'Move',
+    'apagar' => 'Delete',
+
 	'jackpot' => 'Jackpot',
 	'welcome_site' => 'Welcome To Our Site!',
 	'prazer_site' => 'It\'s Nice To Meet You',

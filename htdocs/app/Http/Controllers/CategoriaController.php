@@ -145,6 +145,36 @@ class CategoriaController
     }
 
     public function atualizar(Request $request){
-        return response()->json(['message'=>__METHOD__]);
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+
+        $routeName = $this->rota;
+        $data = $request->all();
+
+        Validator::make($data, [
+            'categoriaid' => 'required',
+            'categoriaidpai' => 'required',
+        ])->validate();
+
+        $idcategpai = $request->categoriaidpai ?? 0;
+        $categoriapai = $this->model->find($idcategpai);
+
+        $idcateg = $request->categoriaid ?? 0;
+        $categoria = $this->model->find($idcateg);
+
+        $nivel = $categoriapai->nivel + 1;
+
+        $categoria->categoriaid = $idcategpai;
+        $categoria->nivel = $nivel;
+
+        if ($this->model->update(['categoriaid' => $idcategpai, 'nivel' => $nivel], $idcateg)){
+            session()->flash('msgMessage', trans('controle.edit_success'));
+            session()->flash('msgStatus', 'success');
+            return redirect(route($routeName.'.treeview'));
+        }else{
+            session()->flash('msgMessage', trans('controle.edit_error'));
+            session()->flash('msgStatus', 'error');
+            return redirect(route($routeName.'.treeview'));
+        }
     }
 }
