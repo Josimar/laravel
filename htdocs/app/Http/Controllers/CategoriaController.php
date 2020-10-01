@@ -46,8 +46,9 @@ class CategoriaController
         $search = "";
         $categorias = $this->model->all();
         $categoria = '';
+        $tableNomeIdList = [];
 
-        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'categorias', 'categoria'));
+        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'categorias', 'categoria', 'tableNomeIdList'));
     }
 
     public function create()
@@ -83,6 +84,9 @@ class CategoriaController
     public function store(Request $request){
         // dd($request->all());
 
+        // usuário logado
+        $usuario = auth()->user();
+
         /* ToDo: permissão
         if (Gate::denies('usuario-create')){
             abort(403, 'Não Autorizado');
@@ -116,9 +120,11 @@ class CategoriaController
         }
         $data['slug'] = Str::slug($request->descricao);
 
-        // ToDo: cadastrar usuário x categoria => usuario_categoria
+        $categoria = $this->model->save($data);
 
-        if ($this->model->create($data)){
+        if ($categoria != null && $categoria != ""){
+            $categoria->usuarios()->attach($usuario);
+
             session()->flash('msgMessage', trans('controle.add_success'));
             session()->flash('msgStatus', 'success');
             return redirect(route($routeName.'.treeview'));
@@ -135,8 +141,8 @@ class CategoriaController
         $routeName = $this->rota;
 
         $categorias = $this->model->findField('categoriaid', '=', 0, 'descricao');
-        // $allCategories = $this->model->pluck('descricao','id')->all();
         $allCategories = $this->model->all();
+
         return view($routeName.'.treeview',compact('categorias','allCategories'));
     }
 
@@ -147,6 +153,9 @@ class CategoriaController
     public function atualizar(Request $request){
         // return response()->json(['message'=>__METHOD__]);
         // dd($request->all());
+
+        // usuário logado
+        $usuario = auth()->user();
 
         $routeName = $this->rota;
         $data = $request->all();
@@ -161,6 +170,8 @@ class CategoriaController
 
         $idcateg = $request->categoriaid ?? 0;
         $categoria = $this->model->find($idcateg);
+
+        $categoria->usuarios()->attach($usuario);
 
         $nivel = $categoriapai->nivel + 1;
 

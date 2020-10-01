@@ -9,10 +9,12 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface SistemaInterface{
     public function selectFilter(Request $request);
     public function selectCondition(Request $request);
+    public function selectConditionVariable(string $field, string $sign, string $value);
     public function getResult();
     public function all(string $column = 'id', string $order = 'ASC'):Collection;
     public function find(string $id = '0');
     public function findField(string $field, string $sign, string $value, string $column = 'id', string $order = 'ASC');
+    public function findFieldModel(string $field, string $sign, string $value, $column = 'id', string $order = 'ASC');
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator;
     public function findPaginate(int $paginate = 10, string $id = '0', string $column = 'id', string $order = 'ASC'):LengthAwarePaginator;
     public function findWhereLike(array $columns, string $search, string $column = 'id', string $order = 'ASC'):Collection;

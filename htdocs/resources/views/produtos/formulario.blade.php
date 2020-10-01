@@ -15,7 +15,12 @@
                                         }
                                     }
                                 }else{
-                                    if ($registro ?? false){
+                                    $key = array_search('lista', array_column($tableNomeIdList, 'tabela'));
+                                    if ($key || $key > -1){
+                                        if ($value->id == $tableNomeIdList[$key]['id']){
+                                            $selected = 'selected';
+                                        }
+                                    }elseif ($registro ?? false){
                                         foreach ($registro->listas as $lista){
                                             if ($lista->id == $value->id){
                                                 $selected = "selected";

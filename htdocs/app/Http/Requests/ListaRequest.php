@@ -14,7 +14,6 @@ class ListaRequest extends FormRequest
     public function rules()
     {
         return [
-            'usuarioid' => 'required',
             'nome' => 'required'
         ];
     }

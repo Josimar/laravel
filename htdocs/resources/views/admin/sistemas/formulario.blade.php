@@ -19,29 +19,22 @@
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="categorias" class="col-form-label">Categorias</label>
-        <select name="categorias[]" multiple class="custom-select custom-select-sm mb-3">
-            @foreach($categorias as $key => $value)
-                @php
-                    $selected = '';
-                    if(old('categorias') ?? false){
-                        foreach (old('categorias') as $key => $id){
-                            if ($value->id == $id){
-                                $selected = 'selected';
-                            }
-                        }
-                    }else{
-                        if ($registro ?? false){
-                            foreach ($registro->categorias as $categoria){
-                                if ($categoria->id == $value->id){
-                                    $selected = "selected";
-                                }
-                            }
-                        }
-                    }
-                @endphp
-                <option {{$selected}} value="{{$value->id}}">{{$value->id}} - {{$value->categoriaid}} - {{$value->descricao}}</option>
-            @endforeach
-        </select>
+        <div class="form-group row">
+            <label for="dd_college" class="col-sm-4 col-form-label">Escolha uma categoria</label>
+            <div class="col-sm-8">
+                <ul id="tree">
+                    @foreach($categorias as $category)
+                        <li>
+                            <input type="checkbox" id="categoriaid[]" name="categoriaid[]" value="{{ $category->id }}">
+                            {{ $category->descricao }}
+                            @if(count($category->childs))
+                                @include('admin.sistemas.treeviewitem',['childs' => $category->childs])
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 

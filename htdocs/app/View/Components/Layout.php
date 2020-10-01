@@ -15,9 +15,11 @@ class Layout extends Component
     public $columnList;
     public $recordsetList;
     public $recordsetItem;
+    public $tableNomeIdList;
 
     public function __construct(string $routeName, string $titulo, string $search, string $mode, array $caminhos,
-                                array $columnList, Collection $recordsetList, string $recordsetItem)
+                                array $columnList, Collection $recordsetList, string $recordsetItem,
+                                array $tableNomeIdList)
     {
         $this->routeName = $routeName;
         $this->titulo = $titulo;
@@ -27,6 +29,7 @@ class Layout extends Component
         $this->columnList = $columnList;
         $this->recordsetList = $recordsetList;
         $this->recordsetItem = $recordsetItem;
+        $this->tableNomeIdList = $tableNomeIdList;
     }
 
     public function render()

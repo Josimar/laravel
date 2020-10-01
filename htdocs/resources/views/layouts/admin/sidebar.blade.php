@@ -256,7 +256,10 @@
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">
                     <li>
-                        <a href="{{route('categorias.index')}}">Categorias</a>
+                        <a href="{{route('categorias.index')}}">Listagem</a>
+                    </li>
+                    <li>
+                        <a href="{{route('categorias.treeview')}}">Estrutura</a>
                     </li>
                 </ul>
             </li>

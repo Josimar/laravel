@@ -30,6 +30,10 @@ class Categoria extends Model
         return $this->belongsToMany('App\Model\Sistema', 'sistema_categoria', 'categoriaid', 'sistemaid');
     }
 
+    public function usuarios(){
+        return $this->belongsToMany('App\User','usuario_categoria', 'categoriaid', 'usuarioid');
+    }
+
     public function imoveis(){
         return $this->belongsToMany('App\Model\Imovel', 'categoria_imovel', 'categoriaid', 'imovelid');
     }

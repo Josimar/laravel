@@ -3,10 +3,10 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\Contracts\ListaInterface;
 
 class ListaController
@@ -23,17 +23,17 @@ class ListaController
     public function index(Request $request){
         // return response()->json(['message'=>__METHOD__]);
 
+        // usuário logado
+        $usuario = auth()->user();
+
         /* ToDo: Permissão
         if (Gate::denies($routeName.'-index')){
             abort(403, 'Não Autorizado');
         }
         */
 
-        // usuário logado
-        $usuario = auth()->user();
-
         // pego a lista atual
-        $lista = $usuario->listas();
+        $listas = $usuario->listas;
 
         $titulo = trans('controle.list');
         $colunas = $this->colunas;
@@ -44,10 +44,10 @@ class ListaController
         ];
 
         $search = "";
-        $listas = $this->model->all();
         $lista = '';
+        $tableNomeIdList = [];
 
-        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista'));
+        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
     }
 
     public function create()
@@ -72,16 +72,19 @@ class ListaController
         $search = "";
         $listas = new Collection;
         $lista = '';
+        $tableNomeIdList = [];
 
-        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista'));
+        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
     }
 
     public function store(Request $request){
         // return response()->json(['message'=>__METHOD__]);
         // dd($request->all());
 
+        $usuario = auth()->user();
+
         /* ToDo: permissão
-        if (Gate::denies('usuario-create')){
+        if (Gate::denies('list-create')){
             abort(403, 'Não Autorizado');
         }
         */
@@ -94,7 +97,11 @@ class ListaController
             'nome' => 'required|string|max:255',
         ])->validate();
 
-        if ($this->model->create($data)){
+        $lista = $this->model->save($data);
+
+        if ($lista != null && $lista != ""){
+            $lista->usuarios()->attach($usuario);
+
             session()->flash('msgMessage', trans('controle.add_success'));
             session()->flash('msgStatus', 'success');
             return redirect(route($routeName.'.create'));
@@ -126,8 +133,9 @@ class ListaController
         $search = "";
         $listas = new Collection;
         $lista = $this->model->find($id);
+        $tableNomeIdList = [];
 
-        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista'));
+        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
     }
 
     public function update(Request $request, $id)
@@ -180,8 +188,9 @@ class ListaController
         $delete = $request->delete ?? '0';
         $listas = new Collection;
         $lista = $this->model->find($id);
+        $tableNomeIdList = [];
 
-        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista'));
+        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
     }
 
     public function destroy($id)

@@ -14,7 +14,9 @@ class SistemaRequest extends FormRequest
     public function rules()
     {
         return [
-            'descricao' => 'required'
+            'descricao' => 'required',
+            'titulo',
+            'slug'
         ];
     }
 }

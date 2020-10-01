@@ -23,8 +23,10 @@ class ListaController extends Controller{
         $this->model->selectFilter($request);
         $lista = $this->model->getResult();
 
-        // return response()->json($lista);
-        return new ListaCollection($lista->paginate(10));
+        $usuario = auth()->user();
+
+        // return response()->json($usuario->listas($request));
+        return new ListaCollection($usuario->listas);
     }
 
     // http://localhost/laravel/api/listas/paginate?page=1
@@ -53,9 +55,14 @@ class ListaController extends Controller{
     // No Header precisa -> Accept => application/json
     public function save(ListaRequest $request){
         $data = $request->all();
+        $usuario = auth()->user();
+        $idUser = $usuario->id;
+        $data['usuarioid'] = $idUser;
 
         try{
-            $lista = $this->model->create($data);
+            $lista = $this->model->save($data);
+
+            $lista->usuarios()->attach($usuario);
 
             return response()->json([
                 'data' => [

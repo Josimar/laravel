@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function(){
 
     Route::resource('produtos', 'ProdutoController');
     Route::get('/produtos/lista/{listaid}', 'ProdutoController@lista')->name('produtos.lista');
+    Route::get('/produtos/lista/{listaid}/create', 'ProdutoController@create')->name('produtos.create.lista');
 
     Route::resource('boloes', 'BolaoController');
 

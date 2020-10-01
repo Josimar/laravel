@@ -24,7 +24,7 @@ class Produto extends Model
     ];
 
     public function getLinksAttribute(){
-        return route('api.produto.show', [$this->id]);
+        return route('api.produtos.show', [$this->id]);
 //        return [
 //            'href' => route('api.imoveis.show', [$this->id]),
 //            'rel' => 'Imóvel'

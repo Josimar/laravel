@@ -45,8 +45,33 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Model\Papel', 'papel_user', 'userid', 'papelid');
     }
 
-    public function listas(){
+    public function lista(){
         return $this->hasMany('App\Model\Lista','usuarioid');
+    }
+
+    public function listas(){
+        // ToDo: Pensar em passar array e montar where
+        /*
+        if ($request->has('conditions')){
+            $conditions = explode(';', $request->get('conditions'));
+
+            $whereStr = "";
+            foreach ($conditions as $condition){
+                $where = explode(':', $condition);
+                $whereStr = $whereStr->where($where[0], $where[1], $where[2]);
+                return $this->belongsToMany('App\Model\Lista','usuario_lista', 'usuarioid', 'listaid')->where($where[0], $where[1], $where[2]);
+            }
+        }
+        */
+        return $this->belongsToMany('App\Model\Lista','usuario_lista', 'usuarioid', 'listaid');
+    }
+
+    public function categorias(){
+        return $this->belongsToMany('App\Model\Categoria','usuario_categoria', 'usuarioid', 'categoriaid');
+    }
+
+    public function categoriasNivel1(){
+        return $this->belongsToMany('App\Model\Categoria','usuario_categoria', 'usuarioid', 'categoriaid')->where('categorias.categoriaid', '=', '0');
     }
 
     public function imoveis(){

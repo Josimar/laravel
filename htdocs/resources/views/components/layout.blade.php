@@ -15,7 +15,16 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <div class="col-sm-4">
-                            <a href="{{route($routeName.'.create')}}" class="btn btn-success mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add {{$titulo}}</a>
+                            @if (empty($tableNomeIdList))
+                                <a href="{{route($routeName.'.create')}}" class="btn btn-success mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add {{$titulo}}</a>
+                            @else
+                                @php
+                                $key = array_search('lista', array_column($tableNomeIdList, 'tabela'));
+                                @endphp
+                                @if ($key)
+                                    <a href="{{route($routeName.'.create'.'.'.$tableNomeIdList[$key]['tabela'], $tableNomeIdList[$key]['id'])}}" class="btn btn-success mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Add {{$titulo}}</a>
+                                @endif
+                            @endif
                         </div>
                         <div class="col-sm-8">
                             <div class="text-sm-right">

@@ -43,6 +43,10 @@ abstract class AbstractRepository{
         }
     }
 
+    public function selectConditionVariable(string $field, string $sign, string $value){
+       $this->model = $this->model->where($field, $sign, $value);
+    }
+
     public function getResult(){
         return $this->model;
     }
@@ -60,6 +64,11 @@ abstract class AbstractRepository{
     public function findField(string $field, string $sign, string $value, $column = 'id', string $order = 'ASC')
     {
         return $this->model->where($field, $sign, $value)->orderBy($column, $order)->get();
+    }
+
+    public function findFieldModel(string $field, string $sign, string $value, $column = 'id', string $order = 'ASC')
+    {
+        return $this->model->where($field, $sign, $value)->orderBy($column, $order);
     }
 
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator

@@ -13,7 +13,7 @@ class Sistema extends Model
     const UPDATED_AT = 'updatedAt';
     const DELETED_AT = 'deletedAt';
 
-    protected $fillable = ['titulo', 'descricao'];
+    protected $fillable = ['titulo', 'descricao', 'slug'];
 
     public function users(){
         return $this->belongsToMany('App\User', 'userid', 'id');

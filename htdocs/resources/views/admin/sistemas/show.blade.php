@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$registros" :recordsetItem="$registro">
+    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$registros" :recordsetItem="$registro" :tableNomeIdList="$tableNomeIdList">
 
         <x-formulario action="{{route($routeName.'.destroy', $registro->id)}}" method="delete">
             <div class="col-md-12">
@@ -27,9 +27,6 @@
             @if ($delete == '1')
                 <button class="btn btn-danger btn-md float-right">@lang('controle.delete')</button>
             @endif
-        </x-formulario>
-        <x-formulario action="{{route($routeName.'.destroy', $registro->id)}}" method="delete">
-            <button class="btn btn-secondary btn-md float-right">@lang('controle.associar_categoria')</button>
         </x-formulario>
     </x-layout>
 @endsection

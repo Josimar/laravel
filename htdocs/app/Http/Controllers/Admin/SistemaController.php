@@ -55,8 +55,9 @@ class SistemaController extends Controller
         }else{
             $registros = $this->model->all();
         }
+        $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList'));
     }
 
     public function permissao($id)
@@ -107,6 +108,11 @@ class SistemaController extends Controller
 
     public function create()
     {
+        // return response()->json(['message'=>__METHOD__]);
+
+        // usuário logado
+        $usuario = auth()->user();
+
         /* ToDo: Permissão
         if (Gate::denies('sistema-create')){
             abort(403, 'Não Autorizado');
@@ -126,8 +132,10 @@ class SistemaController extends Controller
         $search = "";
         $registros = new Collection;
         $registro = '';
+        $categorias = $usuario->categoriasNivel1;
+        $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'categorias'));
     }
 
     public function store(Request $request)
@@ -150,7 +158,15 @@ class SistemaController extends Controller
 
         $data['slug'] = Str::slug($request->titulo);
 
-        if ($this->model->create($data)){
+        $sistema = $this->model->save($data);
+
+        if ($sistema != null && $sistema != ""){
+
+            $categoriaid = $data['categoriaid'];
+            foreach ($categoriaid as $categid){
+                $sistema->categorias()->attach($categid);
+            }
+
             session()->flash('msgMessage', trans('controle.add_success'));
             session()->flash('msgStatus', 'success');
             return redirect(route($routeName.'.create'));
@@ -185,8 +201,9 @@ class SistemaController extends Controller
 
         $registros = new Collection;
         $registro = $this->model->find($id);
+        $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList'));
     }
 
     public function edit($id)
@@ -213,10 +230,10 @@ class SistemaController extends Controller
         $search = "";
         $registros = new Collection;
         $registro = $this->model->find($id);
-
         $categorias = $this->modelCategoria->all('descricao', 'ASC');
+        $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'categorias'));
+        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'categorias'));
     }
 
     public function update(Request $request, $id)

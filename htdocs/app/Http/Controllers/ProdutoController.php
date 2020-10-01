@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Api\ApiMessages;
+use App\Repositories\Contracts\SistemaInterface;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,15 +16,19 @@ use App\Repositories\Contracts\ListaInterface;
 class ProdutoController
 {
     private $rota = 'produtos';
+    private $sistema = 'lista-de-compras';
     private $model;
     private $modelLista;
     private $modelCategoria;
+    private $modelSistema;
     private $colunas;
 
-    public function __construct(ProdutoInterface $model, CategoriaInterface $modelCategoria, ListaInterface $modelLista){
+    public function __construct(ProdutoInterface $model, CategoriaInterface $modelCategoria,
+                                ListaInterface $modelLista, SistemaInterface $modelSistema){
         $this->model = $model;
         $this->modelLista = $modelLista;
         $this->modelCategoria = $modelCategoria;
+        $this->modelSistema = $modelSistema;
 
         $this->colunas = ['id'=>'#',
             'nome'=>trans('controle.name'),
@@ -54,8 +59,12 @@ class ProdutoController
         $search = "";
         $produtos = $this->model->all(); // dd($produtos[2]->categoria->descricao);
         $produto = '';
+        $tableNomeIdList = [
+            ['tabela'=>'lista', 'id'=>0, 'descricao'=>'']
+        ];
+
         return view($routeName.'.index',
-            compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+            compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto', 'tableNomeIdList'));
     }
 
     public function show($id){
@@ -79,8 +88,11 @@ class ProdutoController
         $delete = $request->delete ?? '0';
         $produtos = new Collection;
         $produto = $this->model->find($id);
+        $tableNomeIdList = [
+            ['tabela'=>'lista', 'id'=>0, 'descricao'=>'']
+        ];
 
-        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto', 'tableNomeIdList'));
     }
 
     public function edit($id){
@@ -104,13 +116,25 @@ class ProdutoController
         $search = "";
         $produtos = new Collection;
         $produto = $this->model->find($id);
+        $tableNomeIdList = [
+            ['tabela'=>'lista', 'id'=>0, 'descricao'=>'']
+        ];
 
-        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto', 'tableNomeIdList'));
     }
 
-    public function create()
+    public function create($listaid)
     {
         // return response()->json(['message'=>__METHOD__]);
+
+        // usuário logado
+        $usuario = auth()->user();
+
+        // recupera o id do sistema
+        $this->modelSistema->selectConditionVariable('slug', '=', $this->sistema);
+        $sistema = $this->modelSistema->getResult()->get()[0];
+
+        // $sistema = $this->modelSistema->findFieldModel('slug', '=', $this->sistema);
 
         /* ToDo: Permissão
         if (Gate::denies('usuario-create')){
@@ -130,17 +154,31 @@ class ProdutoController
         $registros = new Collection;
         $registro = '';
 
-        $listas = $this->modelLista->all('nome', 'ASC');
-        $categorias = $this->modelCategoria->all('descricao', 'ASC');
+        $listas = $usuario->listas;
 
+        $categoriasUser = $usuario->categorias;
+        $categoriasSystem = $sistema->categorias;
+
+        $categorias = new Collection;
+        foreach ($categoriasSystem as $categsystem) {
+            $categorias->add($categoriasUser->find($categsystem->id));
+        }
+
+        $tableNomeIdList = [
+            ['tabela'=>'lista', 'id'=>$listaid, 'descricao'=>'']
+        ];
 
         return view($routeName.'.create',
-            compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'listas', 'categorias'));
+            compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'listas', 'categorias'));
     }
 
     public function store(Request $request){
         // return response()->json(['message'=>__METHOD__]);
         // dd($request->all());
+
+        // usuário logado
+        $usuario = auth()->user();
+        // dd($usuario);
 
         /* ToDo: permissão
         if (Gate::denies('usuario-create')){
@@ -149,6 +187,8 @@ class ProdutoController
         */
 
         $data = $request->all();
+
+        $data['usuarioid'] = $usuario->id;
 
         // valor default de quantidade
         if (!isset($data['quantidade']) || $data['quantidade'] == ""){
@@ -223,10 +263,13 @@ class ProdutoController
         ];
 
         $search = "";
-//        $produtos = $this->model->all();
         $produto = '';
+        $tableNomeIdList = [
+            ['tabela'=>'categoria', 'id'=>$lista->id, 'descricao'=>''],
+            ['tabela'=>'lista', 'id'=>$lista->id, 'descricao'=>'']
+        ];
 
         return view($routeName.'.index',
-            compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto'));
+            compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'produtos', 'produto', 'tableNomeIdList'));
     }
 }

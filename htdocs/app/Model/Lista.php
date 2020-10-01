@@ -24,6 +24,10 @@ class Lista extends Model
         return $this->belongsTo('App\User', 'usuarioid');
     }
 
+    public function usuarios(){
+        return $this->belongsToMany('App\User', 'usuario_lista', 'listaid', 'usuarioid');
+    }
+
     public function produtos(){
         // return $this->belongsTo('App\Model\Produto','nadaaverid');
         return $this->hasMany('App\Model\Produto','nadaaverid');

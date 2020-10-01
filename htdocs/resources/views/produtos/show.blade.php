@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$produtos" :recordsetItem="$produto">
+    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$produtos" :recordsetItem="$produto" :tableNomeIdList="$tableNomeIdList">
 
         <x-formulario action="{{route('produtos.destroy', $produto->id)}}" method="delete">
             <div class="col-md-12">

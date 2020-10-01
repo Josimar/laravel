@@ -51,11 +51,13 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
 
     // Rotas de listas
     Route::prefix('listas')->group(function(){
-        Route::get('/', 'ListaController@index')->name('api.listas.index');
-        Route::get('/{id}','ListaController@show')->name('api.listas.show');
-        Route::post('/', 'ListaController@save')->name('api.listas.create');
-        Route::post('/update/{id}', 'ListaController@update')->name('api.listas.update');
-        Route::post('/delete/{id}', 'ListaController@delete')->name('api.listas.delete');
+        Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
+            Route::get('/', 'ListaController@index')->name('api.listas.index');
+            Route::get('/{id}','ListaController@show')->name('api.listas.show');
+            Route::post('/', 'ListaController@save')->name('api.listas.create');
+            Route::post('/update/{id}', 'ListaController@update')->name('api.listas.update');
+            Route::post('/delete/{id}', 'ListaController@delete')->name('api.listas.delete');
+        });
     });
 
     // Rotas de imoveis
@@ -77,17 +79,14 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
 
     // Rotas de produtos
     Route::prefix('produtos')->group(function(){
-        Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
-            Route::get('/', 'ProdutoController@index');
-            Route::get('/paginate', 'ProdutoController@paginate');
-            Route::get('/{id}','ProdutoController@show');
-            Route::post('/', 'ProdutoController@save');
-            Route::put('/', 'ProdutoController@update');
-            Route::patch('/', 'ProdutoController@update');
-            Route::delete('/{id}', 'ProdutoController@delete');
-            Route::post('/update', 'ProdutoController@update');
-            Route::post('/delete/{id}', 'ProdutoController@delete');
-        });
+        // Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
+            Route::get('/', 'ProdutoController@index')->name('api.produtos.index');
+            Route::get('/paginate', 'ProdutoController@paginate')->name('api.produtos.paginate');
+            Route::get('/{id}','ProdutoController@show')->name('api.produtos.show');
+            Route::post('/', 'ProdutoController@save')->name('api.produtos.save');
+            Route::post('/update', 'ProdutoController@update')->name('api.produtos.update');
+            Route::post('/delete/{id}', 'ProdutoController@delete')->name('api.produtos.delete');
+//        });
     });
 
     // Rotas de transportes
