@@ -70,6 +70,13 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
             Route::post('/delete/{id}', 'ListaCompraController@delete')->name('api.listacompra.delete');
         });
     });
+    Route::prefix('produtocompra')->group(function(){
+        Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
+            Route::get('/', 'ProdutoCompraController@index')->name('api.produtocompra.index');
+            Route::get('/lista/{listaid}', 'ProdutoCompraController@lista')->name('api.produtocompra.lista');
+        });
+    });
+
 
     // Rotas de imoveis
     Route::prefix('imoveis')->group(function(){

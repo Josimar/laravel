@@ -29,7 +29,7 @@
                                     }
                                 }
                             @endphp
-                            <option {{$selected}} value="{{$value->id}}">{{$value->nome}}</option>
+                            <option {{$selected}} value="{{$value->id}}">{{$value->titulo}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -64,7 +64,7 @@
                 <div class="col-sm-12">
                 <div class="form-group">
                     <label for="nome">{{__('controle.name')}}</label>
-                    <input type="text" required name="nome" id="nome" class="form-control @error('nome') is-invalid @enderror" value="{{ old('nome') ?? ($registro->nome ?? '') }}" placeholder="{{__('controle.enter_value')}}">
+                    <input type="text" required name="nome" id="nome" class="form-control @error('nome') is-invalid @enderror" value="{{ old('nome') ?? ($registro->nome ?? '') }}" placeholder="{{__('controle.enter_nome')}}">
                     @error('nome')
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror

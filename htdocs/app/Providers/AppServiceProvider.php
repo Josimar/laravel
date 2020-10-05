@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind('App\Repositories\Contracts\ImovelFotoInterface', 'App\Repositories\Eloquent\ImovelFotoRepository');
         $this->app->bind('App\Repositories\Contracts\CategoriaInterface', 'App\Repositories\Eloquent\CategoriaRepository');
         $this->app->bind('App\Repositories\Contracts\ProdutoInterface', 'App\Repositories\Eloquent\ProdutoRepository');
+        $this->app->bind('App\Repositories\Contracts\ProdutoCompraInterface', 'App\Repositories\Eloquent\ProdutoCompraRepository');
         $this->app->bind('App\Repositories\Contracts\BolaoInterface', 'App\Repositories\Eloquent\BolaoRepository');
         $this->app->bind('App\Repositories\Contracts\RodadaInterface', 'App\Repositories\Eloquent\RodadaRepository');
         $this->app->bind('App\Repositories\Contracts\PartidaInterface', 'App\Repositories\Eloquent\PartidaRepository');

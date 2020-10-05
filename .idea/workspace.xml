@@ -20,39 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d16656c6-22ad-4d65-a11f-9f1a73dec9c7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/ListaCompraController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ListaCompraController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Requests/ListaCompraRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Resources/ListaCompraCollection.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/ListaCompra.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/ListaCompraInterface.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ListaCompraRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listacompra/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listacompra/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listacompra/formulario.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listacompra/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/htdocs/resources/views/listacompra/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/ProdutoCompraController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/CategoriaCompra.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Model/ProdutoCompra.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Contracts/ProdutoCompraInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent/ProdutoCompraRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Admin/UsuarioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/ListaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/ListaController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/LoginJwtController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/Api/LoginJwtController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Middleware/Authenticate.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Middleware/apiProtectedRoute.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Middleware/apiProtectedRoute.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ProdutoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Http/Controllers/ProdutoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/Providers/AppServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/en/controle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/es/controle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/lang/pt_br/controle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/sistemas/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/admin/usuarios/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/layouts/admin/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htdocs/resources/views/produtos/formulario.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/resources/views/produtos/formulario.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/htdocs/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/htdocs/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/htdocs/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +170,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/app/Http/Resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/htdocs/app/Repositories/Eloquent" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -211,11 +189,11 @@
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\admin\sistemas" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Resources" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Requests" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\resources\views\listacompra" />
-      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Eloquent" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Repositories\Contracts" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Controllers\Api" />
       <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Model" />
+      <recent name="C:\Josimar\Free\JosimarAWS\bitnami\apps\laravel\htdocs\app\Http\Resources" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -247,7 +225,7 @@
       <workItem from="1601558550687" duration="22541000" />
       <workItem from="1601650786486" duration="8419000" />
       <workItem from="1601853748986" duration="290000" />
-      <workItem from="1601905455726" duration="3821000" />
+      <workItem from="1601905455726" duration="12686000" />
     </task>
     <servers />
   </component>

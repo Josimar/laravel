@@ -154,8 +154,9 @@ class ProdutoController
         $registros = new Collection;
         $registro = '';
 
-        $listas = $usuario->listas;
+        $listas = $usuario->listascompra;
 
+        /* Pego a categoria do usuário e a do sistema e exibo as com permissão
         $categoriasUser = $usuario->categorias;
         $categoriasSystem = $sistema->categorias;
 
@@ -163,6 +164,8 @@ class ProdutoController
         foreach ($categoriasSystem as $categsystem) {
             $categorias->add($categoriasUser->find($categsystem->id));
         }
+        */
+        $categorias = $usuario->categoriacompra;
 
         $tableNomeIdList = [
             ['tabela'=>'lista', 'id'=>$listaid, 'descricao'=>'']
@@ -211,10 +214,12 @@ class ProdutoController
             $request->merge($data);
         }
 
+        $listaid = $data['listaid'];
+
         Validator::make($data, [
-            'usuarioid' => 'required|string',
-            'listaid' => 'required|string',
-            'categoriaid' => 'required|string',
+            'usuarioid' => 'required',
+            'listaid' => 'required',
+            'categoriaid' => 'required',
             'nome' => 'required|string|max:255',
         ])->validate();
 
@@ -224,11 +229,11 @@ class ProdutoController
         if ($this->model->create($data)){
             session()->flash('msgMessage', trans('controle.add_success'));
             session()->flash('msgStatus', 'success');
-            return redirect(route($routeName.'.create'));
+            return redirect(route('produtos.lista', $listaid));
         }else{
             session()->flash('msgMessage', trans('controle.add_error'));
             session()->flash('msgStatus', 'error');
-            return redirect(route($routeName.'.create'));
+            return redirect(route('produtos.create.lista', $listaid));
         }
     }
 
@@ -248,7 +253,7 @@ class ProdutoController
         // dd($usuario);
 
         // pego a lista atual
-        $lista = $usuario->listas()->find($id);
+        $lista = $usuario->listascompra()->find($id);
         // dd($lista);
 
         // produtos da lista
