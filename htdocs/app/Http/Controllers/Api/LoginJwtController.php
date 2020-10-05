@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Api\ApiMessages;
-use App\Http\Controllers\Controller;
 use App\User;
+use App\Api\ApiMessages;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 
 class LoginJwtController extends Controller{
 
     public function login(Request $request){
+
+        Log::debug('Api - LoginJwtController - login: '. implode( ',', $request->all()));
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -114,20 +118,22 @@ class LoginJwtController extends Controller{
         // JSON
         $payload = json_encode($payload);
 
-        // Base 64
-        $payload = base64_encode($payload);
+        $encryption = Hash::make($payload);
 
-        // Store the cipher method
-        $ciphering = "AES-128-CTR";
-        // Use OpenSSl Encryption method
-        $iv_length = openssl_cipher_iv_length($ciphering);
-        $options = 0;
-        // Non-NULL Initialization Vector for encryption
-        $encryption_iv = '1234567891011121';
-        // Store the encryption key
-        $encryption_key = "JosimarSilva";
-        // Use openssl_encrypt() function to encrypt the data
-        $encryption = openssl_encrypt($payload, $ciphering, $encryption_key, $options, $encryption_iv);
+//        // Base 64
+//        $payload = base64_encode($payload);
+
+//        // Store the cipher method
+//        $ciphering = "AES-128-CTR";
+//        // Use OpenSSl Encryption method
+//        $iv_length = openssl_cipher_iv_length($ciphering);
+//        $options = 0;
+//        // Non-NULL Initialization Vector for encryption
+//        $encryption_iv = '1234567891011121';
+//        // Store the encryption key
+//        $encryption_key = "JosimarSilva";
+//        // Use openssl_encrypt() function to encrypt the data
+//        $encryption = openssl_encrypt($payload, $ciphering, $encryption_key, $options, $encryption_iv);
 
         return $encryption;
     }

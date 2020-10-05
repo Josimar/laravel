@@ -1,23 +1,20 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Api\ApiMessages;
-use App\Http\Requests\ListaRequest;
-use App\Http\Resources\ListaCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\Contracts\ListaInterface;
+use App\Http\Requests\ListaCompraRequest;
+use App\Http\Resources\ListaCompraCollection;
+use App\Repositories\Contracts\ListaCompraInterface;
 
-class ListaController extends Controller{
-
+class ListaCompraController extends Controller{
     private $model;
 
-    public function __construct(ListaInterface $model){
+    public function __construct(ListaCompraInterface $model){
         $this->model = $model;
     }
 
-    // http://localhost/laravel/api/listas?fields=nome,quantidade&conditions=nome:LIKE:%a%
     public function index(Request $request){
         $this->model->selectCondition($request);
         $this->model->selectFilter($request);
@@ -26,15 +23,7 @@ class ListaController extends Controller{
         $usuario = auth()->user();
 
         // return response()->json($usuario->listas($request));
-        return new ListaCollection($usuario->listas()->paginate(100));
-    }
-
-    // http://localhost/laravel/api/listas/paginate?page=1
-    public function paginate(){
-        $lista = $this->model->paginate(10);
-
-        // return response()->json($lista);
-        return new ListaCollection($lista);
+        return new ListaCompraCollection($usuario->listacompra()->paginate(100));
     }
 
     public function show($id){
@@ -53,7 +42,7 @@ class ListaController extends Controller{
     }
 
     // No Header precisa -> Accept => application/json
-    public function save(ListaRequest $request){
+    public function save(ListaCompraRequest $request){
         $data = $request->all();
         $usuario = auth()->user();
         $idUser = $usuario->id;
@@ -76,7 +65,7 @@ class ListaController extends Controller{
         }
     }
 
-    public function update($id, ListaRequest $request){
+    public function update($id, ListaCompraRequest $request){
         $data = $request->all();
 
         try{
@@ -113,3 +102,4 @@ class ListaController extends Controller{
     }
 
 }
+

@@ -21,6 +21,10 @@
                             <dt>{{__('controle.description')}}</dt>
                             <dd>{{$registro->descricao}}</dd>
                         </dl>
+                        <dl>
+                            <dt>{{__('controle.slug')}}</dt>
+                            <dd>{{$registro->slug}}</dd>
+                        </dl>
                     </div>
                 </div>
             </div>

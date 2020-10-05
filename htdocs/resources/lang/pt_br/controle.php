@@ -73,6 +73,8 @@ return [
     'mover' => 'Mover',
     'apagar' => 'Apagar',
 
+    'slug' => 'Tag',
+
     'show_crud' => 'Detalhe :page',
     'create_crud' => 'Adicionar :page',
     'edit_crud' => 'Editar :page',

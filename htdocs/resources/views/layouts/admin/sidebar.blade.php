@@ -205,7 +205,7 @@
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">
                     <li>
-                        <a href="{{route('listas.index')}}">Lista</a>
+                        <a href="{{route('listacompra.index')}}">Lista</a>
                     </li>
                     <li>
                         <a href="{{route('produtos.index')}}">Produtos</a>
@@ -263,7 +263,18 @@
                     </li>
                 </ul>
             </li>
-
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
+                    <i class="uil-building"></i>
+                    <span> Listas</span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="{{route('listas.index')}}">Lista</a>
+                    </li>
+                </ul>
+            </li>
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="uil-copy-alt"></i>

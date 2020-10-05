@@ -18,6 +18,7 @@ return [
     'corSite' => 'blue',
     'descricaoSite' => 'Controle de utilitários',
     'autorSite' => 'Josimar Silva',
+    'local' => true,
 
     /*
     |--------------------------------------------------------------------------

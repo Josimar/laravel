@@ -51,6 +51,8 @@ return [
     'mover' => 'Move',
     'apagar' => 'Delete',
 
+    'slug' => 'Tag',
+
 	'jackpot' => 'Jackpot',
 	'welcome_site' => 'Welcome To Our Site!',
 	'prazer_site' => 'It\'s Nice To Meet You',

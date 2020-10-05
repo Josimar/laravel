@@ -60,6 +60,17 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
         });
     });
 
+    // Rotas de lista de compras
+    Route::prefix('listacompra')->group(function(){
+        Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
+            Route::get('/', 'ListaCompraController@index')->name('api.listacompra.index');
+            Route::get('/{id}','ListaCompraController@show')->name('api.listacompra.show');
+            Route::post('/', 'ListaCompraController@save')->name('api.listacompra.create');
+            Route::post('/update/{id}', 'ListaCompraController@update')->name('api.listacompra.update');
+            Route::post('/delete/{id}', 'ListaCompraController@delete')->name('api.listacompra.delete');
+        });
+    });
+
     // Rotas de imoveis
     Route::prefix('imoveis')->group(function(){
         Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){

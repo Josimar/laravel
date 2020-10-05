@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$usuarios" :recordsetItem="$usuario">
+    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$usuarios" :recordsetItem="$usuario" :tableNomeIdList="$tableNomeIdList">
         <x-formulario action="{{route('usuarios.store')}}" method="post">
             @include('admin.usuarios.formulario')
         </x-formulario>

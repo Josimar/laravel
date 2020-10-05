@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('tarefas', 'TarefaController');
 
     Route::resource('listas', 'ListaController');
+    Route::resource('listacompra', 'ListaCompraController');
 
     Route::resource('categorias', 'CategoriaController');
     Route::get('/categorias/treeview',['as'=>'categorias.treeview', 'uses'=>'CategoriaController@treeview']);

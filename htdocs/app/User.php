@@ -49,21 +49,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Model\Lista','usuarioid');
     }
 
-    public function listas(){
-        // ToDo: Pensar em passar array e montar where
-        /*
-        if ($request->has('conditions')){
-            $conditions = explode(';', $request->get('conditions'));
+    public function listacompra(){
+        return $this->hasMany('App\Model\ListaCompra','usuarioid');
+    }
 
-            $whereStr = "";
-            foreach ($conditions as $condition){
-                $where = explode(':', $condition);
-                $whereStr = $whereStr->where($where[0], $where[1], $where[2]);
-                return $this->belongsToMany('App\Model\Lista','usuario_lista', 'usuarioid', 'listaid')->where($where[0], $where[1], $where[2]);
-            }
-        }
-        */
-        return $this->belongsToMany('App\Model\Lista','usuario_lista', 'usuarioid', 'listaid');
+    public function listascompra(){
+        return $this->belongsToMany('App\Model\ListaCompra','usuario_compraslistas', 'usuarioid', 'listaid');
     }
 
     public function categorias(){
