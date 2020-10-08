@@ -67,6 +67,7 @@ return [
 	'match' => 'Partida',
 	'resultado' => 'Resultado',
 	'data' => 'Data',
+    'ordem' => 'Order',
 
     'associar_categoria' => 'Associar Categoria',
 
@@ -85,5 +86,6 @@ return [
     'edit_error' => 'Erro na edição do registro',
     'delete_success' => 'Registro removido com sucesso',
     'delete_error' => 'Erro na exclusão do registro',
-	'enter_value' => 'Entre com um valor'
+	'enter_value' => 'Entre com um valor',
+	'enter_nome' => 'Entre com o nome'
 ];

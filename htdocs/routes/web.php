@@ -51,10 +51,17 @@ Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function()
 });
 
 Route::middleware('auth')->group(function(){
+    /* Lista de compras */
+    Route::resource('listacompra', 'ListaCompraController');
+    Route::resource('produtocompra', 'ProdutoCompraController');
+    Route::resource('categoriacompra', 'CategoriaCompraController');
+    Route::get('/produtocompra/lista/{listaid}', 'ProdutoCompraController@lista')->name('produtocompra.lista');
+    Route::get('/produtocompra/lista/{listaid}/create', 'ProdutoCompraController@create')->name('produtocompra.create.lista');
+    Route::get('/produtocompra/lista/{listaid}/order/{id}/{direction}', 'ProdutoCompraController@order')->name('produtocompra.order');
+
     Route::resource('tarefas', 'TarefaController');
 
     Route::resource('listas', 'ListaController');
-    Route::resource('listacompra', 'ListaCompraController');
 
     Route::resource('categorias', 'CategoriaController');
     Route::get('/categorias/treeview',['as'=>'categorias.treeview', 'uses'=>'CategoriaController@treeview']);

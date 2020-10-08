@@ -54,7 +54,7 @@ class User extends Authenticatable
     }
 
     public function listas(){
-        return $this->belongsToMany('App\Model\ListaCompra','usuario_compraslistas', 'usuarioid', 'listaid');
+        return $this->belongsToMany('App\Model\Lista','usuario_lista', 'usuarioid', 'listaid');
     }
 
     public function listascompra(){

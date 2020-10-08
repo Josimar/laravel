@@ -73,7 +73,18 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
     Route::prefix('produtocompra')->group(function(){
         Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
             Route::get('/', 'ProdutoCompraController@index')->name('api.produtocompra.index');
+            Route::post('/', 'ProdutoCompraController@save')->name('api.produtocompra.create');
+            Route::post('/update/{id}', 'ProdutoCompraController@update')->name('api.produtocompra.update');
             Route::get('/lista/{listaid}', 'ProdutoCompraController@lista')->name('api.produtocompra.lista');
+            Route::post('/order/{id}', 'ProdutoCompraController@order')->name('api.produtocompra.order');
+        });
+    });
+    Route::prefix('categoriacompra')->group(function(){
+        Route::group(['middleware' => ['auth:api', 'jbs.api']], function(){
+            Route::get('/', 'CategoriaCompraController@index')->name('api.categoriacompra.index');
+            Route::post('/', 'CategoriaCompraController@save')->name('api.categoriacompra.create');
+            Route::post('/update/{id}', 'CategoriaCompraController@update')->name('api.categoriacompra.update');
+            Route::get('/lista/{listaid}', 'CategoriaCompraController@lista')->name('api.categoriacompra.lista');
         });
     });
 

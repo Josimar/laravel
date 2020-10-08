@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                             @foreach($recordsetList as $key => $dado)
-                                <tr>
+                                <tr class="ui-state-default">
                                     <td>
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" id="customCheck2">
@@ -99,6 +99,10 @@
                                         <a href="{{route(($routeName ?? 'tarefas').'.show', $dado->id)}}"><i class="mdi mdi-feature-search-outline"></i></a>
                                         <a href="{{route(($routeName ?? 'tarefas').'.edit', $dado->id)}}"><i class="mdi mdi-square-edit-outline"></i></a>
                                         <a href="{{route(($routeName ?? 'tarefas').'.show', [$dado->id, 'delete=1'])}}"><i class="mdi mdi-delete"></i></a>
+                                        @if (! empty($orderlist))
+                                        <a href="{{route(($routeName ?? 'tarefas').'.order', [$dado->listaid, $dado->id, 'up'])}}"><i class="mdi mdi-sort-alphabetical-descending"></i></a>
+                                        <a href="{{route(($routeName ?? 'tarefas').'.order', [$dado->listaid, $dado->id, 'down'])}}"><i class="mdi mdi-sort-alphabetical-ascending"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

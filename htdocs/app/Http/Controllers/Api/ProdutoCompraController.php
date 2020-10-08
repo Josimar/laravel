@@ -7,6 +7,7 @@ use App\Http\Resources\ProdutoCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\ProdutoCompraInterface;
+use Illuminate\Support\Facades\DB;
 
 
 class ProdutoCompraController extends Controller{
@@ -46,13 +47,84 @@ class ProdutoCompraController extends Controller{
     public function save(ProdutoRequest $request){
         $data = $request->all();
 
+        // valor default de valor
+        if (!isset($data['valor']) || $data['valor'] == ""){
+            $data['valor'] = '0';
+            $request->merge($data);
+        }else{
+            $valor = $data['valor'];
+            $valor = str_replace('R', "", $valor);
+            $valor = str_replace('$', "", $valor);
+            $valor = str_replace('.', "", $valor);
+            $valor = str_replace(',', ".", $valor);
+            $data['valor'] = $valor;
+        }
+        // valor default de quantidade
+        if (!isset($data['quantidade']) || $data['quantidade'] == ""){
+            $data['quantidade'] = '0';
+            $request->merge($data);
+        }
+        // valor default de unidade
+        if (!isset($data['unidade']) || $data['unidade'] == ""){
+            $data['unidade'] = 'un';
+            $request->merge($data);
+        }
+        // valor default de precisao
+        if (!isset($data['precisao']) || $data['precisao'] == ""){
+            $data['precisao'] = '0';
+            $request->merge($data);
+        }
+        // ordem default de precisao
+        if (!isset($data['ordem']) || $data['ordem'] == ""){
+            $data['ordem'] = '0';
+            $request->merge($data);
+        }
+        // valor default de categoriaid
+        if (!isset($data['categoriaid']) || $data['categoriaid'] == ""){
+            $data['categoriaid'] = '0';
+            $request->merge($data);
+        }else{
+            $categoriaid = $data['categoriaid'];
+            if ($categoriaid == null || $categoriaid == 'null'){
+                $data['categoriaid'] = '0';
+            }
+        }
+        // valor default de listaid
+        $listaid = 0;
+        if (!isset($data['listaid']) || $data['listaid'] == ""){
+            $data['listaid'] = '0';
+            $request->merge($data);
+        }else{
+            $listaid = $data['listaid'];
+            if ($listaid == null || $listaid == 'null'){
+                $data['listaid'] = '0';
+            }
+        }
+
+        $produtos = $this->model->findField('listaid', '=', $listaid, 'ordem', 'DESC');
+        if (is_null($produtos)){
+            $data['ordem'] = '0';
+        }else{
+            $data['ordem'] = $produtos[0]->ordem + 1;
+        }
+
+        // usuário logado
+        $usuario = auth()->user();
+        // dd($usuario);
+
+        $data['usuarioid'] = $usuario->id;
+
         $produto = $this->model->create($data);
 
         return response()->json($produto);
     }
 
     public function update(ProdutoRequest $request){
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request);
+
         $data = $request->all();
+
         $produto = $this->model->find($data['id']);
         $produto->update($data);
 
@@ -86,10 +158,41 @@ class ProdutoCompraController extends Controller{
         // dd($lista);
 
         // produtos da lista
-        $produtos = $this->model->findFieldModel('listaid', '=', $lista->id);
+        $produtos = $this->model->findFieldModel('listaid', '=', $lista->id, 'ordem', 'ASC');
         // dd($produtos);
 
         return new ProdutoCollection($produtos->paginate(10));
+    }
+
+    public function order(Request $request, $id){
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request->all());
+        // dd($id);
+
+        /* ToDo: permissão
+        if (Gate::denies('usuario-create')){
+            abort(403, 'Não Autorizado');
+        }
+        */
+
+        // usuário logado
+        $usuario = auth()->user();
+        // dd($usuario);
+
+        $produto = $this->model->find($id);
+        // dd($produto);
+
+        $ordem = $produto->ordem;
+        // dd($ordem);
+
+        $produtos = $this->model->findField('ordem', '>=', $ordem);
+        // dd($produtos);
+
+        foreach ($produtos as $p) {
+            $p->increment('ordem', 1);
+        }
+
+        return new ProdutoCollection($produto);
     }
 
 }

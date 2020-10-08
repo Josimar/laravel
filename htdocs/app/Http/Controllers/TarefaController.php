@@ -47,6 +47,10 @@ class TarefaController extends Controller
 
         $search = "";
         $tarefa = '';
+        $orderlist = "";
+        $tableNomeIdList = [
+            ['tabela'=>'tarefa', 'id'=>0, 'descricao'=>'']
+        ];
 
         if (isset($request->search)){
             $search = $request->search;
@@ -56,7 +60,7 @@ class TarefaController extends Controller
             // $tarefas = $this->model->paginate($this->paginate); // ToDo: pensar em paginar
         }
 
-        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'tarefas', 'tarefa'));
+        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'tarefas', 'tarefa', 'tableNomeIdList', 'orderlist'));
     }
 
     public function create()

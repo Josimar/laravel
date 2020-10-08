@@ -1,9 +1,9 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$listas" :recordsetItem="$lista" :tableNomeIdList="$tableNomeIdList" :orderlist="$orderlist">
+    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$categorias" :recordsetItem="$categoria" :tableNomeIdList="$tableNomeIdList">
 
-        <x-formulario action="{{route('listas.destroy', $lista->id)}}" method="delete">
+        <x-formulario action="{{route('categoriacompra.destroy', $categoria->id)}}" method="delete">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -14,14 +14,14 @@
                     </div>
                     <div class="card-body">
                         <dl>
-                            <dd><a href="{{route('produtos.lista', $lista->id)}}">{{$lista->nome}}</a></dd>
+                            <dd>{{$categoria->descricao}}</dd>
                         </dl>
                     </div>
                 </div>
+                @if ($delete == '1')
+                    <button class="btn btn-danger btn-md float-right">@lang('controle.delete')</button>
+                @endif
             </div>
-            @if ($delete == '1')
-                <button class="btn btn-danger btn-md float-right">@lang('controle.delete')</button>
-            @endif
         </x-formulario>
 
     </x-layout>

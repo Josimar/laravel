@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$listas" :recordsetItem="$lista" :tableNomeIdList="$tableNomeIdList">
+    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$listas" :recordsetItem="$lista" :tableNomeIdList="$tableNomeIdList" :orderlist="$orderlist">
 
         <x-formulario action="{{route('listacompra.destroy', $lista->id)}}" method="delete">
             <div class="col-md-12">
@@ -14,12 +14,12 @@
                     </div>
                     <div class="card-body">
                         <dl>
-                            <dd><a href="{{route('produtos.lista', $lista->id)}}">{{$lista->titulo}}</a></dd>
+                            <dt>{{__('controle.titulo')}}</dt>
+                            <dd><a href="{{route('produtocompra.lista', $lista->id)}}">{{$lista->titulo}}</a></dd>
                         </dl>
-                    </div>
-                    <div class="card-body">
                         <dl>
-                            <dd><a href="{{route('produtos.lista', $lista->id)}}">{{$lista->descricao}}</a></dd>
+                            <dt>{{__('controle.descricao')}}</dt>
+                            <dd><a href="{{route('produtocompra.lista', $lista->id)}}">{{$lista->descricao}}</a></dd>
                         </dl>
                     </div>
                 </div>

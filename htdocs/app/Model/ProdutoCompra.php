@@ -19,7 +19,7 @@ class ProdutoCompra extends Model
 
     protected $fillable = [
         'listaid', 'categoriaid', 'usuarioid',
-        'nome', 'quantidade',
+        'nome', 'quantidade', 'ordem',
         'valor', 'unidade', 'precisao', 'purchased',
     ];
 
@@ -33,5 +33,13 @@ class ProdutoCompra extends Model
 
     public function categoria(){
         return $this->belongsTo('App\Model\CategoriaCompra', 'categoriaid');
+    }
+
+    public function categorias(){
+        return $this->belongsTo('App\Model\CategoriaCompra', 'categoriaid');
+    }
+
+    public function listas(){
+        return $this->belongsTo('App\Model\ListaCompra', 'listaid');
     }
 }

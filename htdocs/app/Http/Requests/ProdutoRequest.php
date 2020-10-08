@@ -16,7 +16,7 @@ class ProdutoRequest extends FormRequest
         return [
             'listaid' => 'required',
             'categoriaid',
-            'usuarioid' => 'required',
+            'usuarioid' ,
             'nome' => 'required',
             'quantidade' => 'required',
             'valor',

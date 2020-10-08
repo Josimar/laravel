@@ -45,9 +45,12 @@ class ListaCompraController
 
         $search = "";
         $lista = '';
+        $mode = 'tabela';
+        $orderlist = "";
         $tableNomeIdList = [];
 
-        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
+        return view($routeName.'.index',
+            compact('routeName', 'titulo', 'search', 'mode', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList', 'orderlist'));
     }
 
     public function create()
@@ -70,11 +73,12 @@ class ListaCompraController
         ];
 
         $search = "";
+        $orderlist = "";
         $listas = new Collection;
         $lista = '';
         $tableNomeIdList = [];
 
-        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
+        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList', 'orderlist'));
     }
 
     public function store(Request $request){
@@ -131,11 +135,12 @@ class ListaCompraController
         ];
 
         $search = "";
+        $orderlist = "";
         $listas = new Collection;
         $lista = $this->model->find($id);
         $tableNomeIdList = [];
 
-        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
+        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList', 'orderlist'));
     }
 
     public function update(Request $request, $id)
@@ -185,12 +190,13 @@ class ListaCompraController
             ['url'=>'', 'titulo'=>trans('controle.detail').' '.$titulo],
         ];
         $search = "";
+        $orderlist = "";
         $delete = $request->delete ?? '0';
         $listas = new Collection;
         $lista = $this->model->find($id);
         $tableNomeIdList = [];
 
-        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList'));
+        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'listas', 'lista', 'tableNomeIdList', 'orderlist'));
     }
 
     public function destroy($id)

@@ -74,6 +74,7 @@ return [
 	'match' => 'Match',
 	'resultado' => 'Result',
 	'data' => 'Date',
+    'ordem' => 'Order',
 
     'show_crud' => 'Show :page',
     'create_crud' => 'Create :page',
@@ -85,5 +86,6 @@ return [
     'edit_error' => 'Error editing Registry',
     'delete_success' => 'Registry removed with success',
     'delete_error' => 'Error removed Registry',
-	'enter_value' => 'Entre com um valor'
+	'enter_value' => 'Entre com um valor',
+    'enter_nome' => 'Entre com o nome'
 ];
