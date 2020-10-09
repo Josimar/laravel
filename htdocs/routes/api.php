@@ -76,7 +76,7 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
             Route::post('/', 'ProdutoCompraController@save')->name('api.produtocompra.create');
             Route::post('/update/{id}', 'ProdutoCompraController@update')->name('api.produtocompra.update');
             Route::get('/lista/{listaid}', 'ProdutoCompraController@lista')->name('api.produtocompra.lista');
-            Route::post('/order/{id}', 'ProdutoCompraController@order')->name('api.produtocompra.order');
+            Route::post('/lista/{listaid}/produto/{produtoid}/order/{id}', 'ProdutoCompraController@order')->name('api.produtocompra.order');
         });
     });
     Route::prefix('categoriacompra')->group(function(){

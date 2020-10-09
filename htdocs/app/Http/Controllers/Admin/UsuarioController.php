@@ -54,9 +54,10 @@ class UsuarioController extends Controller
         }else{
             $usuarios = $this->model->all();
         }
+        $orderlist = "";
         $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'usuarios', 'usuario', 'tableNomeIdList'));
+        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'usuarios', 'usuario', 'tableNomeIdList', 'orderlist'));
     }
 
     public function create()
@@ -83,8 +84,9 @@ class UsuarioController extends Controller
         $registro = '';
         $papeis = $this->modelPapel->all('nome', 'ASC');
         $tableNomeIdList = [];
+        $orderlist = "";
 
-        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'papeis'));
+        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'papeis'));
     }
 
     public function show($id, Request $request)
@@ -111,8 +113,9 @@ class UsuarioController extends Controller
         $registros = new Collection;
         $registro = $this->model->find($id);
         $tableNomeIdList = [];
+        $orderlist = "";
 
-        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList'));
+        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function edit($id)
@@ -139,8 +142,9 @@ class UsuarioController extends Controller
         $registro = $this->model->find($id);
         $papeis = $this->modelPapel->all('nome', 'ASC');
         $tableNomeIdList = [];
+        $orderlist = "";
 
-        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'papeis'));
+        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'papeis'));
     }
 
     public function update(Request $request, $id)

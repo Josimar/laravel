@@ -20,12 +20,20 @@ class ProdutoCompraController extends Controller{
 
     // http://localhost/laravel/api/produtos?fields=nome,quantidade&conditions=nome:LIKE:%a%
     public function index(Request $request){
-        $this->model->selectCondition($request);
+        // usuário logado
+        $usuario = auth()->user();
+
+        $this->model->selectCondition($request, $usuario);
         $this->model->selectFilter($request);
         $produto = $this->model->getResult();
 
-        // return response()->json($produto);
-        return new ProdutoCollection($produto->paginate(10));
+        if (get_class($produto) == "Illuminate\Database\Eloquent\Collection"){
+            return new ProdutoCollection(\App\Helpers\CollectionHelper::paginate($produto->sortBy('descricao'), 10));
+        }else if (get_class($produto) == "App\Model\ProdutoCompra"){
+            return new ProdutoCollection($produto->paginate(10));
+        }
+
+        return response()->json($produto);
     }
 
     // http://localhost/laravel/api/produtos/paginate?page=1
@@ -114,18 +122,18 @@ class ProdutoCompraController extends Controller{
 
         $data['usuarioid'] = $usuario->id;
 
-        $produto = $this->model->create($data);
+        $produto = $this->model->save($data);
 
         return response()->json($produto);
     }
 
-    public function update(ProdutoRequest $request){
+    public function update(ProdutoRequest $request, $id){
         // return response()->json(['message'=>__METHOD__]);
         // dd($request);
 
         $data = $request->all();
 
-        $produto = $this->model->find($data['id']);
+        $produto = $this->model->find($id);
         $produto->update($data);
 
         return response()->json($produto);
@@ -164,10 +172,12 @@ class ProdutoCompraController extends Controller{
         return new ProdutoCollection($produtos->paginate(10));
     }
 
-    public function order(Request $request, $id){
+    public function order(Request $request, $listaid, $produtoid, $order){
         // return response()->json(['message'=>__METHOD__]);
         // dd($request->all());
-        // dd($id);
+        // dd($listaid);
+        // dd($produtoid);
+        // dd($order);
 
         /* ToDo: permissão
         if (Gate::denies('usuario-create')){
@@ -179,20 +189,52 @@ class ProdutoCompraController extends Controller{
         $usuario = auth()->user();
         // dd($usuario);
 
-        $produto = $this->model->find($id);
+        $produto = $this->model->find($produtoid);
         // dd($produto);
-
         $ordem = $produto->ordem;
-        // dd($ordem);
 
-        $produtos = $this->model->findField('ordem', '>=', $ordem);
-        // dd($produtos);
+        $produtos = $this->model->findField('listaid', '=', $listaid, 'ordem', 'ASC');
+        $contador = 0;
 
         foreach ($produtos as $p) {
-            $p->increment('ordem', 1);
+            $contador = $contador + 1;
+
+            if ($order > $ordem){
+               if ($p->id == $produto->id){
+                   $contador = $contador - 1;
+                   $p->ordem = $order;
+                   $p->save();
+               }else if ($contador == $order){
+                   $contador = $contador + 1;
+                   $p->ordem = $contador;
+                   $p->save();
+               }else{
+                   $p->ordem = $contador;
+                   $p->save();
+               }
+            }else if ($order < $ordem){
+                if ($p->id == $produto->id){
+                    $contador = $contador - 1;
+                    $p->ordem = $order;
+                    $p->save();
+                }else if ($contador == $order){
+                    $contador = $contador + 1;
+                    $p->ordem = $contador;
+                    $p->save();
+                }else{
+                    $p->ordem = $contador;
+                    $p->save();
+                }
+            }
         }
 
-        return new ProdutoCollection($produto);
+        if (get_class($produtos) == "Illuminate\Database\Eloquent\Collection"){
+            return new ProdutoCollection(\App\Helpers\CollectionHelper::paginate($produtos->sortBy('descricao'), 10));
+        }else if (get_class($produtos) == "App\Model\ProdutoCompra"){
+            return new ProdutoCollection($produtos->paginate(10));
+        }
+
+        return response()->json($produtos);
     }
 
 }

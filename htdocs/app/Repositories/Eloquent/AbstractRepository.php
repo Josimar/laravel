@@ -33,10 +33,10 @@ abstract class AbstractRepository{
     }
 
     public function selectCondition(Request $request){
-        if ($request->has('conditions')){
+        if ($request->has('conditions')) {
             $conditions = explode(';', $request->get('conditions'));
 
-            foreach ($conditions as $condition){
+            foreach ($conditions as $condition) {
                 $where = explode(':', $condition);
                 $this->model = $this->model->where($where[0], $where[1], $where[2]);
             }

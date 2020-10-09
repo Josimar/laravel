@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$usuarios" :recordsetItem="$usuario">
+    <x-layout :routeName="$routeName" :titulo="$titulo" :search="$search" mode="formulario" :caminhos="$caminhos" :columnList="$colunas" :recordsetList="$usuarios" :recordsetItem="$usuario" :tableNomeIdList="$tableNomeIdList" :orderlist="$orderlist">
         <x-formulario action="{{route('usuarios.update', $usuario->id)}}" method="put">
             @include('admin.usuarios.formulario')
         </x-formulario>

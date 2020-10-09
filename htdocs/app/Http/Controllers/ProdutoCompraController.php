@@ -44,6 +44,9 @@ class ProdutoCompraController
     public function index(Request $request){
         // return response()->json(['message'=>__METHOD__]);
 
+        // usuário logado
+        $usuario = auth()->user();
+
         /* ToDo: Permissão
         if (Gate::denies($routeName.'-index')){
             abort(403, 'Não Autorizado');
@@ -60,7 +63,8 @@ class ProdutoCompraController
 
         $search = "";
         $orderlist = "";
-        $produtos = $this->model->all()->sortBy("ordem"); // dd($produtos[2]->categoria->descricao);
+        $produtos = $usuario->produtocompra;
+        // $produtos = $this->model->all()->sortBy("ordem"); // dd($produtos[2]->categoria->descricao);
         $produto = '';
         $tableNomeIdList = [
             ['tabela'=>'lista', 'id'=>0, 'descricao'=>'']

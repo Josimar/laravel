@@ -27,6 +27,9 @@ class CategoriaCompraController
     public function index(Request $request){
         // return response()->json(['message'=>__METHOD__]);
 
+        // usuário logado
+        $usuario = auth()->user();
+
         /* ToDo: Permissão
         if (Gate::denies($routeName.'-index')){
             abort(403, 'Não Autorizado');
@@ -42,7 +45,7 @@ class CategoriaCompraController
         ];
 
         $search = "";
-        $categorias = $this->model->all();
+        $categorias = $usuario->categoriacompra; // $this->model->all();
         $categoria = '';
         $orderlist = "";
         $tableNomeIdList = [];

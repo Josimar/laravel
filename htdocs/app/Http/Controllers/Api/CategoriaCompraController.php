@@ -20,12 +20,20 @@ class CategoriaCompraController extends Controller{
 
     // http://localhost/laravel/api/categorias?fields=nome,quantidade&conditions=nome:LIKE:%a%
     public function index(Request $request){
-        $this->model->selectCondition($request);
+        // usuário logado
+        $usuario = auth()->user();
+
+        $this->model->selectCondition($request, $usuario);
         $this->model->selectFilter($request);
         $categoria = $this->model->getResult();
 
-        // return response()->json($lista);
-        return new CategoriaCompraCollection($categoria->paginate(10));
+        if (get_class($categoria) == "Illuminate\Database\Eloquent\Collection"){
+            return new CategoriaCompraCollection(\App\Helpers\CollectionHelper::paginate($categoria->sortBy('descricao'), 10));
+        }else if (get_class($categoria) == "App\Model\CategoriaCompra"){
+            return new CategoriaCompraCollection($categoria->paginate(10));
+        }
+
+        return response()->json($categoria);
     }
 
     public function child($nivel, Request $request){

@@ -49,6 +49,7 @@ class SistemaController extends Controller
 
         $search = "";
         $registro = '';
+        $orderlist = "";
         if (isset($request->search)){
             $search = $request->search;
             $registros = $this->model->findWhereLike($this->filtro, $search, 'id', 'DESC');
@@ -57,7 +58,7 @@ class SistemaController extends Controller
         }
         $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList'));
+        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function permissao($id)
@@ -88,7 +89,7 @@ class SistemaController extends Controller
         $papel = Sistema::find($id);
         $dados = $request->all();
         $permissao = Categoria::find($dados['sistema_id']);
-        $papel->adicionaCategoria($categoria);
+        $papel->adicionaCategoria($permissao);
         return redirect()->back();
     }
 
@@ -132,10 +133,11 @@ class SistemaController extends Controller
         $search = "";
         $registros = new Collection;
         $registro = '';
+        $orderlist = "";
         $categorias = $usuario->categoriasNivel1;
         $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'categorias'));
+        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'categorias'));
     }
 
     public function store(Request $request)
@@ -197,13 +199,14 @@ class SistemaController extends Controller
             ['url'=>'', 'titulo'=>trans('controle.detail').' '.$titulo],
         ];
         $search = "";
+        $orderlist = "";
         $delete = $request->delete ?? '0';
 
         $registros = new Collection;
         $registro = $this->model->find($id);
         $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList'));
+        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function edit($id)
@@ -228,12 +231,13 @@ class SistemaController extends Controller
         ];
 
         $search = "";
+        $orderlist = "";
         $registros = new Collection;
         $registro = $this->model->find($id);
         $categorias = $this->modelCategoria->all('descricao', 'ASC');
         $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'categorias'));
+        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'categorias'));
     }
 
     public function update(Request $request, $id)

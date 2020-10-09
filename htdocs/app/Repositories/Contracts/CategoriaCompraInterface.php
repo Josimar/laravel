@@ -8,7 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface CategoriaCompraInterface{
     public function selectFilter(Request $request);
-    public function selectCondition(Request $request);
+    public function selectCondition(Request $request, $usuario = null);
     public function getResult();
     public function all(string $column = 'id', string $order = 'ASC'):Collection;
     public function paginate(int $paginate = 10, string $column = 'id', string $order = 'ASC'):LengthAwarePaginator;

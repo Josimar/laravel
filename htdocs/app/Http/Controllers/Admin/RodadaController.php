@@ -41,10 +41,12 @@ class RodadaController
         ];
 
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $registros = $this->model->all();
         $registro = '';
 
-        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function create()
@@ -69,11 +71,13 @@ class RodadaController
         $search = "";
         $registros = new Collection;
         $registro = '';
+        $orderlist = "";
+        $tableNomeIdList = [];
 
         $user = auth()->user();
         $boloes = $user->boloes;
 
-        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'boloes'));
+        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'boloes'));
     }
 
     public function store(Request $request){
@@ -126,13 +130,15 @@ class RodadaController
         ];
 
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $registros = new Collection;
         $registro = $this->model->find($id);
 
         $user = auth()->user();
         $boloes = $user->boloes;
 
-        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'boloes'));
+        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'boloes'));
     }
 
     public function update(Request $request, $id)
@@ -183,11 +189,13 @@ class RodadaController
             ['url'=>'', 'titulo'=>trans('controle.detail').' '.$titulo],
         ];
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $delete = $request->delete ?? '0';
         $registros = new Collection;
         $registro = $this->model->find($id);
 
-        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function destroy($id)

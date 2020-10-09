@@ -65,6 +65,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Model\CategoriaCompra','usuario_comprascategorias', 'usuarioid', 'categoriaid');
     }
 
+    public function produtocompra(){
+        return $this->hasMany('App\Model\ProdutoCompra','usuarioid');
+    }
+
     public function categorias(){
         return $this->belongsToMany('App\Model\Categoria','usuario_categoria', 'usuarioid', 'categoriaid');
     }

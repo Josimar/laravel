@@ -44,10 +44,12 @@ class BolaoController
         ];
 
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $registros = $this->model->all();
         $registro = '';
 
-        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view($routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function create()
@@ -72,8 +74,10 @@ class BolaoController
         $search = "";
         $registros = new Collection;
         $registro = '';
+        $orderlist = "";
+        $tableNomeIdList = [];
 
-        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view($routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function store(Request $request){
@@ -123,10 +127,12 @@ class BolaoController
         ];
 
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $registros = new Collection;
         $registro = $this->model->find($id);
 
-        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view($routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function update(Request $request, $id)
@@ -175,11 +181,13 @@ class BolaoController
             ['url'=>'', 'titulo'=>trans('controle.detail').' '.$titulo],
         ];
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $delete = $request->delete ?? '0';
         $registros = new Collection;
         $registro = $this->model->find($id);
 
-        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view($routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function destroy($id)

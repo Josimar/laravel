@@ -45,6 +45,8 @@ class PapelController extends Controller
 
         $search = "";
         $registro = '';
+        $orderlist = "";
+        $tableNomeIdList = [];
         if (isset($request->search)){
             $search = $request->search;
             $registros = $this->model->findWhereLike($this->filtro, $search, 'id', 'DESC');
@@ -52,7 +54,7 @@ class PapelController extends Controller
             $registros = $this->model->all();
         }
 
-        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view('admin.'.$routeName.'.index', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function permissao($id)
@@ -119,8 +121,10 @@ class PapelController extends Controller
         $search = "";
         $registros = new Collection;
         $registro = '';
+        $orderlist = "";
+        $tableNomeIdList = [];
 
-        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'permissoes'));
+        return view('admin.'.$routeName.'.create', compact('routeName','titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'permissoes'));
     }
 
     public function store(Request $request)
@@ -175,11 +179,13 @@ class PapelController extends Controller
             ['url'=>'', 'titulo'=>trans('controle.detail').' '.$titulo],
         ];
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $delete = $request->delete ?? '0';
         $registros = new Collection;
         $registro = $this->model->find($id);
 
-        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro'));
+        return view('admin.'.$routeName.'.show', compact('delete', 'routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist'));
     }
 
     public function edit($id)
@@ -201,12 +207,14 @@ class PapelController extends Controller
         ];
 
         $search = "";
+        $orderlist = "";
+        $tableNomeIdList = [];
         $registros = new Collection;
         $registro = $this->model->find($id);
 
         $permissoes = $this->modelPermissao->all('nome', 'ASC');
 
-        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'permissoes'));
+        return view('admin.'.$routeName.'.edit', compact('routeName', 'titulo', 'search', 'caminhos', 'colunas', 'registros', 'registro', 'tableNomeIdList', 'orderlist', 'permissoes'));
     }
 
     public function update(Request $request, $id)
