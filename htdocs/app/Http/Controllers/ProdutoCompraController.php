@@ -240,7 +240,7 @@ class ProdutoCompraController
         ])->validate();
 
         $produtos = $this->model->findField('listaid', '=', $listaid, 'ordem', 'DESC');
-        if (is_null($produtos)){
+        if (is_null($produtos) || $produtos->count() == 0){
             $data['ordem'] = '0';
         }else{
             $data['ordem'] = $produtos[0]->ordem + 1;

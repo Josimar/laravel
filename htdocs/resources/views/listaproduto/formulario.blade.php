@@ -49,7 +49,7 @@
                                     if ($produto ?? false){
                                         if ($produto->categoria ?? false){
                                             foreach ($produto->categorias as $categoria){
-                                                if ($categoria->id == $value->id){
+                                                if ($categoria == $value->id){
                                                     $selected = "selected";
                                                 }
                                             }

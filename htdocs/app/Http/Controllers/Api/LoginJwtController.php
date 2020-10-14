@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Password;
 
 class LoginJwtController extends Controller{
 
     public function login(Request $request){
+        // return response()->json(['message'=>__METHOD__]);
 
         Log::debug('Api - LoginJwtController - login: '. implode( ',', $request->all()));
 
@@ -102,6 +104,70 @@ class LoginJwtController extends Controller{
             'admin' => '1',
             'token' => $token
         ]);
+    }
+
+    public function forgot() {
+        $credentials = request()->validate(['email' => 'required|email']);
+
+        Password::sendResetLink($credentials);
+
+        return response()->json(["msg" => 'Reset password link sent on your email id.']);
+    }
+
+    public function reset() {
+        // return response()->json(['message'=>__METHOD__]);
+
+        $credentials = request()->validate([
+            'email' => 'required|email',
+            'api_token' => 'required|string',
+            'password' => 'required|string|confirmed'
+        ]);
+
+        $reset_password_status = Password::reset($credentials, function ($user, $password) {
+            $user->password = $password;
+            $user->save();
+        });
+
+        if ($reset_password_status == Password::INVALID_TOKEN) {
+            return response()->json(["msg" => "Invalid token provided"], 400);
+        }
+
+        return response()->json(["msg" => "Password has been successfully changed"]);
+    }
+
+    public function resetPassword() {
+        // return response()->json(['message'=>__METHOD__]);
+
+        $data = request()->all();
+        // dd($data);
+
+        // valor default de email
+        if (!isset($data['email']) || $data['email'] == ""){
+            return response()->json(["msg" => "Invalid email"], 400);
+        }else{
+            $email = $data['email'];
+            if ($email == null || $email == ''){
+                return response()->json(["msg" => "Invalid email"], 400);
+            }
+        }
+
+        // valor default de password
+        if (!isset($data['password']) || $data['password'] == ""){
+            return response()->json(["msg" => "Invalid password"], 400);
+        }else{
+            $password = $data['password'];
+            if ($password == null || $password == ''){
+                return response()->json(["msg" => "Invalid password"], 400);
+            }
+        }
+
+        $user = User::where('email', $email)->first();
+        //dd($user);
+
+        $user->password = Hash::make($password);
+        $user->save();
+
+        return response()->json(["msg" => "Password has been successfully changed"]);
     }
 
     private function createToken($user){

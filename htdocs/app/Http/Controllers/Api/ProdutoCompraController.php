@@ -53,6 +53,8 @@ class ProdutoCompraController extends Controller{
 
     // No Header precisa -> Accept => application/json
     public function save(ProdutoRequest $request){
+        // return response()->json(['message'=>__METHOD__]);
+
         $data = $request->all();
 
         // valor default de valor
@@ -97,6 +99,94 @@ class ProdutoCompraController extends Controller{
                 $data['categoriaid'] = '0';
             }
         }
+        // valor default de purchased
+        if (!isset($data['purchased']) || $data['purchased'] == ""){
+            $data['purchased'] = '0';
+            $request->merge($data);
+        }else{
+            $purchased = $data['purchased'];
+            if ($purchased == null || $purchased == 'null'){
+                $data['purchased'] = '0';
+            }
+        }
+        // valor default de listaid
+        $listaid = 0;
+        if (!isset($data['listaid']) || $data['listaid'] == ""){
+            $data['listaid'] = '0';
+            $request->merge($data);
+        }else{
+            $listaid = $data['listaid'];
+            if ($listaid == null || $listaid == 'null'){
+                $data['listaid'] = '0';
+            }
+        }
+
+        $produtos = $this->model->findField('listaid', '=', $listaid, 'ordem', 'DESC');
+        if (is_null($produtos) || $produtos->count() == 0){
+            $data['ordem'] = '0';
+        }else{
+            $data['ordem'] = $produtos[0]->ordem + 1;
+        }
+
+        // usuário logado
+        $usuario = auth()->user();
+        // dd($usuario);
+
+        $data['usuarioid'] = $usuario->id;
+
+        $produto = $this->model->save($data);
+
+        return response()->json($produto);
+    }
+
+    public function update(ProdutoRequest $request, $id){
+        // return response()->json(['message'=>__METHOD__]);
+        // dd($request);
+
+        $data = $request->all();
+
+        // valor default de valor
+        if (!isset($data['valor']) || $data['valor'] == ""){
+            $data['valor'] = '0';
+            $request->merge($data);
+        }else{
+            $valor = $data['valor'];
+            $valor = str_replace('R', "", $valor);
+            $valor = str_replace('$', "", $valor);
+            $valor = str_replace('.', "", $valor);
+            $valor = str_replace(',', ".", $valor);
+            $data['valor'] = $valor;
+        }
+        // valor default de quantidade
+        if (!isset($data['quantidade']) || $data['quantidade'] == ""){
+            $data['quantidade'] = '0';
+            $request->merge($data);
+        }
+        // valor default de unidade
+        if (!isset($data['unidade']) || $data['unidade'] == ""){
+            $data['unidade'] = 'un';
+            $request->merge($data);
+        }
+        // valor default de precisao
+        if (!isset($data['precisao']) || $data['precisao'] == ""){
+            $data['precisao'] = '0';
+            $request->merge($data);
+        }
+        // valor default de purchased
+        if (!isset($data['purchased']) || $data['purchased'] == ""){
+            $data['purchased'] = '0';
+            $request->merge($data);
+        }else{
+            $purchased = $data['purchased'];
+            if ($purchased == null || $purchased == 'null'){
+                $data['purchased'] = '0';
+            }
+        }
+
+        // removo ordem
+        // ToDo: tratar update
+        // $data->forget('ordem');
+        // $data->forget('categoriaid');
         // valor default de listaid
         $listaid = 0;
         if (!isset($data['listaid']) || $data['listaid'] == ""){
@@ -122,19 +212,9 @@ class ProdutoCompraController extends Controller{
 
         $data['usuarioid'] = $usuario->id;
 
-        $produto = $this->model->save($data);
-
-        return response()->json($produto);
-    }
-
-    public function update(ProdutoRequest $request, $id){
-        // return response()->json(['message'=>__METHOD__]);
-        // dd($request);
-
-        $data = $request->all();
+        $produto = $this->model->update($data, $id);
 
         $produto = $this->model->find($id);
-        $produto->update($data);
 
         return response()->json($produto);
     }
@@ -169,7 +249,7 @@ class ProdutoCompraController extends Controller{
         $produtos = $this->model->findFieldModel('listaid', '=', $lista->id, 'ordem', 'ASC');
         // dd($produtos);
 
-        return new ProdutoCollection($produtos->paginate(10));
+        return new ProdutoCollection($produtos->paginate(100));
     }
 
     public function order(Request $request, $listaid, $produtoid, $order){

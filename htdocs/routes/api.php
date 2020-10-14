@@ -29,6 +29,10 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
         Route::post('/login', 'LoginJwtController@login')->name('api.login');
         Route::post('/cadastro', 'LoginJwtController@cadastro')->name('api.usuarios.cadastro');
 
+        Route::post('/reset', 'LoginJwtController@reset')->name('api.usuarios.reset');
+        Route::post('/resetpassword', 'LoginJwtController@resetPassword')->name('api.usuarios.resetpassword');
+        Route::post('/forgot', 'LoginJwtController@forgot')->name('api.usuarios.forgot');
+
         Route::get('/', 'UserController@index')->name('api.usuarios.index');
         Route::get('/{id}','UserController@show')->name('api.usuarios.show');
         Route::post('/', 'UserController@save')->name('api.usuarios.create');
@@ -75,6 +79,7 @@ Route::namespace('api')->middleware('log.route')->prefix('v1')->group(function()
             Route::get('/', 'ProdutoCompraController@index')->name('api.produtocompra.index');
             Route::post('/', 'ProdutoCompraController@save')->name('api.produtocompra.create');
             Route::post('/update/{id}', 'ProdutoCompraController@update')->name('api.produtocompra.update');
+            Route::post('/delete/{id}', 'ProdutoCompraController@delete')->name('api.produtocompra.delete');
             Route::get('/lista/{listaid}', 'ProdutoCompraController@lista')->name('api.produtocompra.lista');
             Route::post('/lista/{listaid}/produto/{produtoid}/order/{id}', 'ProdutoCompraController@order')->name('api.produtocompra.order');
         });
